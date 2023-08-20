@@ -48,7 +48,8 @@ export class AuthenticateComponent implements OnInit {
 				'/product/transactions'
 			])
 		},(err)=>{
-			console.log("Authentication failed");
+			
+			console.log("Authentication failed",err);
 		})
 		.add(()=>{
 			this.isAuthenticating.value = false;

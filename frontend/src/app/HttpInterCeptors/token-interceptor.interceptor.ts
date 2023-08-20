@@ -21,11 +21,15 @@ export class TokenInterceptor implements HttpInterceptor {
 	) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const requestCopy = request.clone();
-	if(requestCopy.url.includes('authenticate')){
-		return next.handle(requestCopy);
+	const token:string|null = inject(AuthenticationService).getToken();
+
+
+
+    
+	if(request.url.includes('authenticate')){
+		return next.handle(request);
 	}
-    const token:string|null = inject(AuthenticationService).getToken();
+    
     if(token===null){
 		this.redirectService.redirectToLoginPage();
 		this.notificationService.notify("please login");
@@ -33,12 +37,16 @@ export class TokenInterceptor implements HttpInterceptor {
 			observer.complete();
 		});
 	}
+	const requestCopy = request.clone({
+		setHeaders:{
+			'Authorization':`Bearer ${token}`
+		}
+	});
 
-
-    requestCopy.headers.set("authorization","Bearer "+token);
     return next.handle(requestCopy).pipe(
 		tap(event=>{
 			if(event instanceof HttpResponse){
+				
 				if(event.status===403){
 					this.authService.removeToken();
 					this.notificationService.notify("Unauthorized access");

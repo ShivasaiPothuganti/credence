@@ -32,7 +32,9 @@ body{
 html{
     @apply scroll-smooth;
 }
-
+:host{
+    @apply h-full w-full
+}
 
 
 .secondaryButton{

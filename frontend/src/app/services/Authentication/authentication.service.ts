@@ -17,7 +17,9 @@ export class AuthenticationService {
 	}
 
 	login(usercredentials:LoginCredentials):Observable<string>{
-		const authenticationUrl = backendBaseUrl+'authenticate/login';
+		
+		const authenticationUrl = backendBaseUrl+'/authenticate/login';
+		console.log(authenticationUrl);
 		return this.http.post<string>(authenticationUrl,{
 			...usercredentials
 		});
@@ -28,7 +30,7 @@ export class AuthenticationService {
 	}
 
 	register(usercredentials:LoginCredentials):Observable<string>{
-		const authenticationUrl = backendBaseUrl+'authenticate/register';
+		const authenticationUrl = backendBaseUrl+'/authenticate/register';
 		return this.http.post<string>(authenticationUrl,{
 			...usercredentials
 		});
