@@ -1,0 +1,10 @@
+.footer_left>h1{
+    @apply p-6 font-REM ;
+}
+
+.footer_nav_link{
+    @apply h-10 w-28 flex justify-center items-center border-t-2 border-white text-white;
+    &:hover{
+        @apply bg-white text-black rounded-lg
+    }
+}

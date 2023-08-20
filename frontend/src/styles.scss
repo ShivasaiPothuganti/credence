@@ -1,0 +1,50 @@
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "./src/app/variables.scss";
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=REM:wght@300;400;500;600&display=swap');
+body{
+    background-color: black;
+}
+.btn{
+    @apply h-12 w-auto pr-5 pl-5  text-white rounded bg-buttoncolor 
+}
+
+.btn-click{
+    @apply hover:-translate-y-0.5 duration-200 active:translate-y-1
+}
+
+.center{
+    @apply flex justify-center items-center
+}
+
+.inputField{
+    @apply outline-none rounded-sm w-full h-14 pl-4 border text-white bg-transparent border-l-0 border-r-0 border-t-0
+}
+
+html{
+    @apply scroll-smooth;
+}
+
+
+
+.secondaryButton{
+    @apply 
+    h-10 
+    w-[100%] 
+    bg-white 
+    rounded-3xl 
+    border-[#adadad] 
+    border-[3px] 
+}
+
+.icon25{
+    @apply h-[25px] w-[25px] mr-4 fill-white;
+}

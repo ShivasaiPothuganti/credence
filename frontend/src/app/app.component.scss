@@ -1,0 +1,10 @@
+@import "./variables.scss";
+
+.btn{
+    @apply h-10 w-10 bg-buttoncolor text-white rounded
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}

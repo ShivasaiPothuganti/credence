@@ -1,0 +1,10 @@
+.about_title{
+    &::before{
+        content: '';
+        @apply h-2 w-52 bg-buttoncolor -top-10 right-0 absolute
+    }
+    &::after{
+        content: '';
+        @apply h-52 w-2 bg-buttoncolor right-0 -top-10 absolute
+    }
+}

@@ -1,0 +1,60 @@
+<div class="w-full h-full rounded-3xl bg-secondaryBlack p-3" >
+    <div class="avatar h-[35%] w-[100%] rounded-3xl" >
+        <ng-lottie 
+            [options]="avatarAnimationOptions" 
+            class="h-[50%] w-[50%]" 
+        >
+        </ng-lottie>
+    </div>
+    <div class="w-full h-[65%] pt-2" >
+        <nav class="h-full w-full navbar" >
+            <ul>
+                <navlink 
+                    [routerLink]="['/product/']" 
+                    [icon]="icons.home" 
+                    [title]="'Home'" 
+                    [iconStyling]="'icon25'"
+                />
+
+                <navlink
+                    [routerLink]="['/product/dashboard']"
+                    [icon]="icons.dashBoard"
+                    [title]="'DashBoard'"
+                    [iconStyling]="'icon25'"
+                  
+                />
+                
+                <navlink 
+                    [routerLink]="['/product/transactions']" 
+                    [icon]="icons.wallet" 
+                    [title]="'Transactions'" 
+                    [iconStyling]="'icon25'"
+                />
+                
+                <navlink 
+                    [routerLink]="['/product/collaborativerooms']" 
+                    [icon]="icons.collaborativeTransactions" 
+                    [title]="'Collaborative Rooms'" 
+                    [iconStyling]="'icon25'"
+                />
+
+                <navlink 
+                    [routerLink]="['/product/splitbill']"
+                    [icon]="icons.splitBill"
+                    [title]="'Split Bills'"
+                    [iconStyling]="'icon25'"
+                />
+                
+                <navlink
+                    [routerLink]="['/product/billstopay']"
+                    [icon]="icons.bills"
+                    [title]=" 'Bills To Pay' "
+                    [iconStyling]=" 'icon25' "
+                /> 
+            </ul>
+            <div class="pt-6 pl-4" >
+                <button (click)="logOut()" class="secondaryButton btn-click" >LogOut</button>
+            </div>
+        </nav>
+    </div>
+</div>

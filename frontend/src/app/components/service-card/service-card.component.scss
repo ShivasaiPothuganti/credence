@@ -1,0 +1,7 @@
+.service-card{
+    position: relative;
+
+    &:hover{
+        @apply shadow-lg shadow-buttoncolor
+    }
+}

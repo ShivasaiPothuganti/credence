@@ -1,0 +1,19 @@
+<section class="hero h-screen w-screen center bg-[#080808]" >
+    <div class="hero_container h-[90%] w-[90%] flex px-10">
+        <div class="hero_left w-5/6 center">
+            <div class="hero_left_container">
+                <div class="hero_titles relative">
+                    <h1  class="hero_title text-7xl mb-8 font-REM font-semibold text-white " > {{title | uppercase}} </h1>
+                    <p class="text-[#c6c4c4] text-xl" >{{description}}</p>
+                </div>
+                <div class="w-full mt-7 flex gap-10 items-center">
+                    <button (click)="navigatetoAuthentication()" class="btn" >Get started</button>
+                    <button class="btn" > Explore our product</button>
+                </div>
+            </div>
+        </div>
+        <div class="hero_right h-full w-3/4">
+            <ng-lottie class="h-full w-full"  [options]="options"></ng-lottie>
+        </div>
+    </div>
+</section>
