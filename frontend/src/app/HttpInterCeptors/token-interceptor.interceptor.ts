@@ -4,9 +4,10 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse
+  HttpResponse,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { AuthenticationService } from '../services/Authentication/authentication.service';
 import { RedirectionService } from '../services/Redirection/redirection.service';
 import { NotificationService } from '../services/Notification/notification.service';
@@ -20,7 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
 	private notificationService:NotificationService
 	) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
 	const token:string|null = inject(AuthenticationService).getToken();
 
 
@@ -43,16 +44,18 @@ export class TokenInterceptor implements HttpInterceptor {
 		}
 	});
 
+
     return next.handle(requestCopy).pipe(
-		tap(event=>{
-			if(event instanceof HttpResponse){
+		catchError((error:any)=>{
+			if(error instanceof HttpErrorResponse){
+				this.redirectService.redirectToLoginPage();
+				this.notificationService.notify("Unauthorized access");
 				
-				if(event.status===403){
-					this.authService.removeToken();
-					this.notificationService.notify("Unauthorized access");
-					this.redirectService.redirectToLoginPage();
-				}
+				return new Observable<HttpEvent<any>>(observer=>{
+					observer.complete();
+				})
 			}
+			return throwError(()=>error);
 		})
 	)
   }

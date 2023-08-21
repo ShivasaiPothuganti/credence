@@ -12,7 +12,7 @@ export class TransactionService {
 
   getUserTransactions():Observable<any>{
 	const url = backendBaseUrl+"/transactions/users";
-	return this.http.get(url);
+	return this.http.get(url) as Observable<any>;
   }
 
 }
