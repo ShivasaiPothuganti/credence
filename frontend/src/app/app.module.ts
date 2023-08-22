@@ -28,6 +28,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { BillsComponent } from './pages/bills/bills.component';
 import { NavlinkComponent } from './components/navlink/navlink.component';
 import { TransactioncardComponent } from './components/transactioncard/transactioncard.component';
+import { TransactionsComponent } from './pages/transactions/transactions.component';
 export function playerFactory() {
   return player;
 }
@@ -54,6 +55,7 @@ export function playerFactory() {
     BillsComponent,
     NavlinkComponent,
     TransactioncardComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,
