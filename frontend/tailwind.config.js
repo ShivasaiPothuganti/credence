@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     extend:{
       boxShadow:{
+        'glow':'0px 0px 9px rgba(168, 195, 240,1)',
         'small': '0 10px 10px -8px rgb(66,66,66)',
       },
       colors:{

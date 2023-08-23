@@ -1,4 +1,5 @@
-import { Component, HostBinding, Input,OnInit } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input,OnInit, Output } from '@angular/core';
+import { Loading } from 'src/app/types/Loading';
 
 @Component({
   selector: 'transactioncard',
@@ -15,6 +16,11 @@ export class TransactioncardComponent implements OnInit {
   @Input() transactionDate!:string;
   @Input() roomId!:number;
   @Input() groupId!:number;
+
+
+  @Input() isLoading!:Loading;
+
+  @Output() onDelete = new EventEmitter<number>();
 
 
   validateMandatoryProps(){
@@ -38,6 +44,10 @@ export class TransactioncardComponent implements OnInit {
   ngOnInit(): void {
     this.validateMandatoryProps();
     
+  }
+
+  deleteTransaction(transactionId:number){
+    this.onDelete.emit(transactionId);
   }
 
 

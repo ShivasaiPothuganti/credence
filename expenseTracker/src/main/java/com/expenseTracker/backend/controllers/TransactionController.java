@@ -5,6 +5,7 @@ import com.expenseTracker.backend.entities.UserEntity;
 import com.expenseTracker.backend.models.ErrorResponse;
 import com.expenseTracker.backend.models.GroupTransactionModel;
 import com.expenseTracker.backend.models.RoomTransactionModel;
+import com.expenseTracker.backend.models.SuccessResponseModel;
 import com.expenseTracker.backend.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,8 +45,9 @@ public class TransactionController {
 	public ResponseEntity<?> deleteTransaction(@PathVariable Long transactionId) {
 		try {
 			transactionService.deleteTransactionById(transactionId);
-			return new ResponseEntity<>("transaction with transactionId " + transactionId,
-					HttpStatus.INTERNAL_SERVER_ERROR);
+			SuccessResponseModel response = new SuccessResponseModel("transaction sucessfully deleted");
+			return new ResponseEntity<SuccessResponseModel>(response ,
+					HttpStatus.OK);
 		} catch (Exception exc) {
 			ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, exc.getMessage());
 			return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
