@@ -11,7 +11,7 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=REM:wght@300;400;500;600&display=swap');
 body{
-    background-color: black;
+    @apply bg-black overflow-x-hidden;
 }
 .btn{
     @apply h-12 w-auto pr-5 pl-5  text-white rounded bg-buttoncolor 
@@ -31,10 +31,9 @@ body{
 
 html{
     @apply scroll-smooth;
+    
 }
-:host{
-    @apply h-full w-full
-}
+
 
 
 .secondaryButton{

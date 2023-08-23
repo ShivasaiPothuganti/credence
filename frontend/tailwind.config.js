@@ -9,10 +9,15 @@ module.exports = {
   ],
   theme: {
     extend:{
+      boxShadow:{
+        'small': '0 10px 10px -8px rgb(66,66,66)',
+      },
       colors:{
         herotitle:'#39424E',
         buttoncolor:'#F11A7B',
-        secondaryBlack:'#181823'
+        cardBlack:'#181823',
+        secondaryBlack:'#181823',
+        primaryMint:'#A7ECEE'
       }
     },
     fontFamily:{

@@ -1,4 +1,13 @@
-<section class="rounded-3xl bg-secondaryBlack h-full w-full " >
-  <h1>hello</h1>
-  <transactioncard/>
+<section class="content-start flex flex-wrap w-full gap-6 rounded-3xl h-full">
+  <transactioncard *ngFor="let transaction of userTransactions"
+	[title]="transaction.title"
+	[price]="transaction.price"
+	[description]="transaction.description"
+	[category]="transaction.category"
+	[transactionDate]="transaction.addedOn"
+	[transactionId]="transaction.transactionId"
+	[roomId]="transaction.roomId"
+	[groupId]="transaction.groupId"
+  /> 
+ 
 </section>

@@ -1,3 +1,8 @@
 .transaction-card{
-    @apply h-10 w-96 rounded-xl bg-secondaryBlack
+    @apply h-32 w-[26rem] rounded-xl bg-cardBlack shadow-small ;
+
+    &:hover{
+        @apply h-80 flex-col-reverse items-center;
+    }
 }
+
