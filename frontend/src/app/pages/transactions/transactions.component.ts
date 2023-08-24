@@ -31,6 +31,7 @@ export class TransactionsComponent implements OnInit {
 	ngOnInit():void{
 		this.transactionService.getUserTransactions().subscribe((data)=>{
 			this.userTransactions = data;
+
 		}).add(()=>{
 			console.log(this.userTransactions);
 		})

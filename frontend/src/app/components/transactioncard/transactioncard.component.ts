@@ -8,6 +8,8 @@ import { Loading } from 'src/app/types/Loading';
 })
 export class TransactioncardComponent implements OnInit {
 
+  @HostBinding('style.height') height = 'auto'
+
   @Input() transactionId!:number;
   @Input() title!:string;
   @Input() price!:number;

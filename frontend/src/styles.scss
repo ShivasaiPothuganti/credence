@@ -14,7 +14,7 @@ body{
     @apply bg-black overflow-x-hidden;
 }
 .btn{
-    @apply h-12 w-auto pr-5 pl-5  text-white rounded bg-buttoncolor 
+    @apply h-12 w-auto pr-5 pl-5  text-white rounded bg-buttoncolor  hover:-translate-y-1 duration-75
 }
 
 .btn-click{

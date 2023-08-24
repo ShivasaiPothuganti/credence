@@ -32,6 +32,7 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
 import { TruncateDatePipe } from './pipes/truncate-date.pipe';
 import { TruncateTextPipe } from './pipes/truncate-text.pipe';
 import { CapitalizeTextPipe } from './pipes/capitalize-text.pipe';
+import { AddTransactionComponent } from './components/addTransaction/add-transaction/add-transaction.component';
 export function playerFactory() {
   return player;
 }
@@ -61,7 +62,8 @@ export function playerFactory() {
     TransactionsComponent,
     TruncateDatePipe,
     TruncateTextPipe,
-    CapitalizeTextPipe
+    CapitalizeTextPipe,
+    AddTransactionComponent
   ],
   imports: [
     BrowserModule,
