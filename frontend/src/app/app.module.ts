@@ -29,6 +29,9 @@ import { BillsComponent } from './pages/bills/bills.component';
 import { NavlinkComponent } from './components/navlink/navlink.component';
 import { TransactioncardComponent } from './components/transactioncard/transactioncard.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { TruncateDatePipe } from './pipes/truncate-date.pipe';
+import { TruncateTextPipe } from './pipes/truncate-text.pipe';
+import { CapitalizeTextPipe } from './pipes/capitalize-text.pipe';
 export function playerFactory() {
   return player;
 }
@@ -55,7 +58,10 @@ export function playerFactory() {
     BillsComponent,
     NavlinkComponent,
     TransactioncardComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    TruncateDatePipe,
+    TruncateTextPipe,
+    CapitalizeTextPipe
   ],
   imports: [
     BrowserModule,

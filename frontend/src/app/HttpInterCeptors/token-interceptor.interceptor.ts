@@ -48,12 +48,13 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(requestCopy).pipe(
 		catchError((error:any)=>{
 			if(error instanceof HttpErrorResponse){
-				this.redirectService.redirectToLoginPage();
-				this.notificationService.notify("Unauthorized access");
-				
-				return new Observable<HttpEvent<any>>(observer=>{
-					observer.complete();
-				})
+				if(error.status===403){
+					this.redirectService.redirectToLoginPage();
+					this.notificationService.notify("Unauthorized access");
+					return new Observable<HttpEvent<any>>(observer=>{
+						observer.complete();
+					})
+				}
 			}
 			return throwError(()=>error);
 		})

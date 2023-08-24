@@ -11,8 +11,13 @@ export class TransactionService {
   constructor(private http:HttpClient) { }
 
   getUserTransactions():Observable<any>{
-	const url = backendBaseUrl+"/transactions/users";
-	return this.http.get(url) as Observable<any>;
+    const url = backendBaseUrl+"/transactions/users";
+    return this.http.get(url);
+  }
+
+  deleteTransaction(transactionId:number):Observable<any>{
+	const url = backendBaseUrl + `/transactions/${transactionId}`;
+	return this.http.delete(url);
   }
 
 }

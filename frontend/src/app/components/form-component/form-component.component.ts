@@ -14,7 +14,9 @@ export class FormComponentComponent implements OnInit {
 
 	@Output() onSubmit = new EventEmitter();
 
-	@Input() isLoading!:Loading;
+	@Input() isLoading:Loading = {
+		value:false
+	};
 
 	formSubmissionData : { [key:string]:any } = {} ;
 

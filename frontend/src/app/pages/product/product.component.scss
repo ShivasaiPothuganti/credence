@@ -1,8 +1,0 @@
-transactions{
-    @apply h-[100vh] w-[100vw] bg-buttoncolor
-}
-
-.product-service router-outlet > transactions{
-    display: block;
-    @apply h-full w-full bg-buttoncolor
-}
