@@ -15,7 +15,8 @@ import { BillsComponent } from './pages/bills/bills.component';
 const routes: Routes = [
   {
     path:'',
-    component:LandingComponent
+    component:LandingComponent,
+    
   },
   {
     path:'authenticate',
@@ -52,8 +53,8 @@ const routes: Routes = [
         component:BillsComponent
       }
     ]
-  }
-];
+  },
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
