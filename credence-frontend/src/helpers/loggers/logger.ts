@@ -1,20 +1,26 @@
 class Logger{
+    logger = console.log.bind(window.console);
     debug(message:unknown):void{
         if(import.meta.env.DEV){
-            console.log(message)
+            
+            this.logger(`%cDEBUG %c ${message} `,'background-color:blue;color:white','color:black')
         }
     }
 
     error(message:unknown):void{
         if(import.meta.env.DEV){
-            console.log(message)
+            console.error(`%cERROR %c ${message}`,'background-color:red;color:white','color:black')
         }
     }
 
     warn(message:unknown):void{
         if(import.meta.env.DEV){
-            console.log(message)
+            console.warn(`%cWARN %c ${message}`,'background-color:yellow;color:black','color:black')
         }
+    }
+
+    getLogger(){
+        return this.logger;
     }
 
 }
