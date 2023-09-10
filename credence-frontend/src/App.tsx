@@ -1,16 +1,18 @@
 import './App.css'
-import React,{useEffect} from "react";
+import {useEffect} from "react";
 import { logger } from './helpers/loggers/logger';
 
 function App() {
 
+
+
   useEffect(()=>{
-    logger.getLogger()("hello this is from app")
+    logger.error("Hi there I am running ");
   })
 
   return (
     <div>
-      <h1>hi</h1>
+      
     </div>
   )
 }
