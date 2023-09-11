@@ -1,28 +1,24 @@
-import axios from "axios";
-
+import { instance } from "./HttpInterceptors";
 class HttpClient {
 
-    baseUrl = 'http://localhost:3000'
-    post(){
-        return axios.post('',{});
+    post(url:string){
+        return instance.post(url);
     }
-    get(){
-        return axios.get(this.baseUrl);
-    }
-
-    put(){
-
+    get(url:string){
+        return instance.get(url);
     }
 
-    patch(){
-
+    put(url:string){
+        return instance.put(url);
     }
 
-    delete(){
-        
+    patch(url:string){
+        return instance.patch(url)
     }
 
-    
+    delete(url:string){
+        return instance.delete(url);
+    } 
 }
 
 export const http = new HttpClient();

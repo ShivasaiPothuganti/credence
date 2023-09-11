@@ -1,6 +1,14 @@
-import axios from "axios";
-axios.interceptors.request.use( req => {
-    console.log("intercepted the request");
-    console.log(req);
-    return req;
+import { instance } from "./axiosConfig";
+
+instance.interceptors.request.use(function(config){
+    // const headers = {
+
+    // }
+    // config.transformRequest(config,headers);
+    return config;
+},function(error){
+    console.log(error);
 });
+
+
+export {instance};

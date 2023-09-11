@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 const loggerHelper = ()=>{
 
     const isDevMode = import.meta.env.DEV;
-
     const logger = {
         debug:isDevMode?console.log.bind(window.console):(_message:unknown)=>{},
         error:isDevMode?console.error.bind(window.console):(_message:unknown)=>{},
@@ -9,7 +9,7 @@ const loggerHelper = ()=>{
     };
 
     return logger;
-
 }
 
-export const logger = loggerHelper();
+const logger = loggerHelper();
+export {logger};
