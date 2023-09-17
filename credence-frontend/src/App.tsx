@@ -4,7 +4,6 @@ import { logger } from './helpers/loggers/logger';
 import {backend} from './lib/Network/HttpHelper';
 import { backendApiUrls } from './constants/backendApiEndpoints';
 
-
 function App() {
 
   useEffect(()=>{
