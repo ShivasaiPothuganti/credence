@@ -8,7 +8,7 @@ function App() {
 
   useEffect(()=>{
       backend.get(backendApiUrls.data).then((response:unknown)=>{
-        // logger.debug();
+        logger.debug(response);
       })
       .catch((err)=>{
         logger.debug(err)

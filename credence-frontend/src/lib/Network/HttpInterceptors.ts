@@ -19,9 +19,12 @@ backendApiAxios.interceptors.response.use( response =>{
     if(response.status===401){
         logger.error("invalid token");
     }
+
+    window.location.href = '/login';
     return response;
 },error=>{
     return Promise.reject(error);
 })
+
 
 export default backendApiAxios;

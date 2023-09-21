@@ -1,11 +1,16 @@
 .transaction-card{
-    @apply  w-[20rem] p-4 rounded-xl bg-cardBlack shadow-small mt-5;
-
-    &:hover{
-        @apply  flex-col items-center duration-1000;
-       
-    }
+    @apply max-h-10 w-[20rem] p-4 rounded-xl bg-cardBlack shadow-small mt-5;
+    max-height: 300px;
+    // transition: max-height 0.7s linear;
+    // &:hover{
+    //     @apply h-auto flex-col items-center duration-1000;
+    // }
     
+}
+
+.transaction-card.expanded{
+    max-height: 1800px;
+     transition: max-height 2s linear;
 }
 
 .transaction-card-topsection {

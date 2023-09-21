@@ -8,7 +8,6 @@ import { Loading } from 'src/app/types/Loading';
 })
 export class TransactioncardComponent implements OnInit {
 
-  @HostBinding('style.height') height = 'auto'
 
   @Input() transactionId!:number;
   @Input() title!:string;
@@ -23,6 +22,9 @@ export class TransactioncardComponent implements OnInit {
   @Input() isLoading!:Loading;
 
   @Output() onDelete = new EventEmitter<number>();
+
+
+  
 
 
   validateMandatoryProps(){
@@ -43,9 +45,19 @@ export class TransactioncardComponent implements OnInit {
     }
   }
 
+
+
   ngOnInit(): void {
     this.validateMandatoryProps();
     
+  }
+  showCard!:boolean;
+  show(){
+    this.showCard = true;
+  }
+
+  hide(){
+    this.showCard = false;
   }
 
   deleteTransaction(transactionId:number){

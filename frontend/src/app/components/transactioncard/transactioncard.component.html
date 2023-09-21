@@ -1,4 +1,4 @@
-<div [class]="transactionId===20 ? 'transactionspan' : null"  class="group transaction-card flex flex-row-reverse group-hover:absolute group-hover:z-[1] " >
+<div [class.expanded]="showCard" (mouseover)="show()" (mouseleave)="hide()"  class="group hover:duration-1000 transaction-card flex flex-row-reverse " >
     <div class="w-[30%] group-hover:w-[17rem] group-hover:h-36 flex justify-center items-center h-full">
         <div class=" 
         group-hover:bg-[#2DFF57]
@@ -9,7 +9,7 @@
          transaction-card-topsection
           "
          >
-            <h1 class="text-white font-semibold text-lg group-hover:text-secondaryBlack  " > ₹ {{price}} </h1>
+            <h1 class="text-white font-semibold text-lg group-active:text-secondaryBlack  " > ₹ {{price}} </h1>
         </div>
     </div>
     <div class=" font-REM h-full w-[70%] group-hover:w-full group-hover:pt-0 group-hover:h-[60%]">

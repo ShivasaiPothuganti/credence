@@ -22,7 +22,7 @@ export class TransactionsComponent implements OnInit {
 		console.log($event)
 	}
 
-	userTransactions:any[] = [];
+	userTransactions:any[][] = Array.from({length:3},()=>{return new Array()});
 
 	constructor(private transactionService:TransactionService,private notificationService:NotificationService){
 
@@ -30,8 +30,7 @@ export class TransactionsComponent implements OnInit {
 
 	ngOnInit():void{
 		this.transactionService.getUserTransactions().subscribe((data)=>{
-			this.userTransactions = data;
-
+		 this.splitDataIntoColumns(data,3);
 		}).add(()=>{
 			console.log(this.userTransactions);
 		})
@@ -40,8 +39,10 @@ export class TransactionsComponent implements OnInit {
 	deleteTransaction(transactionId:number){
 		this.isLoading.value = true;
 		this.transactionService.deleteTransaction(transactionId).subscribe((data)=>{
-			this.userTransactions = this.userTransactions.filter((transaction)=>{
-				return transaction.transactionId !== transactionId
+			this.userTransactions = this.userTransactions.filter((transactionColumn)=>{
+				transactionColumn.filter((transaction)=>{
+					return transaction.transactionId !== transactionId;
+				})
 			});
 		},(err)=>{
 			console.log("this is the actual error ",err);
@@ -49,6 +50,15 @@ export class TransactionsComponent implements OnInit {
 		}).add(()=>{
 			this.isLoading.value = false;
 		})
+	}
+
+
+	splitDataIntoColumns(data:any[],numberOfColumns:number){
+		//const resultMatrix  =  Array.from({length:numberOfColumns},()=>{return new Array()})
+		data.forEach((item:any,index:number) => {
+			this.userTransactions[index%numberOfColumns].push(item)
+		});
+		
 	}
 
 }
