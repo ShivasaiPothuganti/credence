@@ -1,6 +1,6 @@
-import { logger } from "../../helpers/loggers/logger";
+import { logger } from "../../../helpers/loggers/logger";
 import {backendApiAxios} from "./axiosBaseConfig";
-import {backendApiUrls} from '../../constants/backendApiEndpoints';
+import {backendApiUrls} from '../../../constants/backendApiEndpoints';
 
 backendApiAxios.interceptors.request.use( request => {
     if(request.url?.startsWith(backendApiUrls.authorization)){

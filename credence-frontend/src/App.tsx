@@ -1,8 +1,9 @@
 import './App.css'
 import {useEffect} from "react";
 import { logger } from './helpers/loggers/logger';
-import {backend} from './lib/Network/HttpHelper';
+import {backend} from './services/api/Network/HttpHelper';
 import { backendApiUrls } from './constants/backendApiEndpoints';
+import { Button } from "@/components/ui/button";
 
 function App() {
 
@@ -16,8 +17,8 @@ function App() {
   })
 
   return (
-    <div>
-      <h1 className='bg-black' >hi</h1>
+    <div className='h-full w-full flex justify-center items-center' >
+      <Button>click me </Button>
     </div>
   )
 }
