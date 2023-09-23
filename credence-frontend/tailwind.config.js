@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line no-undef
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -14,6 +15,15 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+    },
+    colors:{
+      primaryBlack:'#000000',
+      primaryPurple:'#D67BFF',
+      secondaryPurple:'#FFA1F5',
+      tertiaryPurple:'#D8B4F8',
+      primaryWhite:'#fcfcfc',
+      secondaryWhite:'#f0f1f2'
+
     },
     extend: {
       colors: {
@@ -72,5 +82,6 @@ module.exports = {
       },
     },
   },
+  // eslint-disable-next-line no-undef
   plugins: [require("tailwindcss-animate")],
 }

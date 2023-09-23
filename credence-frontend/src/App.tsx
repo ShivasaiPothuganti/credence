@@ -1,26 +1,18 @@
-import './App.css'
-import {useEffect} from "react";
-import { logger } from './helpers/loggers/logger';
-import {backend} from './services/api/Network/HttpHelper';
-import { backendApiUrls } from './constants/backendApiEndpoints';
-import { Button } from "@/components/ui/button";
+import './App.css';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import LandingPage from './pages/Landing/LandingPage';
+
 
 function App() {
 
-  useEffect(()=>{
-      backend.get(backendApiUrls.data).then((response:unknown)=>{
-        logger.debug(response);
-      })
-      .catch((err)=>{
-        logger.debug(err)
-      })
-  })
-
   return (
-    <div className='h-full w-full flex justify-center items-center' >
-      <Button>click me </Button>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' Component={LandingPage} />
+      </Routes>
+    </Router>
   )
 }
 
 export default App;
+// orr 
