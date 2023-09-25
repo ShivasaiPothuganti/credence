@@ -1,10 +1,10 @@
-import React from 'react'
+import AboutSection from './About/AboutSection'
 
 function LandingPage() {
   return (
-    <div>
-       Landing page
-    </div>
+    <>
+    <AboutSection />
+    </>
   )
 }
 

@@ -63,6 +63,7 @@ module.exports = {
       },
       borderRadius: {
         lg: "var(--radius)",
+        three: '50px 0 0 50px',
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },

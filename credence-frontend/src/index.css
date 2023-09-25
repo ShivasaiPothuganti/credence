@@ -74,3 +74,10 @@
     @apply bg-background text-foreground;
   }
 }
+
+.btn{
+  background: #114DAC;
+  padding: 10px;
+  border-radius: 99em;
+  height: max-content;
+}
