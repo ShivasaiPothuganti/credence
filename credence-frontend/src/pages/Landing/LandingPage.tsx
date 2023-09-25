@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import HeroSection from './HeroSection/HeroSection';
 
 function LandingPage() {
   return (
     <div>
-       Landing page
+      <HeroSection />
     </div>
   )
 }
