@@ -2,6 +2,7 @@ import Player from "react-lottie-player";
 import AboutSectionAnimation from "../../../assets/lottie_animations/AboutSectionAnimation.json";
 import { motion } from "framer-motion";
 import "./AboutSection.css";
+import { Button } from "@/components/ui/button";
 
 function AboutSection() {
   const title = "Organized Transactions";
@@ -11,8 +12,8 @@ function AboutSection() {
   return (
     <>
       <section className="about h-screen w-screen bg-primaryWhite">
-        <div className="about_container h-[full] w-[full] flex justify-between gap-10 items-center">
-          <div className="about_container_left h-full w-[50%] flex-item justify-center items-center">
+        <div className="about_container h-full w-full flex justify-between gap-10 items-center">
+          <div className="about_container_left h-full w-[50%] flex justify-center items-center">
             <motion.div
               className="box h-[full] w-[full]"
               initial={{ opacity: 0, scale: 0.5 }}
@@ -26,7 +27,7 @@ function AboutSection() {
               <Player animationData={AboutSectionAnimation} loop play />
             </motion.div>
           </div>
-          <div className="about_container_right h-screen w-[60%] flex justify-center items-center shadow-2xl text-[white] bg-[#121212] p-5 rounded-three">
+          <div className="about_container_right h-screen w-[50%] flex justify-center items-center shadow-2xl text-[white] bg-[#121212] p-5 rounded-three">
             <motion.div
               className="box"
               initial={{ opacity: 0, scale: 0.5 }}
@@ -36,14 +37,14 @@ function AboutSection() {
                 ease: [0, 0.71, 0.2, 1.01],
                 scale: {
                   type: "spring",
-                  damping: 7,
+                  damping: 40,
                   stiffness: 100,
                   restDelta: 0.001,
                 },
               }}
             >
               <div className="about_title relative ">
-                <h1 className="text-white text-8xl font-REM mb-10 about_title text-[white]">
+                <h1 className="text-8xl font-REM mb-10 about_title text-[white]">
                   {title}
                 </h1>
                 <p className="mb-10 text-secondaryWhite"> {about} </p>
@@ -51,7 +52,7 @@ function AboutSection() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <button className="btn"> Our Services </button>
+                  <Button> Our Services </Button>
                 </motion.button>
               </div>
             </motion.div>
