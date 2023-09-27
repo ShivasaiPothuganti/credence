@@ -1,13 +1,15 @@
 import React from 'react';
 import HeroSection from './HeroSection/HeroSection';
 import AboutSection from './About/AboutSection';
+import NavBar from './NavBar/NavBar';
 
 function LandingPage() {
   return (
-    <div>
-      <HeroSection main />
-      <AboutSection />
-    </div>
+    <>
+      <NavBar />
+      {/* <HeroSection /> */}
+      {/* <AboutSection /> */}
+    </>
   )
 }
 

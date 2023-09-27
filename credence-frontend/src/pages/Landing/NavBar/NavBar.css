@@ -1,0 +1,6 @@
+.nav-link{
+    @apply font-primary text-xl;
+}
+.nav-link:hover{
+    @apply border-b border-primaryBlack
+}
