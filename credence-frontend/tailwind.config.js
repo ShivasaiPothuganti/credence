@@ -25,6 +25,11 @@ module.exports = {
       secondaryWhite:'#f0f1f2'
 
     },
+    fontFamily: {
+      'primary':['Poppins','sans-serif'],
+      'secondary':['Mooli', 'sans-serif'],
+      'logo':['Sedgwick Ave Display', 'cursive']
+    },
     extend: {
       colors: {
         border: "hsl(var(--border))",
