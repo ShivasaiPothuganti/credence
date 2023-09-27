@@ -22,8 +22,8 @@ module.exports = {
       secondaryPurple:'#FFA1F5',
       tertiaryPurple:'#D8B4F8',
       primaryWhite:'#fcfcfc',
-      secondaryWhite:'#f0f1f2'
-
+      secondaryWhite:'#f0f1f2',
+      buttonColor:'#114DAC'
     },
     extend: {
       colors: {
