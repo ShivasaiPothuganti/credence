@@ -11,7 +11,7 @@ function AboutSection() {
 
   return (
     <>
-      <section className="about h-screen w-screen bg-primaryWhite">
+      <section id="about" className="about h-screen w-screen bg-primaryWhite">
         <div className="about_container h-full w-full flex justify-between gap-10 items-center">
           <div className="about_container_left h-full w-[50%] flex justify-center items-center">
             <motion.div
@@ -27,7 +27,7 @@ function AboutSection() {
               <Player animationData={AboutSectionAnimation} loop play />
             </motion.div>
           </div>
-          <div className="about_container_right h-screen w-[50%] flex justify-center items-center shadow-2xl text-[white] bg-[#121212] p-5 rounded-three">
+          <div className="about_container_right h-screen w-[50%] flex justify-center items-center shadow-2xl text-[white] bg-primaryBlack p-5 rounded-three">
             <motion.div
               className="box"
               initial={{ opacity: 0, scale: 0.5 }}
@@ -50,9 +50,8 @@ function AboutSection() {
                 <p className="mb-10 text-secondaryWhite"> {about} </p>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
                 >
-                  <Button> Our Services </Button>
+                  <Button variant={'secondary'} > Our Services </Button>
                 </motion.button>
               </div>
             </motion.div>

@@ -76,8 +76,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-y-scroll ;
   }
+}
+
+html{
+  @apply scroll-smooth;
 }
 
 .btn{

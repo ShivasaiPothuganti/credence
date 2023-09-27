@@ -1,5 +1,5 @@
 .nav-link{
-    @apply font-primary text-xl;
+    @apply font-primary text-xl text-primaryBlack;
 }
 .nav-link:hover{
     @apply border-b border-primaryBlack

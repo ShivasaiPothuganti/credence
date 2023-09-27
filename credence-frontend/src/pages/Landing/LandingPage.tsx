@@ -7,8 +7,8 @@ function LandingPage() {
   return (
     <>
       <NavBar />
-      {/* <HeroSection /> */}
-      {/* <AboutSection /> */}
+      <HeroSection /> 
+       <AboutSection />
     </>
   )
 }

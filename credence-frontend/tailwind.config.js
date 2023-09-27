@@ -17,18 +17,18 @@ module.exports = {
       },
     },
     colors:{
-      primaryBlack:'#000000',
+      primaryBlack:'#121524',
       primaryPurple:'#D67BFF',
       secondaryPurple:'#FFA1F5',
       tertiaryPurple:'#D8B4F8',
       primaryWhite:'#fcfcfc',
       secondaryWhite:'#f0f1f2',
-      buttonColor:'#114DAC'
+      secondaryText:'#5d5e61'
     },
     fontFamily: {
-      'primary':['Poppins','sans-serif'],
+      'primary':['Mooli','sans-serif'],
       'secondary':['Mooli', 'sans-serif'],
-      'logo':['Sedgwick Ave Display', 'cursive']
+      'logo':['Mooli', 'cursive']
     },
     extend: {
       colors: {
