@@ -1,12 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Mooli&family=Pacifico&family=Poppins:wght@200;300;400;500;600;700;800;900&family=Roboto+Condensed:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Sedgwick+Ave+Display&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Mooli&family=Pacifico&family=Poppins:wght@200;300;400;500;600;700;800;900&family=Roboto+Condensed:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Sedgwick+Ave+Display&display=swap');
-*{
-  margin: 0 ;
-  padding: 0 ;
-}
+
  
 @layer base {
   :root {
@@ -77,8 +76,12 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground overflow-y-scroll ;
   }
+}
+
+html{
+  @apply scroll-smooth;
 }
 
 .btn{
@@ -86,4 +89,10 @@
   padding: 10px;
   border-radius: 99em;
   height: max-content;
+}
+
+*{
+  margin: 0px ;
+  padding: 0px ;
+  box-sizing: border-box;
 }
