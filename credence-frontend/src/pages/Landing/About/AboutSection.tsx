@@ -11,7 +11,7 @@ function AboutSection() {
 
   return (
     <>
-      <section id="about" className="about h-screen w-screen bg-primaryWhite">
+      <section id="about" className="about h-screen w-full bg-primaryWhite">
         <div className="about_container h-full w-full flex justify-between gap-10 items-center">
           <div className="about_container_left h-full w-[50%] flex justify-center items-center">
             <motion.div

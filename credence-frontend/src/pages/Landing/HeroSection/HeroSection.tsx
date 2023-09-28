@@ -8,7 +8,7 @@ function HeroSection() {
 
 
   return (
-    <section id="hero" className='h-screen w-screen flex justify-items-end p-7' >
+    <section id="hero" className='h-screen w-full flex justify-items-end p-7' >
         <div className="hero-section-left h-full flex-[0.5] items-center flex justify-start">
             <div className="hero-section-container w-[35rem] flex flex-col gap-14 ">
 				

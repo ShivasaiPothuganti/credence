@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 function NavBar() {
   return (
-    <nav className='h-[8vh] w-[100vw] p-3 flex '  >
+    <nav className='h-[8vh] w-[100%] p-3 flex '  >
         <div className="brand-text flex-[0.3] ">
             <h1 className='font-logo text-[2rem] text-primaryBlack ' >Credence</h1>
         </div>
