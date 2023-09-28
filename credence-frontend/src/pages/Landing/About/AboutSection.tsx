@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 function AboutSection() {
   const title = "Organized Transactions";
   const about =
-    "Credence is a user-friendly financial tool designed to simplify your money management. With Credence, you can effortlessly input and organize your transactions, gaining clear visibility of your financial activities. Keep track of your expenses, monitor your spending patterns, and make informed decisions to achieve your financial goals. Take control of your finances with Credence today.";
+    "Credence is a user-friendly financial tool engineered to streamline your financial management experience. Using Credence, you can easily input and structure your financial transactions, granting you a transparent overview of your monetary interactions. Take charge of your expenditures, observe your spending trends, and equip yourself with the insights needed to make well-informed financial choices to reach your objectives. Additionally, this application offers the capability to divide expenses among a group of individuals and provides a platform for creating shared spaces to manage joint financial transactions.";
 
   return (
     <>
@@ -44,14 +44,14 @@ function AboutSection() {
               }}
             >
               <div className="about_title relative ">
-                <h1 className="text-8xl font-REM mb-10 about_title text-[white]">
+                <h1 className="text-8xl font-primary mb-10 about_title text-primaryWhite">
                   {title}
                 </h1>
-                <p className="mb-10 text-secondaryWhite"> {about} </p>
+                <p className="mb-10 font-secondary text-secondaryWhite"> {about} </p>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                 >
-                  <Button variant={'secondary'} > Our Services </Button>
+                  <Button className="font-secondary" variant={'secondary'} > Our Services </Button>
                 </motion.button>
               </div>
             </motion.div>
