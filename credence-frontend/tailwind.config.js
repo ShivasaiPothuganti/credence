@@ -21,7 +21,7 @@ module.exports = {
       primaryPurple:'#D67BFF',
       secondaryPurple:'#FFA1F5',
       tertiaryPurple:'#D8B4F8',
-      primaryWhite:'#fcfcfc',
+      primaryWhite:'#ffffff',
       secondaryWhite:'#f0f1f2',
       buttonColor:'#114DAC'
     },

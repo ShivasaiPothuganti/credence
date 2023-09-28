@@ -5,7 +5,7 @@ import AboutSection from './About/AboutSection';
 function LandingPage() {
   return (
     <div>
-      <HeroSection main />
+      <HeroSection />
       <AboutSection />
     </div>
   )
