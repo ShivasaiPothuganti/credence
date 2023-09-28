@@ -3,6 +3,7 @@ import HeroSection from './HeroSection/HeroSection';
 import AboutSection from './About/AboutSection';
 import NavBar from './NavBar/NavBar';
 import ServicesSection from './ServicesSection/ServicesSection';
+import DeveloperSection from './DeveloperSection/DeveloperSection';
 
 function LandingPage() {
   return (
@@ -11,6 +12,7 @@ function LandingPage() {
       <HeroSection /> 
       <AboutSection />
       <ServicesSection  />
+      <DeveloperSection/>
     </>
   )
 }
