@@ -16,7 +16,7 @@ function ServicesSection() {
 
         <div className="services-section-cards w-full flex mt-10 relative ">
             <div className="backgroundbox h-[21rem] w-[21rem] top-[-4rem] left-0 z-[-1] absolute rounded-full bg-primaryPurple "></div>
-            <div className="backgroundbox rounded-full h-[10rem] w-[10rem] z-[-1] bottom-0 right-0 absolute bg-primaryPurple "></div>
+            <div className="backgroundbox rounded-2xl h-[5rem] w-[5rem] -rotate-12 z-[-1] bottom-0 right-0 absolute bg-primaryPurple "></div>
             <div className="services-section-cards-container flex-wrap flex justify-evenly w-full">
                 <ServiceCard 
                     lottieFile={TransactionListAnimation} 

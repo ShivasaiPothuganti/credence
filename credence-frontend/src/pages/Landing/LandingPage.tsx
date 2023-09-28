@@ -4,6 +4,7 @@ import AboutSection from './About/AboutSection';
 import NavBar from './NavBar/NavBar';
 import ServicesSection from './ServicesSection/ServicesSection';
 import DeveloperSection from './DeveloperSection/DeveloperSection';
+import FooterSection from './FooterSection/FooterSection';
 
 function LandingPage() {
   return (
@@ -13,6 +14,7 @@ function LandingPage() {
       <AboutSection />
       <ServicesSection  />
       <DeveloperSection/>
+      <FooterSection />
     </>
   )
 }
