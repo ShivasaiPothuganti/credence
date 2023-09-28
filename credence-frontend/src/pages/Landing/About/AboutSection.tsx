@@ -27,7 +27,7 @@ function AboutSection() {
               <Player animationData={AboutSectionAnimation} loop play />
             </motion.div>
           </div>
-          <div className="about_container_right h-screen w-[50%] flex justify-center items-center shadow-2xl text-[white] bg-primaryBlack p-5 rounded-three">
+          <div className="about_container_right h-screen w-[50%] flex justify-center items-center text-[white] bg-primaryBlack p-5 rounded-three">
             <motion.div
               className="box"
               initial={{ opacity: 0, scale: 0.5 }}

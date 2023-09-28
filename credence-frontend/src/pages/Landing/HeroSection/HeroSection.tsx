@@ -8,12 +8,12 @@ function HeroSection() {
 
 
   return (
-    <section id="hero" className='h-screen w-screen flex justify-items-end p-7' >
+    <section id="hero" className='bg-primaryWhite h-screen w-screen flex justify-items-end p-7' >
         <div className="hero-section-left h-full flex-[0.5] items-center flex justify-start">
             <div className="hero-section-container w-[35rem] flex flex-col gap-14 ">
 				
-				<div className="hero-section-infocontainer relative  ">
-				<div className="absolute h-10 w-48 z-[-1] bg-primaryPurple rounded-lg top-0 left-0 "></div>
+				<div className="hero-section-infocontainer relative z-[2] ">
+				<div className="absolute h-10 w-48 z-[-1] opacity-80 bg-primaryPurple rounded-lg top-0 left-0 "></div>
 				<div className="absolute h-24 w-24 rotate-12 z-[-1] rounded-lg bg-primaryPurple bottom-[-1rem] right-[-1rem] "></div>
 					<h1 className='text-9xl font-medium font-primary mb-[3rem] text-primaryBlack ' >Credence</h1>
 					<h3 className='text-4xl font-primary text-gray-800 mb-[2rem] text-primaryBlack ' >Your personal expense manager</h3>
