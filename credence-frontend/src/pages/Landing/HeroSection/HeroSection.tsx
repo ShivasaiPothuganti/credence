@@ -28,7 +28,7 @@ function HeroSection() {
 				</div>
 				<div className="hero-section-btngroup flex gap-10 ">
 					<Button size={'lg'} >Get started</Button>
-					<Button size={'lg'} >Explore</Button>
+					<a href='#about'><Button size={'lg'} >Explore</Button></a>
 				</div>
 			</div>
         </div>

@@ -52,7 +52,9 @@ function DeveloperSection() {
 
       <div className="developer-section-right flex justify-center items-center bg-primaryWhite h-full w-[50%]">
         <div className="developer-info m-auto p-10 flex flex-col items-end relative z-[1] ">
-          <div className="backgroundbox absolute h-36 w-36 z-[-1] rounded-3xl -rotate-12 bg-primaryPurple bottom-[20%] left-[10%] "></div>
+          {/* <div className="backgroundbox absolute h-36 w-36 z-[-1] rounded-3xl -rotate-12 bg-primaryPurple bottom-[20%] left-[10%] "></div> */}
+          <div className="backgroundbox absolute h-10 w-10 z-[-1] bg-primaryPurple -rotate-12 rounded-lg bottom-[15%] left-[20%] "></div>
+          <div className="backgroundbox absolute h-36 w-36 z-[-1] rotate-45 rounded-full  bg-primaryPurple top-[2%] right-[1rem] "></div>
           <img
             className=" developer-image h-[20rem] w-[20rem] object-cover overflow-clip "
             src={Manikanta}
