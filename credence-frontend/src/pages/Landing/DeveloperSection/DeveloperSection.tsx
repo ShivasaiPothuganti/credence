@@ -71,21 +71,21 @@ function DeveloperSection() {
             industry trends, and collaborate with like-minded tech enthusiasts.
           </p>
           <div className="developer-social-icons mt-7 flex gap-[3rem]">
-            <img
+            <a href="https://github.com/ManikantaSai55555" target="_blank"><img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer "
               src={githubIcon}
               alt=""
-            />
-            <img
+            /></a>
+            <a href="mailto:manikaspa.18@gmail.com" target="_blank"><img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer"
               src={gmailIcon}
               alt=""
-            />
-            <img
+            /></a>
+            <a href="https://www.linkedin.com/in/kaspa-manikanta-sai-3713721b0/" target="_blank"><img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer"
               src={linkedinIcon}
               alt=""
-            />
+            /></a>
           </div>
         </div>
       </div>
