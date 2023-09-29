@@ -11,8 +11,8 @@ function NavBar() {
         <div className="nav-links flex-[0.4] flex justify-center gap-16 items-center ">
             <a className='nav-link'  href="#hero" >Overview</a>
             <a className='nav-link' href="#about">About</a>
-            <a className='nav-link' href="">Services</a>
-            <a className='nav-link' href="">Developer</a>
+            <a className='nav-link' href="#services">Services</a>
+            <a className='nav-link' href="#developerinfo">Developer</a>
         </div>
         <div className=" justify-end items-center authorization-links flex flex-[0.3] gap-6 ">
             <Button>Login</Button>
