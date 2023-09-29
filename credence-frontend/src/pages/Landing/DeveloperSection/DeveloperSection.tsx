@@ -1,6 +1,7 @@
 import React from 'react';
 import './DeveloperSection.css';
 import Shivasai from '@/assets/images/Shivasai.jpg';
+import Manikanta from '@/assets/images/Manikanta.jpg'
 import githubIcon from '@/assets/Icons/githubIcon.svg';
 import gmailIcon from '@/assets/Icons/gmailIcon.svg';
 import linkedinIcon from '@/assets/Icons/linkedinIcon.svg';
@@ -37,7 +38,7 @@ function DeveloperSection() {
         <div className="developer-section-right flex justify-center items-center bg-primaryWhite h-full w-[50%]">
 		<div className="developer-info m-auto p-10 flex flex-col items-end relative z-[1] ">
 				<div className="backgroundbox absolute h-36 w-36 z-[-1] rounded-3xl -rotate-12 bg-primaryPurple bottom-[20%] left-[10%] "></div>
-				<img className=' developer-image h-[20rem] w-[20rem] object-cover overflow-clip ' src={Shivasai} alt="Developer" />
+				<img className=' developer-image h-[20rem] w-[20rem] object-cover overflow-clip ' src={Manikanta} alt="Developer" />
 				<h1 className=' mt-10 mb-10 text-[3rem] ' >Hi 👋🏻, I am <span className='font-bold text-primaryPurple' >Manikanta</span></h1>
 				<p 
 					className=' leading-10 text-lg text-right '
