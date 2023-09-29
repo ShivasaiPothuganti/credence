@@ -8,7 +8,7 @@ import linkedinIcon from "@/assets/Icons/linkedinIcon.svg";
 
 function DeveloperSection() {
   return (
-    <section id="developerinfo" className=" w-screen flex mt-10">
+    <section id="developerinfo" className=" w-full flex mt-10">
       <div className="developer-section-left h-auto bg-primaryBlack rounded-tr-3xl rounded-br-3xl w-[50%] ">
         <div className="developer-info m-auto p-10 relative z-[1] ">
           <div className="backgroundbox absolute h-10 w-10 z-[-1] bg-primaryPurple rotate-12 rounded-lg top-[10%] right-[20%] "></div>

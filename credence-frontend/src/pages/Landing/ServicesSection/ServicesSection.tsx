@@ -5,7 +5,7 @@ import TransactionListAnimation from '@/assets/lottie_animations/transactionList
 import SplitBillAnimation from '@/assets/lottie_animations/SplitBillAnimation.json';
 function ServicesSection() {
   return (
-    <section id="services" className='h-screen w-screen p-10' >
+    <section id="services" className='h-screen w-full p-10' >
 
         
 
