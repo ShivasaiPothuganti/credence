@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from 'react';
 function FooterSection() {
   return (
     <section className='h-[30vh] w-screen bg-primaryBlack mt-10 p-6 ' >

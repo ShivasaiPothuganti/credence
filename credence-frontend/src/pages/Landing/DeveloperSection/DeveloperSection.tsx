@@ -2,9 +2,7 @@ import React from "react";
 import "./DeveloperSection.css";
 import Shivasai from "@/assets/images/Shivasai.jpg";
 import Manikanta from "@/assets/images/Manikanta.jpg";
-import githubIcon from "@/assets/Icons/githubIcon.svg";
-import gmailIcon from "@/assets/Icons/gmailIcon.svg";
-import linkedinIcon from "@/assets/Icons/linkedinIcon.svg";
+import { IconFactory } from "@/assets/Icons/IconsFactory";
 
 function DeveloperSection() {
   return (
@@ -33,17 +31,17 @@ function DeveloperSection() {
           <div className="developer-social-icons mt-7 flex gap-[3rem]">
             <img
               className="h-12 w-[3rem] bg-primaryWhite rounded-md p-1 hover:cursor-pointer "
-              src={githubIcon}
+              src={IconFactory.GithubIcon}
               alt=""
             />
             <img
               className="h-12 w-[3rem] bg-primaryWhite rounded-md p-1 hover:cursor-pointer"
-              src={gmailIcon}
+              src={IconFactory.GmailIcon}
               alt=""
             />
             <img
               className="h-12 w-[3rem] bg-primaryWhite rounded-md p-1 hover:cursor-pointer"
-              src={linkedinIcon}
+              src={IconFactory.LinkedinIcon}
               alt=""
             />
           </div>
@@ -73,17 +71,17 @@ function DeveloperSection() {
           <div className="developer-social-icons mt-7 flex gap-[3rem]">
             <img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer "
-              src={githubIcon}
+              src={IconFactory.GithubIcon}
               alt=""
             />
             <img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer"
-              src={gmailIcon}
+              src={IconFactory.GmailIcon}
               alt=""
             />
             <img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer"
-              src={linkedinIcon}
+              src={IconFactory.LinkedinIcon}
               alt=""
             />
           </div>

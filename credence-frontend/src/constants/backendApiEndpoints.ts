@@ -1,4 +1,4 @@
-const authorization = '/authorization';
+const authorization = '/authenticate';
 const login = authorization+'/login';
 const register = authorization+'/register';
 const data = '/';
