@@ -16,15 +16,7 @@ module.exports = {
         "2xl": "1400px",
       },
     },
-    colors:{
-      primaryBlack:'#121524',
-      primaryPurple:'#D67BFF',
-      secondaryPurple:'#FFA1F5',
-      tertiaryPurple:'#D8B4F8',
-      primaryWhite:'#ffffff',
-      secondaryWhite:'#f0f1f2',
-      secondaryText:'#5d5e61'
-    },
+
     fontFamily: {
       'primary':['Mooli','sans-serif'],
       'secondary':['Mooli', 'sans-serif'],
@@ -32,6 +24,13 @@ module.exports = {
     },
     extend: {
       colors: {
+        primaryBlack:'#121524',
+      primaryPurple:'#D67BFF',
+      secondaryPurple:'#FFA1F5',
+      tertiaryPurple:'#D8B4F8',
+      primaryWhite:'#ffffff',
+      secondaryWhite:'#f0f1f2',
+      secondaryText:'#5d5e61',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

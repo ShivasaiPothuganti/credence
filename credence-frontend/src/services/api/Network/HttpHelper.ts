@@ -1,7 +1,7 @@
 import {AxiosInstance, AxiosResponse } from "axios";
 import backendApiAxios from "./HttpInterceptors";
 
-function addHttpMethods(instance:AxiosInstance){
+function addHttpMethodsToInstance(instance:AxiosInstance){
     const httpMethods  = {
         post:(apiEndpoint:string,data:unknown):Promise<AxiosResponse>=>{
             return instance.post(apiEndpoint,data);
@@ -23,7 +23,7 @@ function addHttpMethods(instance:AxiosInstance){
     return httpMethods;
 }
 
-const backend  = addHttpMethods(backendApiAxios);
+const backend  = addHttpMethodsToInstance(backendApiAxios);
 
 export {
     backend
