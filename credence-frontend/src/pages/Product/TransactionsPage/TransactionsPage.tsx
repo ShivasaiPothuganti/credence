@@ -1,13 +1,14 @@
 import { backend } from '@/services/api/Network/HttpHelper';
 import { AxiosResponse } from 'axios';
 import React, { useEffect, useState } from 'react';
+import {backendApiUrls} from '@/constants/backendApiEndpoints'; 
 
 function TransactionsPage() {
 
   const [transactionList,setTransactionsList] = useState([]);
 
   useEffect(()=>{
-    backend.get('/transactions/users').then((response:AxiosResponse)=>{
+    backend.get(backendApiUrls.getListOfUsersTransactions).then((response:AxiosResponse)=>{
       if(response&&response.data){
         setTransactionsList(response.data)
       }
