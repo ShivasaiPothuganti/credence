@@ -1,6 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
-import {BrowserRouter as Router, Route, Routes, Navigate} from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import LandingPage from './pages/Landing/LandingPage';
 import AuthenticationPage from './pages/Authentication/Authentication';
 import HomePage from './pages/Product/HomePage/HomePage';
@@ -9,29 +8,30 @@ import CollaborationRoomsPage from './pages/Product/CollaborationRoomsPage/Colla
 import SplitBills from './pages/Product/SplitBills/SplitBills';
 import DashBoardPage from './pages/Product/DashBoardPage/DashBoardPage';
 import RemindersPage from './pages/Product/RemindersPage/RemindersPage';
+import { useState } from 'react';
 import { authenticationService } from './services/api/Authentication';
+import { Navigate } from 'react-router-dom';
+
+
 
 
 function App() {
 
-  const token:string|null = authenticationService.getToken();
-  const [auth,setAuth] = useState(()=>{
-    return token?true:false;
+  const [authenticated,setAuthenticated] = useState(()=>{
+    return !!authenticationService.getToken()
   });
 
-  const NavigateToAuthenticationPage = ()=> <Navigate to='/authenticate?mode=login' />
-
-  function hasToken(Element: React.FunctionComponent){
-    return auth? <Element /> : <NavigateToAuthenticationPage/>
+  function isAuthenticated(Element:React.FunctionComponent){
+      return authenticated? <Element /> : <Navigate to="/authenticate?mode=login" />;
   }
 
+
   return (
-    <Router>
       <Routes>
         <Route path='/' element={<LandingPage/>} 
         />
-        <Route path="/authenticate" element={ <AuthenticationPage setAuth={setAuth} /> } />
-        <Route path='/product/' element={hasToken(HomePage)} >
+        <Route path="/authenticate"  element={ <AuthenticationPage setAuth={setAuthenticated} /> } />
+        <Route path='/product/'  element={isAuthenticated(HomePage)} >
             <Route path='transactions' Component={TransactionsPage} />
             <Route path='collaborationrooms' Component={CollaborationRoomsPage} />
             <Route path='splitbills' Component={SplitBills} />
@@ -39,10 +39,8 @@ function App() {
             <Route path='billstopay' Component={RemindersPage} />
             <Route path='' Component={DashBoardPage} />
         </Route>
-      </Routes>
-    </Router>
+      </Routes> 
   )
 }
 
 export default App;
-// orr 

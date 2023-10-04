@@ -1,12 +1,12 @@
 const authorization = '/authenticate';
 const login = authorization+'/login';
 const register = authorization+'/register';
-const data = '/';
+const getListOfUsersTransactions = '/transactions/users';
 
 
 export const backendApiUrls = {
     authorization,
     login,
     register,
-    data
+    getListOfUsersTransactions
 }
