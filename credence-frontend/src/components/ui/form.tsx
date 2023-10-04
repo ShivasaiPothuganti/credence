@@ -1,15 +1,31 @@
 import { Input } from './input';
 import { Button } from './button';
 import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
+import { Select } from './select';
 
 type FormGeneratorProp = {
 	generatorData:FormGeneratorData[],
+	referenceFunction?:Function,
 	onSubmit:Function
 }
+
+
+
 
 function form({generatorData,onSubmit}:FormGeneratorProp) {
 
   const formElementsRef:Record<string,HTMLInputElement | null> = {};
+
+  function getComponentByType(type:string){
+	switch(type){
+		case 'button':
+			return Button 
+		case 'select':
+			return Select 
+		default:
+			return Input
+	}
+	}
 
   return (
     <>
@@ -26,12 +42,17 @@ function form({generatorData,onSubmit}:FormGeneratorProp) {
 		}}>
         {
 			generatorData.map((generatorData,index)=>{
+				const FormElement = getComponentByType(generatorData.type);
 				return(
-					generatorData.type!=='submit'?
-					(<Input key={index} ref={(element)=>{
-						formElementsRef[element?.name as string] = element;
-					}} name ={generatorData.name} type={generatorData.type} placeholder={generatorData?.placeholder }/>):
-					<Button key={index} > {generatorData.value} </Button>
+					<FormElement
+					 ref={ generatorData.==='submit'? (element)=>{
+
+					}} /> 
+					// generatorData.type!=='submit'?
+					// (<Input key={index} ref={(element)=>{
+					// 	formElementsRef[element?.name as string] = element;
+					// }} name ={generatorData.name} type={generatorData.type} placeholder={generatorData?.placeholder }/>):
+					// <Button key={index} > {generatorData.value} </Button>
 				)
 			})
 		}
