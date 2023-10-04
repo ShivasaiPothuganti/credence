@@ -9,13 +9,28 @@ import { useToast } from "@/components/ui/use-toast";
 import { AxiosError } from "axios";
 import { Toaster } from "@/components/ui/toaster";
 import { ToastOptions } from "@/TypeDefinitions/ToastOptions";
+import { useEffect, useState } from "react";
 
-function AuthenticationPage({setAuth}) {
+type AuthenticationPageProps = {
+	setAuth : React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function AuthenticationPage({setAuth}:AuthenticationPageProps) {
 
 	const [searchParams,setSearchParams] = useSearchParams();
 	const {toast} = useToast();
-	const mode = searchParams.get('mode') as string;
+	const [mode,setMode] = useState('');
 	const navigate = useNavigate();
+	useEffect(()=>{
+		const mode = searchParams.get('mode') as string;
+		if(mode==='login'||mode=='register'){
+			setMode(mode)
+		}
+		else{
+			setMode('login');
+			setSearchParams({mode:'login'})
+		}
+	})
 	const loginFormGeneratorData:FormGeneratorData[] = [
 		{
 			type:'text',
@@ -81,14 +96,13 @@ function AuthenticationPage({setAuth}) {
 			if(response&&response.data){
 				authenticationService.setToken(response.data.token);
 				setAuth(true);
-				logger.debug("authenticated and token recieved successfully");
 				navigate('/product/transactions');
 			}
 		}
 		catch(error){
 			const e = error as AxiosError;
-			setAuth(false);
 			const status = (e?.response?.status);
+			setAuth(false);
 			if(status===409){
 				toast({
 					title:'Account already exists',
