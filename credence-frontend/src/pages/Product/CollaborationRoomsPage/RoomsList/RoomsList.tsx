@@ -12,8 +12,8 @@ function RoomsList({roomsList}:Rooms) {
   console.log(roomsList)
 
   return (
-    <div className="rooms-list p-4 flex flex-row flex-wrap justify-between gap-16 align-top">
-
+    
+    <div className="rooms-list p-4 flex flex-row flex-wrap justify-between gap-8 align-top">
       {
         roomsList.map((room:Room, index)=>{
           return <RoomCard key={index} room={room} />

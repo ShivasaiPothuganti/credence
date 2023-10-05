@@ -3,7 +3,7 @@ import NavigationPanel from '../NavigationPanel/NavigationPanel'
 
 function HomePage() {
   return (
-    <section className='h-screen w-full flex bg-primaryWhite' >
+    <section className='h-screen w-full flex' >
         <NavigationPanel/>
         <Outlet />
     </section>
