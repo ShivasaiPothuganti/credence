@@ -2,16 +2,21 @@ package com.expenseTracker.backend.controllers;
 
 
 import com.expenseTracker.backend.entities.BudgetEntity;
+import com.expenseTracker.backend.entities.RoomEntity;
 import com.expenseTracker.backend.entities.TransactionEntity;
+import com.expenseTracker.backend.entities.UserEntity;
 import com.expenseTracker.backend.services.BudgetService;
 import com.expenseTracker.backend.services.TransactionService;
+import com.expenseTracker.backend.services.UserRoomsService;
 import com.expenseTracker.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.expenseTracker.backend.models.ErrorResponse;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -20,12 +25,14 @@ public class UserController {
 	private UserService userService;
     private TransactionService transactionService;
     private BudgetService budgetService;
+	private UserRoomsService userRoomsService;
 
     @Autowired
-    public UserController(UserService userService, TransactionService transactionService, BudgetService budgetService){
+    public UserController(UserService userService, TransactionService transactionService, BudgetService budgetService, UserRoomsService userRoomsService){
         this.userService = userService;
         this.transactionService = transactionService;
         this.budgetService = budgetService;
+		this.userRoomsService = userRoomsService;
     }
 
     @GetMapping("budgets/{userId}")
@@ -62,4 +69,16 @@ public class UserController {
 		}
     }
 
+	@GetMapping("/rooms")
+	public ResponseEntity<?> getUserRooms(Authentication authentication){
+		UserEntity principal = (UserEntity) authentication.getPrincipal();
+		Long userId = principal.getUserId();
+		try{
+			List<RoomEntity> userRooms = userRoomsService.getRoomsOfUser(userId);
+			return new ResponseEntity<>(userRooms, HttpStatus.OK);
+		} catch (Exception e){
+			e.printStackTrace();
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

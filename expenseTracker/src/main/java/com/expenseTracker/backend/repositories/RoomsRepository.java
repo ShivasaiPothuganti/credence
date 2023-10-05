@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RoomsRepository extends JpaRepository<RoomEntity,Long> {
 
@@ -23,4 +25,10 @@ public interface RoomsRepository extends JpaRepository<RoomEntity,Long> {
     		nativeQuery = true
     )
     void refreshExpenditure(@Param("roomId") long roomId);
+
+    @Query(
+            value = "select * from room r where r.id in (select room_id from user_rooms where user_id = :userId)",
+            nativeQuery = true
+    )
+    List<RoomEntity> findByUserId(Long userId);
 }
