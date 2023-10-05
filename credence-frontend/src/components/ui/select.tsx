@@ -4,6 +4,7 @@ import { Check, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+
 const Select = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
@@ -107,13 +108,39 @@ const SelectSeparator = React.forwardRef<
 ))
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
-export {
-  Select,
-  SelectGroup,
-  SelectValue,
-  SelectTrigger,
-  SelectContent,
-  SelectLabel,
-  SelectItem,
-  SelectSeparator,
+type SelectFieldProps = {
+	selectPlaceholder:string,
+	selectLabel:string,
+	selectItems:{
+		value:string,
+		text:string
+	}[],
+	// eslint-disable-next-line @typescript-eslint/ban-types
+	onChange:Function,
+	reference:Function
 }
+
+export function SelectField({selectPlaceholder,selectLabel,selectItems,onChange,reference}:SelectFieldProps){
+  return(
+  <Select  onValueChange={(value)=>{onChange(value)}} >
+      <SelectTrigger  className="w-[180px]">
+        <SelectValue  placeholder={selectPlaceholder} />
+      </SelectTrigger>
+      <SelectContent  >
+        <SelectGroup >
+			<SelectLabel>{selectLabel}</SelectLabel>
+			{
+				selectItems.map((selectItem)=>{
+					return (
+						<SelectItem  value={selectItem.value}>{selectItem.text}</SelectItem>
+					)
+				})
+			}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  )
+}
+
+
+

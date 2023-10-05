@@ -37,7 +37,33 @@ function TransactionsPage() {
 		type:'select',
 		placeholder:'Select Category',
 		name:'category',
-		values:['food','movies','travelling','shopping']
+		elementProps:{
+			selectPlaceholder:'Category',
+			selectLabel:'Category',
+			selectItems:[
+				{
+					value:'food',
+					text:'Food'
+				},
+				{
+					value:'movie',
+					text:'Movie'
+				},
+				{
+					value:'travelling',
+					text:'Travelling'
+				},
+				{
+					value:'shopping',
+					text:'Shopping'
+				}
+			]
+		}
+	},
+	{
+		type:'submit',
+		name:'addTransaction',
+		value:'AddTransaction'
 	}
   ]
   function handleAddTransactionSubmit(data:unknown){

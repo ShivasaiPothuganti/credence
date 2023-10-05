@@ -4,5 +4,7 @@ export type FormGeneratorData = {
     name:string,
     value?:string,
     values?:string[],
-    reference?:Function
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    reference?:Function,
+    elementProps?:unknown
 }

@@ -1,12 +1,19 @@
 import { Input } from './input';
 import { Button } from './button';
 import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
-import { Select } from './select';
+import {SelectField} from './select';
 
 type FormGeneratorProp = {
 	generatorData:FormGeneratorData[],
 	referenceFunction?:Function,
 	onSubmit:Function
+}
+
+type BasicFormElementProps = {
+	type:string,
+	value:string|undefined,
+	name:string,
+	placeholder?:string
 }
 
 
@@ -15,44 +22,58 @@ type FormGeneratorProp = {
 function form({generatorData,onSubmit}:FormGeneratorProp) {
 
   const formElementsRef:Record<string,HTMLInputElement | null> = {};
+  let formData:Record<string,unknown> = {};
 
-  function getComponentByType(type:string){
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function getComponentByType(basicProps:BasicFormElementProps,additionalProps:any,elementReference:any){
+	const {type,name,value,placeholder} = basicProps;
 	switch(type){
+		case 'submit':
+			return <Button {...additionalProps} > {value} </Button>
 		case 'button':
-			return Button 
+			return <Button {...additionalProps} > {value} </Button> 
 		case 'select':
-			return Select 
+			return <SelectField reference = {elementReference} onChange={(value:string)=>{formData[name]=value}} {...additionalProps} /> 
 		default:
-			return Input
+			return <Input ref={elementReference} type={type} value={value} name={name} placeholder={placeholder} {...additionalProps} />
 	}
 	}
+
+	function handleSubmit(event:React.FormEvent){
+		event.preventDefault();
+		Object.keys(formElementsRef).forEach((key:string)=>{
+			if(formElementsRef[key]?.type!='submit'){
+				formData[key] = formElementsRef[key]?.value;
+			}
+		})
+		onSubmit(formData);
+		formData = {}
+		Object.keys(formElementsRef).forEach((key:string)=>{
+			if(formElementsRef[key]?.type!='submit'){
+				const element = formElementsRef[key];
+				if(element){
+					element.value = ''
+				}
+			}
+		})
+	}
+
 
   return (
     <>
-      <form className='flex flex-col gap-3'  onSubmit={
-			(event)=>{
-				event.preventDefault();
-				const formData:Record<string,unknown> = {};
-				Object.keys(formElementsRef).forEach((key:string)=>{
-					if(formElementsRef[key]?.type!='submit'){
-						formData[key] = formElementsRef[key]?.value;
-					}
-				})
-				onSubmit(formData);
-		}}>
+      <form className='flex flex-col gap-3'  onSubmit={handleSubmit}>
         {
-			generatorData.map((generatorData,index)=>{
-				const FormElement = getComponentByType(generatorData.type);
+			generatorData.map((generatorData)=>{
+				const basicProps = {type:generatorData.type,value:generatorData.value,name:generatorData.name,placeholder:generatorData.placeholder};
+				const FormElement = getComponentByType(
+					basicProps,
+					generatorData.elementProps,
+					(element:HTMLInputElement)=>{
+						formElementsRef[element?.name as string] = element;
+					}
+				);
 				return(
-					<FormElement
-					 ref={ generatorData.==='submit'? (element)=>{
-
-					}} /> 
-					// generatorData.type!=='submit'?
-					// (<Input key={index} ref={(element)=>{
-					// 	formElementsRef[element?.name as string] = element;
-					// }} name ={generatorData.name} type={generatorData.type} placeholder={generatorData?.placeholder }/>):
-					// <Button key={index} > {generatorData.value} </Button>
+					FormElement
 				)
 			})
 		}
