@@ -25,7 +25,7 @@ function CollaborationRoomsPage() {
 
   return (
     <section className='h-full w-full bg-[#f8f8fc] flex items-center' >
-      <div className="rooms-list h-full flex-[0.8] scroll-smooth overflow-scroll">
+      <div className="rooms-list h-full flex-[0.8] scroll-smooth overflow-auto">
         <RoomsList roomsList={roomsList} />
       </div>
       <div className="right-navigation-panel flex flex-[0.2] h-[95%] rounded-l-[2rem] shadow-xl bg-secondaryWhite">
