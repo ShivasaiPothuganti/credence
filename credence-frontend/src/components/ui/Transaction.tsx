@@ -4,7 +4,6 @@ import {
     Card,
     CardContent,
     CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
@@ -21,8 +20,11 @@ function Transaction({transaction}:TransactionProp) {
     <Card className='flex' >
         <div className="flex-[0.8]">
             <CardHeader>
-                <CardTitle>{title}</CardTitle>
-                <CardDescription > <p> <span className='h-2 w-2 inline-block bg-primaryBlack rounded-full' ></span> {category}</p> <p className='mt-2' > {description} </p>  </CardDescription>
+                <div className="card-title-container flex gap-12">
+                    <CardTitle>{title}</CardTitle>
+                    <p className=' bg-primaryBlack text-primaryWhite pt-1 pb-1 pr-3 pl-3 rounded-3xl ' > {category} </p>
+                </div>
+                <CardDescription > <p className='mt-2' > {description} </p>  </CardDescription>
             </CardHeader>
             <CardContent>
                 <p>{addedOn}</p>
