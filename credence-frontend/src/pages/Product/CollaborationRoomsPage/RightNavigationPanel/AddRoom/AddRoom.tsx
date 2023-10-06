@@ -30,9 +30,8 @@ function AddRoom({addNewRoom}:any) {
     ]
 
     function onSubmit(data:RoomData){
-        backend.post(backendApiUrls.addRoom,data).then(()=>{
-            data.expenditure = 0;
-            addNewRoom(data);
+        backend.post(backendApiUrls.addRoom,data).then((response)=>{
+            addNewRoom(response.data);
         })
     }
 

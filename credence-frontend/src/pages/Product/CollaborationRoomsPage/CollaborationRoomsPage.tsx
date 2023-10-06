@@ -28,7 +28,7 @@ function CollaborationRoomsPage() {
       <div className="rooms-list h-full flex-[0.8] scroll-smooth overflow-auto">
         <RoomsList roomsList={roomsList} />
       </div>
-      <div className="right-navigation-panel flex flex-[0.2] h-[95%] rounded-l-[2rem] shadow-xl bg-secondaryWhite">
+      <div className="right-navigation-panel flex flex-[0.2] h-[95%] rounded-[2rem] shadow-xl bg-secondaryWhite">
         <RightNavigationPanel addNewRoom={addNewroom}/>
       </div>
     </section>
