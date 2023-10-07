@@ -5,7 +5,7 @@ export type TTransaction = {
     userId:number,
     description:string,
     createdOn:string,
-    addedOn:string,
+    dateOfTransaction:string,
     category:string,
     roomId:string|null,
     groupId:string|null

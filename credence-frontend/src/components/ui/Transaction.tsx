@@ -7,17 +7,21 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
+import { transformISOtoDateTime } from '@/utils/formatDate';
+import { Button } from './button';
+import {IconFactory} from '@/assets/Icons/IconsFactory';
 
 type TransactionProp = {
-    transaction:TTransaction;
+    transaction:TTransaction,
+    deleteTransaction:Function
 }
 
-function Transaction({transaction}:TransactionProp) {
+function Transaction({transaction,deleteTransaction}:TransactionProp) {
 
-    const {title,price,addedOn,category,description,groupId,roomId,transactionId,userId} = transaction;
+    const {title,price,dateOfTransaction,category,description,groupId,roomId,transactionId,userId} = transaction;
 
   return (
-    <Card className='flex' >
+    <Card className=' group flex relative' >
         <div className="flex-[0.8]">
             <CardHeader>
                 <div className="card-title-container flex gap-12">
@@ -27,35 +31,18 @@ function Transaction({transaction}:TransactionProp) {
                 <CardDescription > <p className='mt-2' > {description} </p>  </CardDescription>
             </CardHeader>
             <CardContent>
-                <p>{addedOn}</p>
+                <p >{transformISOtoDateTime(dateOfTransaction)}</p>
             </CardContent>
         </div>
         <div className="flex-[0.2] flex items-center justify-center">
             <h1 className='text-2xl font-bold' >₹ {price} </h1>
         </div>
+        <div className=" hidden group-hover:block transaction-delete absolute bottom-2 right-2">
+            <Button onClick={()=>{deleteTransaction(transactionId)}} variant='destructive' >
+                <img className='h-full' src={IconFactory.DeleteIcon} alt="" />
+            </Button>
+        </div>
     </Card>
-    // <div className='w-full h-16 flex ' >
-    //     <div className="transaction-left flex-[0.2]">
-    //         <div className="caterogry-container rounded-full h-[80%]">
-    //             <h1>{category}</h1>
-    //         </div>
-    //     </div>
-    //     <div className="transaction-center flex[0.6] ">
-    //         <div className="transaction-heading">
-    //             <h1> {title} </h1>
-    //         </div>
-    //         <div className="transaction-descriptiom">
-    //             <p> {description} </p>
-    //         </div>
-    //         <div className="transaction-dates flex justify-between">
-    //             <p> {addedOn} </p>
-    //             <p> {createdOn} </p>
-    //         </div>
-    //     </div>
-    //     <div className="transaction-right flex-[0.2]">
-    //         <h1> ₹{price} </h1>
-    //     </div>
-    // </div>
   )
 }
 

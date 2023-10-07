@@ -7,6 +7,7 @@ import LinkedinIcon from './linkedinIcon.svg';
 import HomeIcon from './HomeIcon.svg';
 import WalletIcon from './WalletIcon.svg';
 import SplitBillIcon from './SplitBillIcons.svg';
+import DeleteIcon from '@/assets/Icons/DeleteIcon.svg';
 
 export const IconFactory= {
     DashboardIcon,
@@ -17,5 +18,6 @@ export const IconFactory= {
     LinkedinIcon,
     HomeIcon,
     WalletIcon,
-    SplitBillIcon
+    SplitBillIcon,
+    DeleteIcon
 }

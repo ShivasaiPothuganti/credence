@@ -4,10 +4,11 @@ import React from 'react';
 
 
 type TTransactionList = {
-    transactions:TTransaction[]
+    transactions:TTransaction[],
+    deleteTransactions:Function
 }
 
-function TransactionList({transactions}:TTransactionList) {
+function TransactionList({transactions,deleteTransactions}:TTransactionList) {
 
 
   return (
@@ -15,7 +16,7 @@ function TransactionList({transactions}:TTransactionList) {
         {
             
             transactions.map((transaction:TTransaction)=>{
-                return <Transaction transaction={transaction} />
+                return <Transaction deleteTransaction={deleteTransactions} transaction={transaction} />
             })
         }
     </section>

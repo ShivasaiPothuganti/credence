@@ -2,7 +2,7 @@ import Form from "@/components/ui/form";
 import { createSearchParams, useSearchParams } from "react-router-dom";
 import { logger } from "@/helpers/loggers/logger";
 import { FormGeneratorData } from "@/TypeDefinitions/FormGeneratorData";
-import { authenticationService } from "@/services/api/Authentication";
+import { authenticationService } from "@/services/api/AuthenticationService";
 import { UserCredentials } from "@/TypeDefinitions/UserCredentials";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
