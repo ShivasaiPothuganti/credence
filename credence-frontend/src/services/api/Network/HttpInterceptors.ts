@@ -2,6 +2,7 @@ import { logger } from "../../../helpers/loggers/logger";
 import {backendApiAxios} from "./axiosBaseConfig";
 import {backendApiUrls} from '../../../constants/backendApiEndpoints';
 import { authenticationService } from "../AuthenticationService";
+import { AxiosError } from "axios";
 
 
 backendApiAxios.interceptors.request.use( request => {
@@ -21,12 +22,12 @@ backendApiAxios.interceptors.request.use( request => {
 
 backendApiAxios.interceptors.response.use( response =>{
     return response;
-},error=>{
-    if(error.response.status===401){
+},(error:AxiosError)=>{
+    if(error.response?.status===401){
         authenticationService.removeToken();
         window.location.href = '/authenticate?mode=login';
     }
-    else if(error.response.status===403){
+    else if(error.response?.status===403){
         authenticationService.removeToken();
         window.location.href = '/authenticate?mode=login';
     }

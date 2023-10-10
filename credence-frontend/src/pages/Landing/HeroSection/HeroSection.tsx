@@ -8,7 +8,7 @@ function HeroSection() {
 
 
   return (
-    <section id="hero" className='bg-primaryWhite h-screen w-screen flex justify-items-end p-7' >
+    <section id="hero" className='bg-primaryWhite h-screen w-full flex justify-items-end p-7' >
         <div className="hero-section-left h-full flex-[0.5] items-center flex justify-start">
             <div className="hero-section-container w-[35rem] flex flex-col gap-14 ">
 				
@@ -28,7 +28,7 @@ function HeroSection() {
 				</div>
 				<div className="hero-section-btngroup flex gap-10 ">
 					<Button size={'lg'} >Get started</Button>
-					<Button size={'lg'} >Explore</Button>
+					<a href='#about'><Button size={'lg'} >Explore</Button></a>
 				</div>
 			</div>
         </div>

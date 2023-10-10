@@ -6,7 +6,7 @@ import { IconFactory } from "@/assets/Icons/IconsFactory";
 
 function DeveloperSection() {
   return (
-    <section id="developerinfo" className=" w-screen flex mt-10">
+    <section id="developerinfo" className=" w-full flex mt-10">
       <div className="developer-section-left h-auto bg-primaryBlack rounded-tr-3xl rounded-br-3xl w-[50%] ">
         <div className="developer-info m-auto p-10 relative z-[1] ">
           <div className="backgroundbox absolute h-10 w-10 z-[-1] bg-primaryPurple rotate-12 rounded-lg top-[10%] right-[20%] "></div>
@@ -50,7 +50,9 @@ function DeveloperSection() {
 
       <div className="developer-section-right flex justify-center items-center bg-primaryWhite h-full w-[50%]">
         <div className="developer-info m-auto p-10 flex flex-col items-end relative z-[1] ">
-          <div className="backgroundbox absolute h-36 w-36 z-[-1] rounded-3xl -rotate-12 bg-primaryPurple bottom-[20%] left-[10%] "></div>
+          {/* <div className="backgroundbox absolute h-36 w-36 z-[-1] rounded-3xl -rotate-12 bg-primaryPurple bottom-[20%] left-[10%] "></div> */}
+          <div className="backgroundbox absolute h-10 w-10 z-[-1] bg-primaryPurple -rotate-12 rounded-lg bottom-[15%] left-[20%] "></div>
+          <div className="backgroundbox absolute h-36 w-36 z-[-1] rotate-45 rounded-full  bg-primaryPurple top-[2%] right-[1rem] "></div>
           <img
             className=" developer-image h-[20rem] w-[20rem] object-cover overflow-clip "
             src={Manikanta}
@@ -69,21 +71,21 @@ function DeveloperSection() {
             industry trends, and collaborate with like-minded tech enthusiasts.
           </p>
           <div className="developer-social-icons mt-7 flex gap-[3rem]">
-            <img
+            <a href="https://github.com/ManikantaSai55555" target="_blank"><img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer "
               src={IconFactory.GithubIcon}
               alt=""
-            />
-            <img
+            /></a>
+            <a href="mailto:manikaspa.18@gmail.com" target="_blank"><img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer"
               src={IconFactory.GmailIcon}
               alt=""
-            />
-            <img
+            /></a>
+            <a href="https://www.linkedin.com/in/kaspa-manikanta-sai-3713721b0/" target="_blank"><img
               className="h-12 w-[3rem] shadow-xl rounded-md p-1 hover:cursor-pointer"
               src={IconFactory.LinkedinIcon}
               alt=""
-            />
+            /></a>
           </div>
         </div>
       </div>

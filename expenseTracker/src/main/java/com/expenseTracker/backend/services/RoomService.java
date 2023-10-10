@@ -7,6 +7,7 @@ import com.expenseTracker.backend.repositories.UserRoomsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import java.util.Optional;
 
@@ -25,14 +26,15 @@ public class RoomService {
 
     // create a room
     @Transactional
-    public void createRoom(RoomEntity room,Long userId) {
+    public RoomEntity createRoom(RoomEntity room,Long userId) {
         room.setExpenditure(0.0);
-        roomsRepository.save(room);
+        RoomEntity savedRoom = roomsRepository.save(room);
         System.out.println(room);
         UserRoomsEntity userRoomsEntity = new UserRoomsEntity();
         userRoomsEntity.setUserId(userId);
         userRoomsEntity.setRoomId(room.getRoomId());
         userRoomsRepository.save(userRoomsEntity);
+        return savedRoom;
     }
 
     // add user to a room

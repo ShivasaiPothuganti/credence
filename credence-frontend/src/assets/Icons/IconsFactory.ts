@@ -8,6 +8,7 @@ import HomeIcon from './HomeIcon.svg';
 import WalletIcon from './WalletIcon.svg';
 import SplitBillIcon from './SplitBillIcons.svg';
 import DeleteIcon from '@/assets/Icons/DeleteIcon.svg';
+import SearchIcon from './SearchIcon.svg';
 
 export const IconFactory= {
     DashboardIcon,
@@ -19,5 +20,6 @@ export const IconFactory= {
     HomeIcon,
     WalletIcon,
     SplitBillIcon,
-    DeleteIcon
+    DeleteIcon,
+    SearchIcon
 }

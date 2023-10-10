@@ -4,6 +4,8 @@ const register = authorization+'/register';
 const getListOfUsersTransactions = '/transactions/users';
 const addTransaction = '/transactions/';
 const deleteTransactions = '/transactions/';
+const getRoomsOfUser = '/users/rooms'
+const addRoom = '/rooms/'
 
 export const backendApiUrls = {
     authorization,
@@ -11,5 +13,7 @@ export const backendApiUrls = {
     register,
     getListOfUsersTransactions,
     addTransaction,
-    deleteTransactions
+    deleteTransactions,
+    getRoomsOfUser,
+    addRoom
 }

@@ -1,5 +1,6 @@
 package com.expenseTracker.backend.repositories;
 
+import com.expenseTracker.backend.entities.RoomEntity;
 import com.expenseTracker.backend.entities.UserRoomsEntity;
 import com.expenseTracker.backend.models.RoomUsers;
 

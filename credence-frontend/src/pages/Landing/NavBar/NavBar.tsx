@@ -18,7 +18,7 @@ function NavBar() {
             <a className='nav-link'  href="#hero" >Overview</a>
             <a className='nav-link' href="#about">About</a>
             <a className='nav-link' href="#services">Services</a>
-            <a className='nav-link' href="#developerinfo">Developer</a>
+            <a className='nav-link' href="#developerinfo">Developers</a>
         </div>
         <div className=" justify-end items-center authorization-links flex flex-[0.3] gap-6 ">
             <Button onClick={()=>{

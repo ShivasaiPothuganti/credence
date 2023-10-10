@@ -3,6 +3,8 @@ package com.expenseTracker.backend.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.expenseTracker.backend.entities.RoomEntity;
+import com.expenseTracker.backend.repositories.RoomsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +18,12 @@ import jakarta.transaction.Transactional;
 public class UserRoomsService {
 	
 	private UserRoomsRepository userRoomsRepository;
+	private RoomsRepository roomsRepository;
 
 	@Autowired
-	public UserRoomsService(UserRoomsRepository userRoomsRepository) {
+	public UserRoomsService(UserRoomsRepository userRoomsRepository, RoomsRepository roomsRepository) {
 		this.userRoomsRepository = userRoomsRepository;
+		this.roomsRepository = roomsRepository;
 	}
 	
 	@Transactional
@@ -36,6 +40,12 @@ public class UserRoomsService {
 	public List<RoomUsers> getByRoomId(long roomId) {
 		List<RoomUsers> roomUsers = userRoomsRepository.getByRoomId(roomId);
 		return roomUsers;
+	}
+
+	@Transactional
+	public List<RoomEntity> getRoomsOfUser(Long userId) {
+		List<RoomEntity> roomsList = roomsRepository.findByUserId(userId);
+		return roomsList;
 	}
 
 }

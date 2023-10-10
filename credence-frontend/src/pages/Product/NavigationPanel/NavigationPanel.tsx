@@ -41,7 +41,7 @@ function NavigationPanel() {
                 >
                     <img className='h-6 w-6 mr-4' src={IconFactory.CollaborativeRoomsIcon}
                      alt="" />
-                        <p>Collaboration rooms</p>
+                        <p>Rooms</p>
                 </Link>
                 <Link 
                     className='navigationpanel-link' 
@@ -49,7 +49,7 @@ function NavigationPanel() {
                 >
                     <img className='h-6 w-6 mr-4' src={IconFactory.SplitBillIcon}
                      alt="" />
-                       <p> splitbills</p>
+                       <p> Split Bills</p>
                 </Link>
                 <Link 
                     className='navigationpanel-link' 

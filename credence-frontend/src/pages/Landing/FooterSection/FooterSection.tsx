@@ -1,7 +1,7 @@
 import React from 'react';
 function FooterSection() {
   return (
-    <section className='h-[30vh] w-screen bg-primaryBlack mt-10 p-6 ' >
+    <section className='h-[30vh] w-full bg-primaryBlack mt-10 p-6 ' >
         <h1 className='text-center font-md text-primaryWhite text-[3rem] ' >Credence</h1>
         <div className="footer-container mt-5 flex justify-between">
 
