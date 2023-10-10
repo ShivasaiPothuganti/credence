@@ -7,7 +7,6 @@ function addHttpMethodsToInstance(instance:AxiosInstance){
             return instance.post(apiEndpoint,data);
         },
         get:(apiEndpoint:string,options={}):Promise<AxiosResponse>=>{
-            console.log(options);
             return instance.get(apiEndpoint);
         },
         put:(apiEndpoint:string,data:unknown):Promise<AxiosResponse>=>{
@@ -29,6 +28,14 @@ export {
     backend
 };
 
+
+/**
+ * 
+ * 
+ * 
+ * axios.get("https://localhost:8080/getTransactions").then(()).catch(())
+ * 
+ */
 /**
  * 
  * url

@@ -2,6 +2,7 @@ import { Input } from './input';
 import { Button } from './button';
 import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
 import {SelectField} from './select';
+import { Checkbox } from './checkbox';
 
 type FormGeneratorProp = {
 	generatorData:FormGeneratorData[],
@@ -13,7 +14,8 @@ type BasicFormElementProps = {
 	type:string,
 	value:string|undefined,
 	name:string,
-	placeholder?:string
+	placeholder?:string,
+	required?:boolean
 }
 
 
@@ -28,6 +30,12 @@ function form({generatorData,onSubmit}:FormGeneratorProp) {
   function getComponentByType(basicProps:BasicFormElementProps,additionalProps:any,elementReference:any){
 	const {type,name,value,placeholder} = basicProps;
 	switch(type){
+		case 'checkbox':
+			return <span className="inline-block">
+				
+				<Checkbox name={name}  />
+				<p>{'hiello'}</p>
+			</span>
 		case 'submit':
 			return <Button {...additionalProps} > {value} </Button>
 		case 'button':
@@ -64,7 +72,7 @@ function form({generatorData,onSubmit}:FormGeneratorProp) {
       <form className='flex flex-col gap-3'  onSubmit={handleSubmit}>
         {
 			generatorData.map((generatorData)=>{
-				const basicProps = {type:generatorData.type,value:generatorData.value,name:generatorData.name,placeholder:generatorData.placeholder};
+				const basicProps = {type:generatorData.type,value:generatorData.value,name:generatorData.name,placeholder:generatorData.placeholder,required:generatorData.required};
 				const FormElement = getComponentByType(
 					basicProps,
 					generatorData.elementProps,

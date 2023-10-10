@@ -19,7 +19,11 @@ function TransactionsPage() {
 	{
 		type:'text',
 		placeholder:'Title ',
-		name:'title'
+		name:'title',
+		elementProps:{
+			required:true,
+			minLength:3,
+		}
 	},
 	{
 		type:'text',
@@ -106,6 +110,7 @@ function TransactionsPage() {
 	})
   }
 
+
   useEffect(()=>{
     transactionService.getAllTransactions().then((response:AxiosResponse)=>{
       if(response&&response.data){
@@ -126,7 +131,7 @@ function TransactionsPage() {
 		<TransactionList deleteTransactions = {handleDeleteTransaction} transactions={transactionList} />
       </div>
       <div className=" bg-white transactionPage-rightPanel-container h-full p-5 flex-[0.3]">
-        <div className="transactionPage-rightPanel h-full rounded-lg bg-[#efefef] p-7 ">
+        <div className="transactionPage-rightPanel h-full rounded-lg p-7 ">
           <Form generatorData={addTransactionFormGenerator} onSubmit={handleAddTransactionSubmit} />
 		  <div className="filterOptions">
 			{/* 
@@ -136,8 +141,9 @@ function TransactionsPage() {
 				category
 				roomsOnly
 				groupsOnly
-				range Of price
 				personal Transactions.....
+				range Of price
+				
 
 			 */}
 		  </div>
