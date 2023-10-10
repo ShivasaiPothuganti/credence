@@ -8,12 +8,11 @@ import { AxiosResponse } from "axios";
 
 function CollaborationRoomsPage() {
 
-  const [roomsList, setRoomsList] = useState([] as Room[]);
+  const [roomsList, setRoomsList] = useState<Room[]>([]);
 
   useEffect(()=>{
     backend.get(backendApiUrls.getRoomsOfUser).then((data:AxiosResponse)=>{
       setRoomsList(data.data);
-      console.log(data," this is the rooms data")
     })
   },[])
 
