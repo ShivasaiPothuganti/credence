@@ -6,7 +6,9 @@ import { Checkbox } from './checkbox';
 
 type FormGeneratorProp = {
 	generatorData:FormGeneratorData[],
+	// eslint-disable-next-line @typescript-eslint/ban-types
 	referenceFunction?:Function,
+	// eslint-disable-next-line @typescript-eslint/ban-types
 	onSubmit:Function
 }
 

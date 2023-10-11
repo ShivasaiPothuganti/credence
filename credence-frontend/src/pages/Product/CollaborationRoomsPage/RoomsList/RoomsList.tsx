@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Room } from "../../../../TypeDefinitions/Room";
-import RoomCard from "./RoomCard/RoomCard";
+import RoomCard from "../../../../components/ui/RoomCard/RoomCard";
 import SearchBar from "@/components/ui/searchbar";
 import { logger } from "@/helpers/loggers/logger";
 
@@ -26,7 +26,7 @@ function RoomsList({roomsList}:Rooms) {
 
   useEffect(()=>{
     setFilteredRooms(roomsList);
-  },[])
+  },[roomsList])
 
   return (
     <>

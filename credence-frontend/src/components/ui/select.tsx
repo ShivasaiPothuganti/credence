@@ -111,16 +111,12 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 type SelectFieldProps = {
 	selectPlaceholder:string,
 	selectLabel:string,
-	selectItems:{
-		value:string,
-		text:string
-	}[],
+	selectItems:string[],
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	onChange:Function,
-	reference:Function
 }
 
-export function SelectField({selectPlaceholder,selectLabel,selectItems,onChange,reference}:SelectFieldProps){
+export function SelectField({selectPlaceholder,selectLabel,selectItems,onChange}:SelectFieldProps){
   return(
   <Select  onValueChange={(value)=>{onChange(value)}} >
       <SelectTrigger  className="w-[180px]">
@@ -132,7 +128,7 @@ export function SelectField({selectPlaceholder,selectLabel,selectItems,onChange,
 			{
 				selectItems.map((selectItem)=>{
 					return (
-						<SelectItem  value={selectItem.value}>{selectItem.text}</SelectItem>
+						<SelectItem  value={selectItem}>{selectItem}</SelectItem>
 					)
 				})
 			}
