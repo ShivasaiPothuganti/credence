@@ -30,9 +30,9 @@ public class UserService {
     	if(existingUser!=null) {
 			throw new UserNameExistsException("Username already found");
 		}
-    	UserEntity savedUser=userRepository.save(user);
-        //categoriesService.addCategory(savedUser.getUserId());
-    	return savedUser;
+        UserEntity saved_user = userRepository.save(user);
+        categoriesService.addCategory(user.getUserId());
+        return saved_user;
     }
 
     // login the user

@@ -31,6 +31,7 @@ public class CategoryController {
 	public ResponseEntity<?> updateCategories(@RequestBody CategoriesEntity categories, Authentication authentication) {
 		UserEntity user = (UserEntity) authentication.getPrincipal();
 		try {
+			categories.setUserId(((UserEntity) authentication.getPrincipal()).getUserId());
 			categoriesService.updateCategories(categories);
 			CategoriesEntity saveCategories = categoriesService.findCategoriesByUserId(user.getUserId());
 			return new ResponseEntity<>(saveCategories, HttpStatus.OK);
