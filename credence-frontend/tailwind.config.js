@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line no-undef
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -15,8 +16,21 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+
+    fontFamily: {
+      'primary':['Mooli','sans-serif'],
+      'secondary':['Mooli', 'sans-serif'],
+      'logo':['Mooli', 'cursive']
+    },
     extend: {
       colors: {
+        primaryBlack:'#121524',
+      primaryPurple:'#D67BFF',
+      secondaryPurple:'#FFA1F5',
+      tertiaryPurple:'#D8B4F8',
+      primaryWhite:'#ffffff',
+      secondaryWhite:'#f0f1f2',
+      secondaryText:'#5d5e61',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -53,6 +67,7 @@ module.exports = {
       },
       borderRadius: {
         lg: "var(--radius)",
+        three: '50px 0 0 50px',
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
@@ -72,5 +87,6 @@ module.exports = {
       },
     },
   },
+  // eslint-disable-next-line no-undef
   plugins: [require("tailwindcss-animate")],
 }

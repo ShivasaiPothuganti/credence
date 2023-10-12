@@ -1,6 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Mooli&family=Pacifico&family=Poppins:wght@200;300;400;500;600;700;800;900&family=Roboto+Condensed:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Sedgwick+Ave+Display&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar { 
+  width: 5px; 
+} 
+
+/* Track */
+::-webkit-scrollbar-track { 
+  background: #f1f1f1; 
+} 
+
+/* Handle */
+::-webkit-scrollbar-thumb { 
+  background: #888; 
+  border-radius: 5px; 
+  display: none;
+} 
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover { 
+  background: #555; 
+}
+
  
 @layer base {
   :root {
@@ -71,6 +96,22 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-y-scroll ;
   }
+}
+
+html{
+  @apply scroll-smooth;
+}
+
+.btn{
+  background: #114DAC;
+  padding: 10px;
+  border-radius: 99em;
+  height: max-content;
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
 }

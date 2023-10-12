@@ -1,0 +1,7 @@
+.navigationpanel-link{
+    @apply p-3 mb-4 text-primaryWhite text-lg hover:bg-primaryPurple hover:rounded-md flex items-start gap-1  ;
+}
+
+.navigationpanel-link>p{
+    @apply font-semibold;
+}

@@ -1,11 +1,22 @@
-import React from 'react'
+import React from 'react';
+import HeroSection from './HeroSection/HeroSection';
+import AboutSection from './About/AboutSection';
+import NavBar from './NavBar/NavBar';
+import ServicesSection from './ServicesSection/ServicesSection';
+import DeveloperSection from './DeveloperSection/DeveloperSection';
+import FooterSection from './FooterSection/FooterSection';
 
 function LandingPage() {
   return (
-    <div>
-       Landing page
-    </div>
+    <>
+      <NavBar />
+      <HeroSection /> 
+      <AboutSection />
+      <ServicesSection  />
+      <DeveloperSection/>
+      <FooterSection />
+    </>
   )
 }
 
-export default LandingPage
+export default LandingPage;

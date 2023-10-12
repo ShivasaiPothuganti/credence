@@ -37,8 +37,8 @@ public class RoomsController {
         UserEntity authenticatedUser = (UserEntity) authenticationObject.getPrincipal();
         Long userId = authenticatedUser.getUserId();
         try{
-            roomService.createRoom(room,userId);
-            return new ResponseEntity<>("new room created",HttpStatus.OK);
+            RoomEntity roomEntity = roomService.createRoom(room,userId);
+            return new ResponseEntity<>(roomEntity,HttpStatus.OK);
         }
         catch (Exception exc){
             return new ResponseEntity<>("failed to created the room",HttpStatus.INTERNAL_SERVER_ERROR);

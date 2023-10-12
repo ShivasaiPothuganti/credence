@@ -1,12 +1,15 @@
-const authorization = '/authorization';
+const authorization = '/authenticate';
 const login = authorization+'/login';
 const register = authorization+'/register';
-const data = '/';
-
+const getListOfUsersTransactions = '/transactions/users';
+const getRoomsOfUser = '/users/rooms'
+const addRoom = '/rooms/'
 
 export const backendApiUrls = {
     authorization,
     login,
     register,
-    data
+    getListOfUsersTransactions,
+    getRoomsOfUser,
+    addRoom
 }
