@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import './NavigationPanel.css';
 import { Button } from '@/components/ui/button';
-import { authenticationService } from '@/services/api/Authentication';
+import { authenticationService } from '@/services/api/AuthenticationService';
 import { useNavigate } from 'react-router-dom';
 import { IconFactory } from '@/assets/Icons/IconsFactory';
 

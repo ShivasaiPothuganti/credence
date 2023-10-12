@@ -1,7 +1,7 @@
 import { logger } from "../../../helpers/loggers/logger";
 import {backendApiAxios} from "./axiosBaseConfig";
 import {backendApiUrls} from '../../../constants/backendApiEndpoints';
-import { authenticationService } from "../Authentication";
+import { authenticationService } from "../AuthenticationService";
 import { AxiosError } from "axios";
 
 
@@ -28,7 +28,8 @@ backendApiAxios.interceptors.response.use( response =>{
         window.location.href = '/authenticate?mode=login';
     }
     else if(error.response?.status===403){
-        logger.error("forbidden request");
+        authenticationService.removeToken();
+        window.location.href = '/authenticate?mode=login';
     }
     return Promise.reject(error);
 })

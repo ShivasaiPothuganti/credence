@@ -1,10 +1,11 @@
-import {Room} from '../Room';
+import {Room} from '../../../TypeDefinitions/Room';
 
 type RoomList = {
   room:Room
 }
 
 function RoomCard({room}:RoomList) {
+
   
   return (
     <div className='h-32 w-[18rem] p-1 bg-card border text-card-foreground shadow-sm flex justify-between gap-2 rounded-lg cursor-pointer hover:scale-105'>

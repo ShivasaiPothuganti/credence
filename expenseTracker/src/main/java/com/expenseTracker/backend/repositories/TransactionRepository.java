@@ -20,7 +20,7 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity,L
 
             value = "SELECT \n" +
                     "\tt.id as transactionId,\n" +
-                    "\tt.added_on,\n" +
+                    "\tt.date_of_transaction,\n" +
                     "\tt.category,\n" +
                     "\tt.created_on,\n" +
                     "\tt.description,\n" +
@@ -35,7 +35,7 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity,L
     @Query(
             value="SELECT \n" +
                     "\tt.id as transactionId,\n" +
-                    "\tt.added_on,\n" +
+                    "\tt.date_of_transaction,\n" +
                     "\tt.category,\n" +
                     "\tt.created_on,\n" +
                     "\tt.description,\n" +

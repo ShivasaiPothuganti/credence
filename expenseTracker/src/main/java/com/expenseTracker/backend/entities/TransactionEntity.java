@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name="transactions")
@@ -33,8 +34,8 @@ public class TransactionEntity {
     @Column(name="createdOn")
     private LocalDateTime createdOn;
 
-    @Column(name="addedOn")
-    private LocalDateTime addedOn;
+    @Column(name="dateOfTransaction")
+    private Date dateOfTransaction;
 
     @Column(name="category")
     private String category;
@@ -112,12 +113,12 @@ public class TransactionEntity {
         this.createdOn = createdOn;
     }
 
-    public LocalDateTime getAddedOn() {
-        return addedOn;
+    public Date getDateOfTransaction() {
+        return dateOfTransaction;
     }
 
-    public void setAddedOn(LocalDateTime addedOn) {
-        this.addedOn = addedOn;
+    public void setDateOfTransaction(Date dateOfTransaction) {
+        this.dateOfTransaction = dateOfTransaction;
     }
 
     public String getCategory() {
@@ -172,7 +173,7 @@ public class TransactionEntity {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", createdOn=" + createdOn +
-                ", addedOn=" + addedOn +
+                ", dateofTransaction=" + dateOfTransaction +
                 ", Category='" + category + '\'' +
                 "}\n";
     }

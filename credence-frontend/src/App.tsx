@@ -9,7 +9,7 @@ import SplitBills from './pages/Product/SplitBills/SplitBills';
 import DashBoardPage from './pages/Product/DashBoardPage/DashBoardPage';
 import RemindersPage from './pages/Product/RemindersPage/RemindersPage';
 import { useState } from 'react';
-import { authenticationService } from './services/api/Authentication';
+import { authenticationService } from './services/api/AuthenticationService';
 import { Navigate } from 'react-router-dom';
 
 
