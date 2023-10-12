@@ -1,4 +1,4 @@
-import {Room} from '../Room';
+import {Room} from '../../../../../TypeDefinitions/Room';
 
 type RoomList = {
   room:Room
