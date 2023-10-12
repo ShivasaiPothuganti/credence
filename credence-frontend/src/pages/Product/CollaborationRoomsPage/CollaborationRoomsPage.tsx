@@ -5,13 +5,13 @@ import { backendApiUrls } from "@/constants/backendApiEndpoints";
 import { backend } from "@/services/api/Network/HttpHelper";
 import { AxiosResponse } from "axios";
 import { useSearchParams } from "react-router-dom";
-import Room from "./Room/Room";
+import Room from "../RoomPage/RoomPage";
 import { RoomType } from '@/TypeDefinitions/Room'
 
 function CollaborationRoomsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [roomsList, setRoomsList] = useState<RoomType[]>([]);
-  const roomId = searchParams.get("roomId");
+  const [roomId, setRoomId] = useState(searchParams.get("roomId"));
 
   useEffect(() => {
     if (roomId == null) {
@@ -21,23 +21,37 @@ function CollaborationRoomsPage() {
     }
   }, []);
 
+  useEffect(()=>{
+    setRoomId(searchParams.get("roomId"));
+  },[searchParams])
+
   function addNewroom(newRoom: RoomType) {
     const newRoomsList = [...roomsList, newRoom];
     setRoomsList(newRoomsList);
   }
 
+  function navigateToRoom(roomId:string){
+    setRoomId(roomId);
+    setSearchParams({roomId:roomId});
+  }
+
+  function deleteRoom(roomId:string){
+
+  }
+
   return (
     <>
+    {console.log("rendered with room id ", roomId)}
     {roomId?(
-      <section className="h-full w-full bg-[#f8f8fc] flex items-center">
+      <section className="h-full w-full bg-[#f8f8fc] flex items-center p-4">
       <Room roomId={roomId} />
     </section>
     ):(
-      <section className="h-full w-full bg-[#f8f8fc] flex items-center">
+      <section className="h-full w-full bg-[#f8f8fc] flex items-center p-4">
       <div className="rooms-list h-full flex-[0.8] scroll-smooth overflow-auto p-4">
-        <RoomsList roomsList={roomsList} />
+        <RoomsList roomsList={roomsList} navigateToRoom={navigateToRoom}/>
       </div>
-      <div className="right-navigation-panel flex flex-[0.2] h-[95%] rounded-[2rem] shadow-xl bg-secondaryWhite">
+      <div className="right-navigation-panel flex flex-[0.2] h-[95%] rounded-[2rem] ">
         <RightNavigationPanel addNewRoom={addNewroom} />
       </div>
     </section>

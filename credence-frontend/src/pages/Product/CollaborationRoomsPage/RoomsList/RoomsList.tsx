@@ -4,10 +4,12 @@ import SearchBar from "@/components/ui/searchbar";
 import RoomCard from "@/components/ui/RoomCard/RoomCard";
 
 type Rooms = {
-  roomsList:RoomType[]
+  roomsList:RoomType[],
+  // setRoomId:Function,
+  navigateToRoom:Function
 }
 
-function RoomsList({roomsList}:Rooms) {
+function RoomsList({roomsList, navigateToRoom}:Rooms) {
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -36,7 +38,7 @@ function RoomsList({roomsList}:Rooms) {
     <div className="rooms-list p-4 grid gap-4 sm:grid-cols-1 md:grid-cols-3 lg:grid-col-4">
       {
         filteredRooms.map((room:RoomType, index)=>{
-          return <RoomCard key={index} room={room} />
+          return <RoomCard key={index} room={room} navigateToRoom={navigateToRoom} />
         })
       }
     </div>

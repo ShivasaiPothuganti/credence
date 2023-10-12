@@ -21,7 +21,7 @@ function Transaction({transaction,deleteTransaction}:TransactionProp) {
     const {title,price,dateOfTransaction,category,description,groupId,roomId,transactionId,userId} = transaction;
 
   return (
-    <Card className=' group flex relative' >
+    <Card className='group flex relative' >
         <div className="flex-[0.8]">
             <CardHeader>
                 <div className="card-title-container flex gap-12">
