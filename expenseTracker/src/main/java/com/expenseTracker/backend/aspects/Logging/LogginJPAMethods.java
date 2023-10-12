@@ -22,7 +22,12 @@ public class LogginJPAMethods {
         logger.debug("Jpa Method "+joinPoint.getSignature());
         Object[] args = joinPoint.getArgs();
         for(Object arg:args){
-            logger.debug(arg.toString());
+            if(arg!=null){
+                logger.debug(arg.toString());
+            }else{
+                logger.debug("null arg");
+            }
+
         }
     }
 

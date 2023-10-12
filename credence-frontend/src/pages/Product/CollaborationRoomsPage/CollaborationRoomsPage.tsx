@@ -24,7 +24,6 @@ function CollaborationRoomsPage() {
   function addNewroom(newRoom: RoomType) {
     const newRoomsList = [...roomsList, newRoom];
     setRoomsList(newRoomsList);
-    console.log(newRoomsList);
   }
 
   return (
