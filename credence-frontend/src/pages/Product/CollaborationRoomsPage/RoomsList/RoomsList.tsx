@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Room } from "../../../../TypeDefinitions/Room";
 import RoomCard from "../../../../components/ui/RoomCard/RoomCard";
 import SearchBar from "@/components/ui/searchbar";
-import { logger } from "@/helpers/loggers/logger";
 
 type Rooms = {
   roomsList:Room[]
@@ -13,7 +12,6 @@ function RoomsList({roomsList}:Rooms) {
   const [searchQuery, setSearchQuery] = useState("");
 
   const [filteredRooms, setFilteredRooms] = useState<Room[]>(roomsList);
-  logger.error(filteredRooms);
   useEffect(()=>{
     if(searchQuery == ''){
       setFilteredRooms(roomsList);
@@ -27,6 +25,7 @@ function RoomsList({roomsList}:Rooms) {
   useEffect(()=>{
     setFilteredRooms(roomsList);
   },[roomsList])
+
 
   return (
     <>
