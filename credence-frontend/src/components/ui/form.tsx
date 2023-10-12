@@ -3,6 +3,8 @@ import { Button } from './button';
 import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
 import {SelectField} from './select';
 import { Checkbox } from './checkbox';
+import { DatePickerWithRange } from './DateRangePicker';
+
 
 type FormGeneratorProp = {
 	generatorData:FormGeneratorData[],
@@ -32,6 +34,10 @@ function form({generatorData,onSubmit}:FormGeneratorProp) {
   function getComponentByType(basicProps:BasicFormElementProps,additionalProps:any,elementReference:any){
 	const {type,name,value,placeholder} = basicProps;
 	switch(type){
+
+		case 'dateRangePicker':
+			return <DatePickerWithRange onSelect={(date)=>{formData[name]=date}} />
+
 		case 'checkbox':
 			return <span className="inline-block">
 				

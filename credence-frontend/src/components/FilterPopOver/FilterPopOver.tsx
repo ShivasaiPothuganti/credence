@@ -24,7 +24,7 @@ function FilterPopOver({filterForm}:FilterForm) {
       <PopoverTrigger >
         <FilterButton />
       </PopoverTrigger>
-      <PopoverContent className="w-80 h-atuo flex flex-wrap gap-10">
+      <PopoverContent className="p-5 min-w-fit h-atuo flex flex-wrap gap-10">
         <Form generatorData={filterForm} onSubmit={handleFilter} />
       </PopoverContent>
     </Popover>

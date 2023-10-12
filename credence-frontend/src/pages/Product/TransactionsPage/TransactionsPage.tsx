@@ -12,7 +12,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { toast } from '@/components/ui/use-toast';
 import { categoryService } from '@/services/api/CategoryService';
 import SearchBar from '@/components/ui/searchbar';
-import FilterPopOver from '@/components/FilterPopOver/FilterPopOver';
+import FilterTransactions from '@/components/FilterTransactions/FilterTransactions';
 
 function attachCategoriesToFormData(formDataGeneratorData:FormGeneratorData[],categories:string[]){
 	formDataGeneratorData.forEach((_element,index,array)=>{
@@ -71,44 +71,7 @@ function TransactionsPage() {
 	}
   ]);
 
-  const [filterTransactionFormGenerator,setFilterTransactionFormGenerator] = useState<FormGeneratorData[]>([
-	{
-		type:'number',
-		name:'startingPrice',
-		placeholder:'starting price'
-	},
-	{
-		type:'number',
-		name:'endingPrice',
-		placeholder:'ending price'
-	},
-	{
-		type:'date',
-		name:'startingDate',
-		placeholder:'starting date'
-	},
-	{
-		type:'date',
-		name:'endingDate',
-		placeholder:'ending date'
-	},
-	{
-		type:'select',
-		name:'category',
-		placeholder:'category',
-		elementProps:{
-			selectPlaceholder:'Category',
-			selectLabel:'Category',
-			selectItems:[]
-		}
-	},
-	{
-		type:'submit',
-		name:'Filter',
-		value:'Filter'
-	},
-	
-  ])
+  
   
   function handleAddTransactionSubmit(transaction:TTransaction){
 	transactionService.addTransaction(transaction).then((response:AxiosResponse)=>{
@@ -149,17 +112,15 @@ function TransactionsPage() {
 
   useEffect(()=>{
 	categoryService.getCategories().then((response:AxiosResponse)=>{
+		logger.debug("got the categories",response)
 		const categories = response.data;
 		setAddTransactionFormGenerator((previousState)=>{
 			const newState = attachCategoriesToFormData(previousState,categories);
 			return newState;
 		});
-		setFilterTransactionFormGenerator((previousState)=>{
-			const newState = attachCategoriesToFormData(previousState,categories);
-			return newState;
-		})
 	})
-	.catch(()=>{
+	.catch((error)=>{
+		logger.debug(error);
 		toast({
 			title:'unable to get the categories',
 			variant:'destructive'
@@ -186,7 +147,7 @@ function TransactionsPage() {
     	<div className="transactions-body h-full flex-[0.7]">
 			<div className="transaction-filters flex justify-between pt-10 pb-10 ">
 				<SearchBar setSearchQuery={()=>{}} />
-				<FilterPopOver filterForm={filterTransactionFormGenerator} />
+				<FilterTransactions />
 			</div>
 			<div className="transactions-container h-auto w-full flex-[0.7]">
 				<TransactionList deleteTransactions = {handleDeleteTransaction} transactions={transactionList} />
