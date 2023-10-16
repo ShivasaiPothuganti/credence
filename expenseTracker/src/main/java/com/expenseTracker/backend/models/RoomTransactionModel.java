@@ -27,8 +27,8 @@ public interface RoomTransactionModel {
     String getUsername();
 
 
-    @Value("#{target.added_on}")
-    LocalDateTime getAdded_on();
+    @Value("#{target.date_of_transaction}")
+    LocalDateTime getDateOfTransaction();
 
 
     @Value("#{target.created_on}")

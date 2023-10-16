@@ -12,6 +12,7 @@ function CollaborationRoomsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [roomsList, setRoomsList] = useState<RoomType[]>([]);
   const [roomId, setRoomId] = useState(searchParams.get("roomId"));
+  const [selectedRoom, setSelectedRoom] = useState({} as RoomType);
 
   useEffect(() => {
     if (roomId == null) {
@@ -33,10 +34,7 @@ function CollaborationRoomsPage() {
   function navigateToRoom(roomId:string){
     setRoomId(roomId);
     setSearchParams({roomId:roomId});
-  }
-
-  function deleteRoom(roomId:string){
-
+    setSelectedRoom(roomsList.find(room => room.roomId===roomId) as RoomType);
   }
 
   return (
@@ -44,7 +42,7 @@ function CollaborationRoomsPage() {
     {console.log("rendered with room id ", roomId)}
     {roomId?(
       <section className="h-full w-full bg-[#f8f8fc] flex items-center p-4">
-      <Room roomId={roomId} />
+      <Room room={selectedRoom} />
     </section>
     ):(
       <section className="h-full w-full bg-[#f8f8fc] flex items-center p-4">

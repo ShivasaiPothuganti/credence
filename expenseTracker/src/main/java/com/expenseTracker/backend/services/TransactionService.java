@@ -81,12 +81,13 @@ public class TransactionService {
     }
 
     @Transactional
-    public void addTransactionByRoomId(TransactionEntity transactionEntity,Long roomId) throws Exception {
+    public TransactionEntity addTransactionByRoomId(TransactionEntity transactionEntity,Long roomId) throws Exception {
         if(this.isUserBelongsToRoom(roomId,transactionEntity.getUserId())){
             transactionEntity.setRoomId(roomId);
             transactionEntity.setCreatedOn(LocalDateTime.now());
-            transactionRepository.save(transactionEntity);
+            TransactionEntity savedTransaction = transactionRepository.save(transactionEntity);
             roomsRepository.updateExpenditureById(roomId,transactionEntity.getPrice());
+            return savedTransaction;
         }
         else{
             throw new Exception("user can't add transaction he does not belong to this room");
