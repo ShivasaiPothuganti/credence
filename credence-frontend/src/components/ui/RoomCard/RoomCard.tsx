@@ -11,7 +11,7 @@ function RoomCard({room, navigateToRoom}:RoomList) {
   return (
     <div className='h-32 w-[18rem] p-1 bg-card border text-card-foreground shadow-sm flex justify-between gap-2 rounded-lg cursor-pointer hover:scale-105' onClick={()=>navigateToRoom(room.roomId)}>
       <div className="icon-container flex-[0.4] p-5 ">
-        <div className="icon bg-primaryPurple h-[5rem] w-[5rem] rounded-full flex justify-center items-center">
+        <div className="icon bg-primaryBlack h-[5rem] w-[5rem] rounded-full flex justify-center items-center">
           <h1 className='text-primaryWhite font-bold text-5xl'>{room.title.charAt(0).toUpperCase()}</h1>
         </div>
       </div>

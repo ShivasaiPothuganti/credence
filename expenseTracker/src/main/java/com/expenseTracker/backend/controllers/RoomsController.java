@@ -11,6 +11,7 @@ import com.expenseTracker.backend.services.UserRoomsService;
 
 import java.util.List;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,10 +69,11 @@ public class RoomsController {
 		}
     }
     
-    @DeleteMapping("/{roomId}/users/{userId}")
-    public ResponseEntity<?> deleteUserFromRoom(@PathVariable long roomId, @PathVariable long userId) {
+    @DeleteMapping("/{roomId}/users")
+    public ResponseEntity<?> deleteUserFromRoom(@PathVariable long roomId, Authentication authentication) {
+        UserEntity user = (UserEntity) authentication.getPrincipal();
     	try {
-    		userRoomsService.deleteUserFromRoom(userId, roomId);
+    		userRoomsService.deleteUserFromRoom(user.getUserId(), roomId);
     		return new ResponseEntity<>("User removed from room succesfully", HttpStatus.OK);
     	}
     	catch (Exception e) {

@@ -5,13 +5,16 @@ import { backend } from "@/services/api/Network/HttpHelper";
 import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import RightNavigationPanel from "./RightNavigationPanel/RightNavigationPanel";
-import { RoomType } from "@/TypeDefinitions/Room";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 type RoomId = {
   room: any;
 };
 
 function RoomPage({ room }: RoomId) {
+
+  const navigate = useNavigate();
   const [transactionsList, setTransactionsList] = useState(
     [] as TTransaction[]
   );
@@ -31,10 +34,19 @@ function RoomPage({ room }: RoomId) {
 
   function deleteTransactions() {}
 
+  function leaveRoom(){
+    backend.delete(`/rooms/${room.roomId}/users`).then(()=>{
+      navigate('/product/collaborationrooms');
+    })
+  }
+
   return (
-    <div className="flex flex-col h-full w-full">
-      <div className="h-20 rounded-lg bg-primaryBlack text-primaryWhite m-4 p-4 text-3xl flex justify-center items-center">
-        {room.title}
+    <div className="flex flex-col h-full w-full overflow-hidden">
+      <div className="h-20 rounded-lg bg-primaryBlack text-primaryWhite m-4 p-4 flex justify-center items-center">
+        <h1 className="text-3xl">{room.title} </h1>
+        <div className="absolute right-[5%]" onClick={leaveRoom}>
+        <Button variant="destructive" >Leave</Button>
+        </div>
       </div>
       <div className="flex w-full h-full justify-start align-top ">
         <div className="rooms-list flex-[0.7] scroll-smooth overflow-scroll">

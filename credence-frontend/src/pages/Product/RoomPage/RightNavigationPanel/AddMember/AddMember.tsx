@@ -26,7 +26,7 @@ function AddMember({ roomId }: InputProps) {
     {
       type: "submit",
       name: "addTransaction",
-      value: "Add",
+      value: "Add a Member",
     },
   ]);
 
@@ -53,13 +53,14 @@ function AddMember({ roomId }: InputProps) {
   return (
     <>
       <h1 className="font-primary font-bold flex justify-center mt-10">
-        Add a Member
+        Room Members
       </h1>
       <div className="m-2">
         {users?.map((user) => {
           return <Badge className="mr-1 ml-1">{user.userName}</Badge>;
         })}
       </div>
+      {/* <p className="text-xs">You can find the User ID in dashboard</p> */}
       <Form generatorData={addUserFormGenerator} onSubmit={addUserToUser} />
     </>
   );
