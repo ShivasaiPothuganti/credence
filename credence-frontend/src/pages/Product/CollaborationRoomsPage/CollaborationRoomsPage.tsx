@@ -5,7 +5,7 @@ import { backendApiUrls } from "@/constants/backendApiEndpoints";
 import { backend } from "@/services/api/Network/HttpHelper";
 import { AxiosResponse } from "axios";
 import { useSearchParams } from "react-router-dom";
-import Room from "../RoomPage/RoomPage";
+import RoomPage from "../RoomPage/RoomPage";
 import { RoomType } from '@/TypeDefinitions/Room'
 
 function CollaborationRoomsPage() {
@@ -20,8 +20,8 @@ function CollaborationRoomsPage() {
         setRoomsList(data.data);
       });
     }
-  }, []);
-
+  }, [roomId]);
+  
   useEffect(()=>{
     setRoomId(searchParams.get("roomId"));
   },[searchParams])
@@ -39,10 +39,9 @@ function CollaborationRoomsPage() {
 
   return (
     <>
-    {console.log("rendered with room id ", roomId)}
     {roomId?(
       <section className="h-full w-full bg-[#f8f8fc] flex items-center p-4">
-      <Room room={selectedRoom} />
+      <RoomPage room={selectedRoom} />
     </section>
     ):(
       <section className="h-full w-full bg-[#f8f8fc] flex items-center p-4">

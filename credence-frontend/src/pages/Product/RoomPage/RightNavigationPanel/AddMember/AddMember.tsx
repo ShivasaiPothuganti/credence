@@ -37,15 +37,12 @@ function AddMember({ roomId }: InputProps) {
   function loadUsers(){
     backend.get(`/rooms/${roomId}`).then((data: AxiosResponse) => {
         setUsers(data.data);
-        console.log("users updated",users);
       });
   }
 
   function addUserToUser(data: RoomUser) {
     data.roomId = roomId;
-    console.log(data);
-    backend.post("/rooms/addUser", data).then((response: AxiosResponse) => {
-      console.log(response);
+    backend.post("/rooms/addUser", data).then(() => {
       loadUsers();
     });
   }
