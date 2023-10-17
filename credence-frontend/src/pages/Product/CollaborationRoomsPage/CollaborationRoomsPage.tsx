@@ -27,7 +27,7 @@ function CollaborationRoomsPage() {
   },[searchParams])
 
   function addNewroom(newRoom: RoomType) {
-    const newRoomsList = [...roomsList, newRoom];
+    const newRoomsList = [newRoom, ...roomsList];
     setRoomsList(newRoomsList);
   }
 
