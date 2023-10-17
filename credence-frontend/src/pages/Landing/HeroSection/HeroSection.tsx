@@ -2,10 +2,11 @@ import React from 'react';
 import Player from "react-lottie-player";
 import HeroAnimation from '@/assets/lottie_animations/HeroSectionAnimation.json';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 function HeroSection() {
 
-
+	const navigate = useNavigate();
 
   return (
     <section id="hero" className='bg-primaryWhite h-screen w-full flex justify-items-end p-7' >
@@ -27,7 +28,9 @@ function HeroSection() {
 					</p>
 				</div>
 				<div className="hero-section-btngroup flex gap-10 ">
-					<Button size={'lg'} >Get started</Button>
+					<Button onClick={()=>{
+						navigate('/product/transactions')
+					}} size={'lg'} >Get started</Button>
 					<a href='#about'><Button size={'lg'} >Explore</Button></a>
 				</div>
 			</div>

@@ -13,6 +13,8 @@ import { toast } from '@/components/ui/use-toast';
 import { categoryService } from '@/services/api/CategoryService';
 import SearchBar from '@/components/ui/searchbar';
 import FilterTransactionsPopOver from '@/components/FilterTransactions/FilterTransactionsPopOver';
+import { Button } from '@/components/ui/button';
+import Loader from '@/components/ui/Loader';
 
 function attachCategoriesToFormData(formDataGeneratorData:FormGeneratorData[],categories:string[]){
 	formDataGeneratorData.forEach((_element,index,array)=>{
@@ -29,6 +31,7 @@ function TransactionsPage() {
   const [transactionList,setTransactionsList] = useState<TTransaction[]>([]);
   const [filteredTransactions,setFilteredTransactions] = useState<TTransaction[]|null>(null);
 
+  const [loadingTransactions,setLoadingTransactions] = useState(false);
 
   const [addTransactionFormGenerator,setAddTransactionFormGenerator] = useState<FormGeneratorData[]>([
 	{
@@ -130,6 +133,7 @@ function TransactionsPage() {
   },[])
 
   useEffect(()=>{
+	setLoadingTransactions(true);
     transactionService.getAllTransactions().then((response:AxiosResponse)=>{
       if(response&&response.data){
         setTransactionsList(response.data)
@@ -139,16 +143,25 @@ function TransactionsPage() {
 			title:'Unable to get the transactions',
 			variant:'destructive'
 		})
+	}).finally(()=>{
+		setLoadingTransactions(false);
 	})
   },[])
 
   return (
     <section className=' bg-white h-screen w-full p-10 flex items-center justify-center ' >
 		<Toaster />
-    	<div className="transactions-body h-full flex-[0.7]">
+		{
+			loadingTransactions? <Loader />:<>
+			<div className="transactions-body h-full flex-[0.7]">
 			<div className="transaction-filters flex justify-between pt-10 pb-10 ">
 				<SearchBar setSearchQuery={()=>{}} />
-				<FilterTransactionsPopOver initialTransactions={transactionList} setFilteredTransactions={setFilteredTransactions} />
+				<div className="filter-options flex gap-5">
+					<Button onClick={()=>{
+						setFilteredTransactions(null);
+					}} > All Transactions </Button>
+					<FilterTransactionsPopOver initialTransactions={transactionList} setFilteredTransactions={setFilteredTransactions} />
+				</div>
 			</div>
 			<div className="transactions-container h-[90%] w-full flex-[0.7]">
 				{
@@ -164,7 +177,9 @@ function TransactionsPage() {
 				<h1 className='p-6 text-center text-lg font-bold font-primary' >AddTransaction</h1>
 				<Form generatorData={addTransactionFormGenerator} onSubmit={handleAddTransactionSubmit} />		
 			</div>
-		</div>
+		</div></>
+		}
+    	
     </section>
   )
 }
