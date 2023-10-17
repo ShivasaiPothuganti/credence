@@ -40,7 +40,7 @@ function CollaborationRoomsPage() {
   return (
     <>
     {roomId?(
-      <section className="h-full w-full bg-[#f8f8fc] flex items-center p-4">
+      <section className="h-full w-full bg-[#f8f8fc] flex items-center">
       <RoomPage room={selectedRoom} />
     </section>
     ):(

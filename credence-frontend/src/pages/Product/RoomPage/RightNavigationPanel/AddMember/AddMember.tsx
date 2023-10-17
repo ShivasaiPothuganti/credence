@@ -52,13 +52,13 @@ function AddMember({ roomId }: InputProps) {
       <h1 className="font-primary font-bold flex justify-center mt-10">
         Room Members
       </h1>
+      {/* <p className="text-xs">You can find the User ID in dashboard</p> */}
+      <Form generatorData={addUserFormGenerator} onSubmit={addUserToUser} />
       <div className="m-2">
         {users?.map((user) => {
           return <Badge className="mr-1 ml-1">{user.userName}</Badge>;
         })}
       </div>
-      {/* <p className="text-xs">You can find the User ID in dashboard</p> */}
-      <Form generatorData={addUserFormGenerator} onSubmit={addUserToUser} />
     </>
   );
 }
