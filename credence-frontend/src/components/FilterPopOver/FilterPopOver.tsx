@@ -6,17 +6,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import Form from "../ui/form";
-import { logger } from "@/helpers/loggers/logger";
 
 type FilterForm = {
-    filterForm:FormGeneratorData[]
+    filterForm:FormGeneratorData[],
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    handleFilter:Function
 }
 
-function FilterPopOver({filterForm}:FilterForm) {
-
-    function handleFilter(data:unknown){
-        logger.debug(data)
-    }
+function FilterPopOver({filterForm,handleFilter}:FilterForm) {
 
   return (
   

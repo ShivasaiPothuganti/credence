@@ -12,7 +12,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { toast } from '@/components/ui/use-toast';
 import { categoryService } from '@/services/api/CategoryService';
 import SearchBar from '@/components/ui/searchbar';
-import FilterTransactions from '@/components/FilterTransactions/FilterTransactions';
+import FilterTransactionsPopOver from '@/components/FilterTransactions/FilterTransactionsPopOver';
 
 function attachCategoriesToFormData(formDataGeneratorData:FormGeneratorData[],categories:string[]){
 	formDataGeneratorData.forEach((_element,index,array)=>{
@@ -27,6 +27,7 @@ function attachCategoriesToFormData(formDataGeneratorData:FormGeneratorData[],ca
 function TransactionsPage() {
 
   const [transactionList,setTransactionsList] = useState<TTransaction[]>([]);
+  const [filteredTransactions,setFilteredTransactions] = useState<TTransaction[]|null>(null);
 
 
   const [addTransactionFormGenerator,setAddTransactionFormGenerator] = useState<FormGeneratorData[]>([
@@ -147,21 +148,21 @@ function TransactionsPage() {
     	<div className="transactions-body h-full flex-[0.7]">
 			<div className="transaction-filters flex justify-between pt-10 pb-10 ">
 				<SearchBar setSearchQuery={()=>{}} />
-				<FilterTransactions />
+				<FilterTransactionsPopOver initialTransactions={transactionList} setFilteredTransactions={setFilteredTransactions} />
 			</div>
-			<div className="transactions-container h-auto w-full flex-[0.7]">
-				<TransactionList deleteTransactions = {handleDeleteTransaction} transactions={transactionList} />
+			<div className="transactions-container h-[90%] w-full flex-[0.7]">
+				{
+					filteredTransactions === null? 
+						<TransactionList deleteTransactions = {handleDeleteTransaction} transactions={transactionList} /> : 
+						<TransactionList deleteTransactions={handleDeleteTransaction} transactions={filteredTransactions} />
+				}
+				
 			</div>
 		</div>
 		<div className=" bg-white transactionPage-rightPanel-container h-full p-5 flex-[0.3]">
 			<div className="transactionPage-rightPanel h-full rounded-lg p-7 ">
 				<h1 className='p-6 text-center text-lg font-bold font-primary' >AddTransaction</h1>
-			<Form generatorData={addTransactionFormGenerator} onSubmit={handleAddTransactionSubmit} />
-				{/* 
-					range of date
-					category
-					range Of price
-				*/}
+				<Form generatorData={addTransactionFormGenerator} onSubmit={handleAddTransactionSubmit} />		
 			</div>
 		</div>
     </section>

@@ -4,6 +4,7 @@ import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
 import {SelectField} from './select';
 import { Checkbox } from './checkbox';
 import { DatePickerWithRange } from './DateRangePicker';
+import React,{ useState } from 'react';
 
 
 type FormGeneratorProp = {
@@ -25,8 +26,8 @@ type BasicFormElementProps = {
 
 
 
-function form({generatorData,onSubmit}:FormGeneratorProp) {
-
+function Form({generatorData,onSubmit}:FormGeneratorProp) {
+	const [date,setDate] = useState(0);
   const formElementsRef:Record<string,HTMLInputElement | null> = {};
   let formData:Record<string,unknown> = {};
 
@@ -36,6 +37,7 @@ function form({generatorData,onSubmit}:FormGeneratorProp) {
 	switch(type){
 
 		case 'dateRangePicker':
+			
 			return <DatePickerWithRange onSelect={(date)=>{formData[name]=date}} />
 
 		case 'checkbox':
@@ -98,4 +100,4 @@ function form({generatorData,onSubmit}:FormGeneratorProp) {
   )
 }
 
-export default form
+export default Form
