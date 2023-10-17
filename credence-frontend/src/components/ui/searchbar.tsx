@@ -1,16 +1,29 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useRef } from "react"
 
 type InputProps = {
-    setSearchQuery:Function
+    setSearchQuery:Function,
+    getSearchQuery:Function
 }
 
-export default function SearchBar({setSearchQuery}:InputProps) {
+export default function SearchBar({setSearchQuery,getSearchQuery}:InputProps) {
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="flex items-center space-x-2">
-      <Input type="text" className="px-3 py-2 w-80" placeholder="Search..." onChange={(e)=>{setSearchQuery(e.target.value)}} />
-      <Button className="px-3 py-2">
+      <Input ref={inputRef} type="text" className="px-3 py-2 w-80" placeholder="Search..." onChange={(e)=>{setSearchQuery(e.target.value)}} />
+      <Button 
+        onClick={()=>{
+          if(inputRef.current){
+            getSearchQuery(inputRef.current.value);
+            inputRef.current.value = ""
+          }
+          
+          
+        }}
+      className="px-3 py-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"

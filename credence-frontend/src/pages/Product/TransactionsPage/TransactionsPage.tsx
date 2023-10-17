@@ -146,7 +146,15 @@ function TransactionsPage() {
 	}).finally(()=>{
 		setLoadingTransactions(false);
 	})
-  },[])
+  },[]);
+
+
+  function searchTransactionsByTitle(query:string){
+	const foundTransactions = transactionList.filter((transaction:TTransaction)=>{
+		return transaction.title === query.trim();
+	});
+	setFilteredTransactions(foundTransactions);
+  }
 
   return (
     <section className=' bg-white h-screen w-full p-10 flex items-center justify-center ' >
@@ -155,7 +163,7 @@ function TransactionsPage() {
 			loadingTransactions? <Loader />:<>
 			<div className="transactions-body h-full flex-[0.7]">
 			<div className="transaction-filters flex justify-between pt-10 pb-10 ">
-				<SearchBar setSearchQuery={()=>{}} />
+				<SearchBar getSearchQuery={searchTransactionsByTitle} setSearchQuery={()=>{}} />
 				<div className="filter-options flex gap-5">
 					<Button onClick={()=>{
 						setFilteredTransactions(null);
