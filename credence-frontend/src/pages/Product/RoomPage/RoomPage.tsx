@@ -1,6 +1,5 @@
 import { TTransaction } from "@/TypeDefinitions/Transaction";
 import TransactionList from "@/components/ui/TransactionList";
-import { logger } from "@/helpers/loggers/logger";
 import { backend } from "@/services/api/Network/HttpHelper";
 import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
@@ -8,9 +7,10 @@ import RightNavigationPanel from "./RightNavigationPanel/RightNavigationPanel";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "@/components/ui/searchbar";
+import { RoomType } from "@/TypeDefinitions/Room";
 
 type RoomId = {
-  room: any;
+  room: RoomType;
 };
 
 function RoomPage({ room }: RoomId) {
@@ -18,33 +18,42 @@ function RoomPage({ room }: RoomId) {
   const [transactionsList, setTransactionsList] = useState(
     [] as TTransaction[]
   );
-  const [filteredList, setFilteredList] = useState([] as TTransaction[]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredList, setFilteredList] = useState<TTransaction[]>([]);
 
   useEffect(() => {
     loadTransactions();
   }, []);
 
-  useEffect(() => {
-    if (searchQuery === "") {
-      setFilteredList(transactionsList);
-    } else {
-      const list = transactionsList.filter((transaction) =>
-        transaction.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredList(list as TTransaction[]);
-      console.log(list);
-    }
-  }, [searchQuery]);
+  // useEffect(() => {
+  //   if (searchQuery === "") {
+  //     setFilteredList(transactionsList);
+  //   } else {
+  //     const list = transactionsList.filter((transaction) =>
+  //       transaction.title.toLowerCase().includes(searchQuery.toLowerCase())
+  //     );
+  //     setFilteredList(list as TTransaction[]);
+  //     console.log(list);
+  //   }
+  // }, [searchQuery]);
 
   function loadTransactions() {
     backend
       .get(`/rooms/${room.roomId}/transactions`)
-      .then((data: AxiosResponse) => {
-        setTransactionsList(data.data);
-        setFilteredList(data.data);
-        logger.warn(data.data, "this is room data");
+      .then((response: AxiosResponse) => {
+        setTransactionsList(response.data);
+        setFilteredList(response.data);
       });
+  }
+
+  function searchTransactionsByTitle(queryString:string){
+    if (queryString === "") {
+      setFilteredList(transactionsList);
+    } else {
+      const list = transactionsList.filter((transaction) =>
+        transaction.title.toLowerCase().includes(queryString.toLowerCase())
+      );
+      setFilteredList(list);
+    } 
   }
 
   function deleteTransactions() {}
@@ -66,7 +75,7 @@ function RoomPage({ room }: RoomId) {
       <div className="flex w-full h-full justify-start align-top ">
         <div className="rooms-list flex-[0.7]">
           <div className="p-4">
-            <SearchBar setSearchQuery={setSearchQuery} />
+            <SearchBar getSearchQuery={searchTransactionsByTitle} />
           </div>
           <div className="rooms-list h-[79%] scroll-smooth overflow-scroll">
             <TransactionList

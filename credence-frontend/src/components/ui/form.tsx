@@ -4,7 +4,6 @@ import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
 import {SelectField} from './select';
 import { Checkbox } from './checkbox';
 import { DatePickerWithRange } from './DateRangePicker';
-import React,{ useState } from 'react';
 
 
 type FormGeneratorProp = {
@@ -27,7 +26,6 @@ type BasicFormElementProps = {
 
 
 function Form({generatorData,onSubmit}:FormGeneratorProp) {
-	const [date,setDate] = useState(0);
   const formElementsRef:Record<string,HTMLInputElement | null> = {};
   let formData:Record<string,unknown> = {};
 
@@ -57,6 +55,7 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 	}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	function handleSubmit(event:any){
 		event.preventDefault();
 		Object.keys(formElementsRef).forEach((key:string)=>{

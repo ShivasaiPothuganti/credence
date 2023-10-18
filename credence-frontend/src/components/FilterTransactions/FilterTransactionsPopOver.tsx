@@ -6,7 +6,7 @@ import { toast } from '../ui/use-toast';
 import { AxiosResponse } from 'axios';
 import { TTransaction } from '@/TypeDefinitions/Transaction';
 import { logger } from '@/helpers/loggers/logger';
-import { compareTwoDates, getDateOnly } from '@/utils/formatDate';
+import { compareTwoDates } from '@/utils/formatDate';
 
 
 type FilterTransactionsPopOver = {

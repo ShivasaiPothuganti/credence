@@ -1,27 +1,26 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useRef } from "react"
+import { useRef } from "react";
+
 
 type InputProps = {
-    setSearchQuery:Function,
+    // eslint-disable-next-line @typescript-eslint/ban-types
     getSearchQuery:Function
 }
 
-export default function SearchBar({setSearchQuery,getSearchQuery}:InputProps) {
+export default function SearchBar({getSearchQuery}:InputProps) {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="flex items-center space-x-2">
-      <Input ref={inputRef} type="text" className="px-3 py-2 w-80" placeholder="Search..." onChange={(e)=>{setSearchQuery(e.target.value)}} />
+      <Input ref={inputRef} type="text" className="px-3 py-2 w-80" placeholder="Search..." />
       <Button 
         onClick={()=>{
           if(inputRef.current){
             getSearchQuery(inputRef.current.value);
             inputRef.current.value = ""
-          }
-          
-          
+          }         
         }}
       className="px-3 py-2">
         <svg

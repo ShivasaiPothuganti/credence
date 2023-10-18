@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { TTransaction } from "@/TypeDefinitions/Transaction";
 import React from "react";
 import {
@@ -23,10 +24,7 @@ function Transaction({ transaction, deleteTransaction }: TransactionProp) {
     dateOfTransaction,
     category,
     description,
-    groupId,
-    roomId,
     transactionId,
-    userId,
     username
   } = transaction;
 
