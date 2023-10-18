@@ -57,14 +57,14 @@ function AuthenticationPage({setAuth}:AuthenticationPageProps) {
 	const registerFormGeneratorData:FormGeneratorData[] = [
 
 		{
-			type:'email',
-			name:'userEmail',
-			placeholder:'Gmail'
-		},
-		{
 			type:'text',
 			name:'userName',
 			placeholder:'username'
+		},
+		{
+			type:'email',
+			name:'userEmail',
+			placeholder:'Gmail'
 		},
 		{
 			type:'password',

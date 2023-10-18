@@ -65,8 +65,8 @@ public class TransactionController {
 			newTransaction.setUserId(authenticatedUser.getUserId());
 			newTransaction.setGroup(null);
 			newTransaction.setGroupId(null);
-			transactionService.addTransactionByRoomId(newTransaction,roomId);
-			return new ResponseEntity<>("added transaction under RoomId "+roomId,HttpStatus.OK);
+			TransactionEntity transactionEntity = transactionService.addTransactionByRoomId(newTransaction, roomId);
+			return new ResponseEntity<>(transactionEntity,HttpStatus.OK);
 		}
 		catch (Exception exc){
 			return new ResponseEntity<>("failed to add transaction ",HttpStatus.INTERNAL_SERVER_ERROR);

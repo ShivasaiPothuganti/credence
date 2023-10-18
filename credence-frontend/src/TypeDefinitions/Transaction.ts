@@ -8,5 +8,6 @@ export type TTransaction = {
     dateOfTransaction:string,
     category:string,
     roomId:string|null,
-    groupId:string|null
+    groupId:string|null,
+    username?:string
 }
