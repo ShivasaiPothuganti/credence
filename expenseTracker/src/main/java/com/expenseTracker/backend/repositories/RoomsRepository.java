@@ -1,6 +1,7 @@
 package com.expenseTracker.backend.repositories;
 
 import com.expenseTracker.backend.entities.RoomEntity;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,13 @@ public interface RoomsRepository extends JpaRepository<RoomEntity,Long> {
             nativeQuery = true
     )
     void updateExpenditureById( @Param("roomId") Long id, @Param("value") Double value);
+
+    @Modifying
+    @Query(
+            value = " UPDATE room SET expenditure = expenditure - :value where id = :roomId",
+            nativeQuery = true
+    )
+    void removeExpenditureById(@Param("roomId") Long id, @Param("value") Double value);
     
     @Modifying
     @Query(
@@ -27,7 +35,7 @@ public interface RoomsRepository extends JpaRepository<RoomEntity,Long> {
     void refreshExpenditure(@Param("roomId") long roomId);
 
     @Query(
-            value = "select * from room r where r.id in (select room_id from user_rooms where user_id = :userId)",
+            value = "select * from room r where r.id in (select room_id from user_rooms where user_id = :userId) ORDER BY id DESC",
             nativeQuery = true
     )
     List<RoomEntity> findByUserId(Long userId);

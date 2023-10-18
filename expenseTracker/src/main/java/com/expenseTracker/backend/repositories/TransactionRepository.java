@@ -27,7 +27,7 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity,L
                     "\tt.price,\n" +
                     "\tt.title,\n" +
                     "\tu.username\n" +
-                    "FROM transactions t,users u WHERE t.room_id=:roomId AND t.userid=u.id;",
+                    "FROM transactions t,users u WHERE t.room_id=:roomId AND t.userid=u.id ORDER BY t.id DESC;",
             nativeQuery = true
     )
     List<RoomTransactionModel> findByRoomId(Long roomId);

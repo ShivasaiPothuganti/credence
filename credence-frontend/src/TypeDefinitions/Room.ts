@@ -1,5 +1,5 @@
-export type Room = {
-    roomId?:number,
+export type RoomType = {
+    roomId?:string,
     title:string,
     totalPrice:number,
     expenditure:number

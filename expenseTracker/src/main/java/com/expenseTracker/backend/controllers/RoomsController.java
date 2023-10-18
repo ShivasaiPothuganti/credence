@@ -1,6 +1,7 @@
 package com.expenseTracker.backend.controllers;
 
 import com.expenseTracker.backend.entities.RoomEntity;
+import com.expenseTracker.backend.entities.TransactionEntity;
 import com.expenseTracker.backend.entities.UserEntity;
 import com.expenseTracker.backend.entities.UserRoomsEntity;
 import com.expenseTracker.backend.models.RoomTransactionModel;
@@ -10,7 +11,9 @@ import com.expenseTracker.backend.services.TransactionService;
 import com.expenseTracker.backend.services.UserRoomsService;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,10 +71,11 @@ public class RoomsController {
 		}
     }
     
-    @DeleteMapping("/{roomId}/users/{userId}")
-    public ResponseEntity<?> deleteUserFromRoom(@PathVariable long roomId, @PathVariable long userId) {
+    @DeleteMapping("/{roomId}/users")
+    public ResponseEntity<?> deleteUserFromRoom(@PathVariable long roomId, Authentication authentication) {
+        UserEntity user = (UserEntity) authentication.getPrincipal();
     	try {
-    		userRoomsService.deleteUserFromRoom(userId, roomId);
+    		userRoomsService.deleteUserFromRoom(user.getUserId(), roomId);
     		return new ResponseEntity<>("User removed from room succesfully", HttpStatus.OK);
     	}
     	catch (Exception e) {
@@ -83,6 +87,12 @@ public class RoomsController {
     public ResponseEntity<?> getTransactionsWithUsername(@PathVariable("roomId") long roomId) {
     	List<RoomTransactionModel> roomTransactions = transactionService.getTransactionsByRoomIdWithUsername(roomId);
     	return new ResponseEntity<>(roomTransactions,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{roomId}/transactions/{transactionId}")
+    public ResponseEntity<?> deleteRoomTransaction(@PathVariable("roomId") long roomId, @PathVariable("transactionId") long transactionId){
+        roomService.deleteRoomTransaction(roomId, transactionId);
+        return new ResponseEntity<>("Transaction deleted", HttpStatus.OK);
     }
     
     @GetMapping("/{roomId}")

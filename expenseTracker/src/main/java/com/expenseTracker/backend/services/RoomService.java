@@ -1,6 +1,7 @@
 package com.expenseTracker.backend.services;
 
 import com.expenseTracker.backend.entities.RoomEntity;
+import com.expenseTracker.backend.entities.TransactionEntity;
 import com.expenseTracker.backend.entities.UserRoomsEntity;
 import com.expenseTracker.backend.repositories.RoomsRepository;
 import com.expenseTracker.backend.repositories.UserRoomsRepository;
@@ -17,10 +18,13 @@ public class RoomService {
     private RoomsRepository roomsRepository;
     private UserRoomsRepository userRoomsRepository;
 
+    private TransactionService transactionService;
+
     @Autowired
-    public RoomService(RoomsRepository roomsRepository,UserRoomsRepository userRoomsRepository){
+    public RoomService(RoomsRepository roomsRepository,UserRoomsRepository userRoomsRepository, TransactionService transactionService){
         this.roomsRepository = roomsRepository;
         this.userRoomsRepository = userRoomsRepository;
+        this.transactionService = transactionService;
     }
 
 
@@ -45,11 +49,17 @@ public class RoomService {
         if(result.isPresent()){
             throw new Exception("user already belongs to the room");
         }
-        else{
+        else {
             userRoomsRepository.save(userRoomsEntity);
         }
+    }
 
-
+    @Transactional
+    public void deleteRoomTransaction(long roomId, long transactionId){
+        Optional<TransactionEntity> optionalTransaction = transactionService.getTransactionById(transactionId);
+        TransactionEntity transactionEntity = optionalTransaction.get();
+        roomsRepository.removeExpenditureById(roomId, transactionEntity.getPrice());
+        transactionService.deleteTransactionById(transactionId);
     }
 
     @Transactional
