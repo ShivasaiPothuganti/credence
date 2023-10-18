@@ -1,6 +1,7 @@
 package com.expenseTracker.backend.controllers;
 
 import com.expenseTracker.backend.entities.RoomEntity;
+import com.expenseTracker.backend.entities.TransactionEntity;
 import com.expenseTracker.backend.entities.UserEntity;
 import com.expenseTracker.backend.entities.UserRoomsEntity;
 import com.expenseTracker.backend.models.RoomTransactionModel;
@@ -10,6 +11,7 @@ import com.expenseTracker.backend.services.TransactionService;
 import com.expenseTracker.backend.services.UserRoomsService;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +87,12 @@ public class RoomsController {
     public ResponseEntity<?> getTransactionsWithUsername(@PathVariable("roomId") long roomId) {
     	List<RoomTransactionModel> roomTransactions = transactionService.getTransactionsByRoomIdWithUsername(roomId);
     	return new ResponseEntity<>(roomTransactions,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{roomId}/transactions/{transactionId}")
+    public ResponseEntity<?> deleteRoomTransaction(@PathVariable("roomId") long roomId, @PathVariable("transactionId") long transactionId){
+        roomService.deleteRoomTransaction(roomId, transactionId);
+        return new ResponseEntity<>("Transaction deleted", HttpStatus.OK);
     }
     
     @GetMapping("/{roomId}")

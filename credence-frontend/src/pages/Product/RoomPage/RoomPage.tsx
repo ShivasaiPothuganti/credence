@@ -24,18 +24,6 @@ function RoomPage({ room }: RoomId) {
     loadTransactions();
   }, []);
 
-  // useEffect(() => {
-  //   if (searchQuery === "") {
-  //     setFilteredList(transactionsList);
-  //   } else {
-  //     const list = transactionsList.filter((transaction) =>
-  //       transaction.title.toLowerCase().includes(searchQuery.toLowerCase())
-  //     );
-  //     setFilteredList(list as TTransaction[]);
-  //     console.log(list);
-  //   }
-  // }, [searchQuery]);
-
   function loadTransactions() {
     backend
       .get(`/rooms/${room.roomId}/transactions`)
@@ -44,6 +32,7 @@ function RoomPage({ room }: RoomId) {
         setFilteredList(response.data);
       });
   }
+
 
   function searchTransactionsByTitle(queryString:string){
     if (queryString === "") {
@@ -56,7 +45,13 @@ function RoomPage({ room }: RoomId) {
     } 
   }
 
-  function deleteTransactions() {}
+  function deleteTransactions(transactionId:number) {
+    backend.delete(`/rooms/${room.roomId}/transactions/${transactionId}`).then(()=>{
+      console.log("transaction deleted");
+      loadTransactions();
+    })
+  }
+
 
   function leaveRoom() {
     backend.delete(`/rooms/${room.roomId}/users`).then(() => {
