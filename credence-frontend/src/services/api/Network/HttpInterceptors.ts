@@ -28,7 +28,7 @@ backendApiAxios.interceptors.response.use( response =>{
         // window.location.href = '/authenticate?mode=login';
     }
     else if(error.response?.status===403){
-        authenticationService.removeToken();
+        // authenticationService.removeToken();
         // window.location.href = '/authenticate?mode=login';
     }
     return Promise.reject(error);

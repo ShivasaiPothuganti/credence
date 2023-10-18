@@ -47,7 +47,12 @@ function RoomPage({ room }: RoomId) {
       });
   }
 
-  function deleteTransactions() {}
+  function deleteTransactions(transactionId:number) {
+    backend.delete(`/rooms/${room.roomId}/transactions/${transactionId}`).then(()=>{
+      console.log("transaction deleted");
+      loadTransactions();
+    })
+  }
 
   function leaveRoom() {
     backend.delete(`/rooms/${room.roomId}/users`).then(() => {

@@ -66,6 +66,11 @@ public class TransactionService {
     	return savedTransaction;
     }
 
+    @Transactional
+    public Optional<TransactionEntity> getTransactionById(long transactionId){
+        return transactionRepository.findById(transactionId);
+    }
+
     public void deleteTransactionById(Long transactionId){
         transactionRepository.deleteById(transactionId);
     }
