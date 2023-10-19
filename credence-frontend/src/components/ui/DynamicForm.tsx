@@ -25,7 +25,8 @@ type BasicFormElementProps = {
 
 
 
-function Form({generatorData,onSubmit}:FormGeneratorProp) {
+function DynamicForm({generatorData,onSubmit}:FormGeneratorProp) {
+
   const formElementsRef:Record<string,HTMLInputElement | null> = {};
   let formData:Record<string,unknown> = {};
 
@@ -35,7 +36,6 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 	switch(type){
 
 		case 'dateRangePicker':
-			
 			return <DatePickerWithRange onSelect={(date)=>{formData[name]=date}} />
 
 		case 'checkbox':
@@ -55,7 +55,6 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 	}
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	function handleSubmit(event:any){
 		event.preventDefault();
 		Object.keys(formElementsRef).forEach((key:string)=>{
@@ -100,4 +99,4 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
   )
 }
 
-export default Form
+export default DynamicForm;

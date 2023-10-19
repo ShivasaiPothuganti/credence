@@ -8,11 +8,12 @@ import Form from '@/components/ui/form';
 import { logger } from '@/helpers/loggers/logger';
 import { transactionService } from '@/services/api/TransactionsService';
 import { TTransaction } from '@/TypeDefinitions/Transaction';
-import { Toaster } from '@/components/ui/toaster';
 import { toast } from '@/components/ui/use-toast';
 import { categoryService } from '@/services/api/CategoryService';
 import SearchBar from '@/components/ui/searchbar';
-import FilterPopOver from '@/components/FilterPopOver/FilterPopOver';
+import FilterTransactionsPopOver from '@/components/FilterTransactions/FilterTransactionsPopOver';
+import { Button } from '@/components/ui/button';
+import Loader from '@/components/ui/Loader';
 
 function attachCategoriesToFormData(formDataGeneratorData:FormGeneratorData[],categories:string[]){
 	formDataGeneratorData.forEach((_element,index,array)=>{
@@ -27,7 +28,9 @@ function attachCategoriesToFormData(formDataGeneratorData:FormGeneratorData[],ca
 function TransactionsPage() {
 
   const [transactionList,setTransactionsList] = useState<TTransaction[]>([]);
+  const [filteredTransactions,setFilteredTransactions] = useState<TTransaction[]|null>(null);
 
+  const [loadingTransactions,setLoadingTransactions] = useState(false);
 
   const [addTransactionFormGenerator,setAddTransactionFormGenerator] = useState<FormGeneratorData[]>([
 	{
@@ -71,44 +74,7 @@ function TransactionsPage() {
 	}
   ]);
 
-  const [filterTransactionFormGenerator,setFilterTransactionFormGenerator] = useState<FormGeneratorData[]>([
-	{
-		type:'number',
-		name:'startingPrice',
-		placeholder:'starting price'
-	},
-	{
-		type:'number',
-		name:'endingPrice',
-		placeholder:'ending price'
-	},
-	{
-		type:'date',
-		name:'startingDate',
-		placeholder:'starting date'
-	},
-	{
-		type:'date',
-		name:'endingDate',
-		placeholder:'ending date'
-	},
-	{
-		type:'select',
-		name:'category',
-		placeholder:'category',
-		elementProps:{
-			selectPlaceholder:'Category',
-			selectLabel:'Category',
-			selectItems:[]
-		}
-	},
-	{
-		type:'submit',
-		name:'Filter',
-		value:'Filter'
-	},
-	
-  ])
+  
   
   function handleAddTransactionSubmit(transaction:TTransaction){
 	transactionService.addTransaction(transaction).then((response:AxiosResponse)=>{
@@ -149,17 +115,15 @@ function TransactionsPage() {
 
   useEffect(()=>{
 	categoryService.getCategories().then((response:AxiosResponse)=>{
+		logger.debug("got the categories",response)
 		const categories = response.data;
 		setAddTransactionFormGenerator((previousState)=>{
 			const newState = attachCategoriesToFormData(previousState,categories);
 			return newState;
 		});
-		setFilterTransactionFormGenerator((previousState)=>{
-			const newState = attachCategoriesToFormData(previousState,categories);
-			return newState;
-		})
 	})
-	.catch(()=>{
+	.catch((error)=>{
+		logger.debug(error);
 		toast({
 			title:'unable to get the categories',
 			variant:'destructive'
@@ -168,6 +132,7 @@ function TransactionsPage() {
   },[])
 
   useEffect(()=>{
+	setLoadingTransactions(true);
     transactionService.getAllTransactions().then((response:AxiosResponse)=>{
       if(response&&response.data){
         setTransactionsList(response.data)
@@ -177,32 +142,51 @@ function TransactionsPage() {
 			title:'Unable to get the transactions',
 			variant:'destructive'
 		})
+	}).finally(()=>{
+		setLoadingTransactions(false);
 	})
-  },[])
+  },[]);
+
+
+  function searchTransactionsByTitle(query:string){
+	const foundTransactions = transactionList.filter((transaction:TTransaction)=>{
+		return transaction.title === query.trim();
+	});
+	setFilteredTransactions(foundTransactions);
+  }
 
   return (
     <section className=' bg-white h-screen w-full p-10 flex items-center justify-center ' >
-		<Toaster />
-    	<div className="transactions-body h-full flex-[0.7]">
+		
+		{
+			loadingTransactions? <Loader />:<>
+			<div className="transactions-body h-full flex-[0.7]">
 			<div className="transaction-filters flex justify-between pt-10 pb-10 ">
-				<SearchBar setSearchQuery={()=>{}} />
-				<FilterPopOver filterForm={filterTransactionFormGenerator} />
+				<SearchBar getSearchQuery={searchTransactionsByTitle} />
+				<div className="filter-options flex gap-5">
+					<Button onClick={()=>{
+						setFilteredTransactions(null);
+					}} > All Transactions </Button>
+					<FilterTransactionsPopOver initialTransactions={transactionList} setFilteredTransactions={setFilteredTransactions} />
+				</div>
 			</div>
-			<div className="transactions-container h-auto w-full flex-[0.7]">
-				<TransactionList deleteTransactions = {handleDeleteTransaction} transactions={transactionList} />
+			<div className="transactions-container h-[90%] w-full flex-[0.7]">
+				{
+					filteredTransactions === null? 
+						<TransactionList deleteTransactions = {handleDeleteTransaction} transactions={transactionList} /> : 
+						<TransactionList deleteTransactions={handleDeleteTransaction} transactions={filteredTransactions} />
+				}
+				
 			</div>
 		</div>
 		<div className=" bg-white transactionPage-rightPanel-container h-full p-5 flex-[0.3]">
 			<div className="transactionPage-rightPanel h-full rounded-lg p-7 ">
 				<h1 className='p-6 text-center text-lg font-bold font-primary' >AddTransaction</h1>
-			<Form generatorData={addTransactionFormGenerator} onSubmit={handleAddTransactionSubmit} />
-				{/* 
-					range of date
-					category
-					range Of price
-				*/}
+				<Form generatorData={addTransactionFormGenerator} onSubmit={handleAddTransactionSubmit} />		
 			</div>
-		</div>
+		</div></>
+		}
+    	
     </section>
   )
 }

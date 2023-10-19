@@ -5,6 +5,7 @@ import React from 'react';
 
 type TTransactionList = {
     transactions:TTransaction[],
+    // eslint-disable-next-line @typescript-eslint/ban-types
     deleteTransactions:Function
 }
 
