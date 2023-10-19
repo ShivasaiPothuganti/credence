@@ -72,7 +72,7 @@ function RoomPage({ room }: RoomId) {
           <div className="p-4">
             <SearchBar getSearchQuery={searchTransactionsByTitle} />
           </div>
-          <div className="rooms-list h-[79%] scroll-smooth overflow-scroll">
+          <div className="rooms-list h-[79%] scroll-smooth overflow-x-hidden overflow-y-scroll">
             <TransactionList
               transactions={filteredList}
               deleteTransactions={deleteTransactions}
