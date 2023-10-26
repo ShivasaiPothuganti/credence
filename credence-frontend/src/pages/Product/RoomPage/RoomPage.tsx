@@ -69,8 +69,11 @@ function RoomPage({ room }: RoomId) {
       </div>
       <div className="flex w-full h-full justify-start align-top ">
         <div className="rooms-list flex-[0.7]">
-          <div className="p-4">
+          <div className="p-4 flex justify-between">
             <SearchBar getSearchQuery={searchTransactionsByTitle} />
+            <Button onClick={()=>{loadTransactions()}} >
+              Show All Transactions
+            </Button>
           </div>
           <div className="rooms-list h-[79%] scroll-smooth overflow-x-hidden overflow-y-scroll">
             <TransactionList

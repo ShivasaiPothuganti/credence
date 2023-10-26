@@ -1,5 +1,6 @@
 import { FormGeneratorData } from "@/TypeDefinitions/FormGeneratorData"
 import Form from '@/components/ui/form'
+import { toast } from "@/components/ui/use-toast"
 import { backendApiUrls } from "@/constants/backendApiEndpoints"
 import { backend } from "@/services/api/Network/HttpHelper"
 
@@ -32,6 +33,10 @@ function AddRoom({addNewRoom}:any) {
     function onSubmit(data:RoomData){
         backend.post(backendApiUrls.addRoom,data).then((response)=>{
             addNewRoom(response.data);
+            toast({
+                title:'Room added',
+                variant:'default'
+            })
         })
     }
 
