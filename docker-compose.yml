@@ -1,0 +1,22 @@
+version: '3'
+services:
+  frontend:
+    build: 
+      context: ./credence-frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    
+  backend:
+    build: 
+      context: ./expenseTracker
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=expenseTracker
