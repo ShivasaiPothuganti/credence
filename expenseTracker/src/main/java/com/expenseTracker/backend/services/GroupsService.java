@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,7 +42,10 @@ public class GroupsService {
        }
     }
 
-
+    public List<GroupEntity> getAdminGroups(long userId) {
+        List<GroupEntity> adminGroups = groupsRepository.findByOwnerId(userId);
+        return adminGroups;
+    }
 
 
 

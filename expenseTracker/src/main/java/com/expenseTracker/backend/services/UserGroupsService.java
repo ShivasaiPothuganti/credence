@@ -1,9 +1,12 @@
 package com.expenseTracker.backend.services;
 
+import com.expenseTracker.backend.entities.GroupEntity;
 import com.expenseTracker.backend.entities.UserGroupsEntity;
 import com.expenseTracker.backend.repositories.UserGroupsRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +41,18 @@ public class UserGroupsService {
         else{
             return false;
         }
+    }
+
+    public List<GroupEntity> getUserGroups(Long userId) {
+        List<UserGroupsEntity> userGroups = userGroupsRepository.findByUserId(userId);
+        List<GroupEntity> groups = new ArrayList<>();
+        List<GroupEntity> adminGroups = groupsService.getAdminGroups(userId);
+        for(GroupEntity adminGroup : adminGroups) {
+            groups.add(adminGroup);
+        }
+        for(UserGroupsEntity userGroupsEntity : userGroups) {
+            groups.add(userGroupsEntity.getGroup());
+        }
+        return  groups;
     }
 }

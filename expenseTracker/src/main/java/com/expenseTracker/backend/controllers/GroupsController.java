@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/groups")
 public class GroupsController {
@@ -31,8 +33,8 @@ public class GroupsController {
         UserEntity authenticatedUser = (UserEntity) authenticationObject.getPrincipal();
         newGroup.setOwnerId(authenticatedUser.getUserId());
         try{
-            groupsService.createGroup(newGroup);
-            return new ResponseEntity<>("room created successfully",HttpStatus.OK);
+            GroupEntity group = groupsService.createGroup(newGroup);
+            return new ResponseEntity<>(group,HttpStatus.OK);
         }
         catch (Exception exc){
             return new ResponseEntity<>(exc.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
@@ -50,6 +52,15 @@ public class GroupsController {
         catch (Exception exc){
             return new ResponseEntity<>(exc.getMessage(),HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/")
+    public  ResponseEntity<?> getUserGroups(Authentication authentication) {
+        System.out.println("In the get user groups function");
+        UserEntity authenticatedUser = (UserEntity) authentication.getPrincipal();
+        Long userId = authenticatedUser.getUserId();
+        List<GroupEntity> userGroups = userGroupsService.getUserGroups(userId);
+        return new ResponseEntity<>(userGroups, HttpStatus.OK);
     }
 
 }

@@ -8,7 +8,8 @@ const getRoomsOfUser = '/users/rooms'
 const addRoom = '/rooms/';
 const getCategories = '/category/';
 const updateCategories = "/category/";
-const deleteCategories = "/category/"
+const deleteCategories = "/category/";
+const getGroups = "/"
 
 export const backendApiUrls = {
     authorization,

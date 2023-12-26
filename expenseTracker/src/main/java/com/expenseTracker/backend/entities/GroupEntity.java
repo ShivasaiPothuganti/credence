@@ -21,7 +21,7 @@ public class GroupEntity {
     @Column(name="owner_id")
     private Long ownerId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id",referencedColumnName = "id",insertable = false,updatable = false)
     private UserEntity user;
 

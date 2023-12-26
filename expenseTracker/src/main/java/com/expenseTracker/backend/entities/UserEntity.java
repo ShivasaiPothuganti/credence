@@ -1,5 +1,6 @@
 package com.expenseTracker.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -27,6 +28,7 @@ public class UserEntity implements UserDetails {
     @Column(name="username",unique = true,nullable = false)
     private String userName;
 
+    @JsonIgnore
     @Column(name="password",nullable = false)
     private String password;
 

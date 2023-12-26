@@ -5,6 +5,7 @@ import com.expenseTracker.backend.models.GroupTransactionModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,5 +23,7 @@ public interface GroupsRepository extends JpaRepository<GroupEntity,Long> {
             nativeQuery = true
     )
     List<GroupTransactionModel> getTransactionsByGroupId(@Param("groupId") Long groupId);
+
+    List<GroupEntity> findByOwnerId(Long ownerId);
 
 }
