@@ -10,6 +10,10 @@ const getCategories = '/category/';
 const updateCategories = "/category/";
 const deleteCategories = "/category/";
 const getGroups = "/"
+const getBills = '/bills/';
+const deleteBill = '/bills/';
+const toggleBill = '/bills/';
+const addBill = '/bills/'
 
 export const backendApiUrls = {
     authorization,
@@ -22,5 +26,9 @@ export const backendApiUrls = {
     addRoom,
     deleteCategories,
     updateCategories,
-    getCategories
+    getCategories,
+    getBills,
+    deleteBill,
+    toggleBill,
+    addBill
 }

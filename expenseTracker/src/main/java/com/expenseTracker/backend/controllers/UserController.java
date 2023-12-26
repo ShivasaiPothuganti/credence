@@ -5,10 +5,12 @@ import com.expenseTracker.backend.entities.BudgetEntity;
 import com.expenseTracker.backend.entities.RoomEntity;
 import com.expenseTracker.backend.entities.TransactionEntity;
 import com.expenseTracker.backend.entities.UserEntity;
+import com.expenseTracker.backend.repositories.UserRepository;
 import com.expenseTracker.backend.services.BudgetService;
 import com.expenseTracker.backend.services.TransactionService;
 import com.expenseTracker.backend.services.UserRoomsService;
 import com.expenseTracker.backend.services.UserService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ public class UserController {
     private TransactionService transactionService;
     private BudgetService budgetService;
 	private UserRoomsService userRoomsService;
+
 
     @Autowired
     public UserController(UserService userService, TransactionService transactionService, BudgetService budgetService, UserRoomsService userRoomsService){
@@ -70,15 +73,16 @@ public class UserController {
     }
 
 	@GetMapping("/rooms")
-	public ResponseEntity<?> getUserRooms(Authentication authentication){
+	public ResponseEntity<?> getUserRooms(Authentication authentication) {
 		UserEntity principal = (UserEntity) authentication.getPrincipal();
 		Long userId = principal.getUserId();
-		try{
+		try {
 			List<RoomEntity> userRooms = userRoomsService.getRoomsOfUser(userId);
 			return new ResponseEntity<>(userRooms, HttpStatus.OK);
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
 }

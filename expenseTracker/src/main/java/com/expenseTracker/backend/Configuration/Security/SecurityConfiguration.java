@@ -40,7 +40,7 @@ public class SecurityConfiguration {
                     .configurationSource(request -> {
                         var cors = new CorsConfiguration();
                         cors.setAllowedOrigins(List.of("*"));
-                        cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
+                        cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS","PATCH"));
                         cors.setAllowedHeaders(List.of("*"));
                         cors.setExposedHeaders(List.of("*"));
                         return cors;
