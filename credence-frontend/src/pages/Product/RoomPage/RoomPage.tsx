@@ -61,9 +61,11 @@ function RoomPage({ room }: RoomId) {
 
   return (
     <div className="flex flex-col h-full w-full overflow-hidden">
-      <div className="h-20 rounded-lg bg-primaryBlack text-primaryWhite m-4 p-4 flex justify-center items-center">
-        <h1 className="text-3xl">{room.title} </h1>
-        <div className="absolute right-[2%]" onClick={leaveRoom}>
+      <div className="h-20 rounded-lg bg-primaryBlack text-primaryWhite flex flex-row m-4 p-4 justify-between items-center">
+        <div className="flex flex-[0.6] justify-end">
+          <h1 className="text-3xl">{room.title} </h1>
+        </div>
+        <div className="" onClick={leaveRoom}>
           <Button variant="destructive">Leave</Button>
         </div>
       </div>
@@ -82,7 +84,7 @@ function RoomPage({ room }: RoomId) {
             />
           </div>
         </div>
-        <div className="right-navigation-panel flex flex-[0.3] h-[95%] rounded-[2rem] pt-4 pl-4 ">
+        <div className="right-navigation-panel flex flex-[0.25] h-[95%] rounded-[2rem] pt-4 pl-4 m-auto ">
           <RightNavigationPanel
             roomId={room.roomId}
             loadTransactions={loadTransactions}
