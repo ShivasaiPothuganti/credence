@@ -58,7 +58,7 @@ function Transaction({ transaction, deleteTransaction }: TransactionProp) {
       <div className="flex-[0.2] flex items-center justify-center">
         <h1 className="text-2xl font-bold">₹ {price} </h1>
       </div>
-      <div className=" hidden group-hover:block transaction-delete absolute bottom-2 right-2">
+      <div className=" hidden group-hover:block transaction-delete absolute z-[1] bottom-2 right-2">
         <Button
           onClick={() => {
             deleteTransaction(transactionId);

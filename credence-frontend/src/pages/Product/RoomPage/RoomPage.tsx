@@ -61,25 +61,30 @@ function RoomPage({ room }: RoomId) {
 
   return (
     <div className="flex flex-col h-full w-full overflow-hidden">
-      <div className="h-20 rounded-lg bg-primaryBlack text-primaryWhite m-4 p-4 flex justify-center items-center">
-        <h1 className="text-3xl">{room.title} </h1>
-        <div className="absolute right-[2%]" onClick={leaveRoom}>
+      <div className="h-20 rounded-lg bg-primaryBlack text-primaryWhite flex flex-row m-4 p-4 justify-between items-center">
+        <div className="flex flex-[0.6] justify-end">
+          <h1 className="text-3xl">{room.title} </h1>
+        </div>
+        <div className="" onClick={leaveRoom}>
           <Button variant="destructive">Leave</Button>
         </div>
       </div>
       <div className="flex w-full h-full justify-start align-top ">
         <div className="rooms-list flex-[0.7]">
-          <div className="p-4">
+          <div className="p-4 flex justify-between">
             <SearchBar getSearchQuery={searchTransactionsByTitle} />
+            <Button onClick={()=>{loadTransactions()}} >
+              Show All Transactions
+            </Button>
           </div>
-          <div className="rooms-list h-[79%] scroll-smooth overflow-scroll">
+          <div className="rooms-list h-[79%] scroll-smooth overflow-x-hidden overflow-y-scroll">
             <TransactionList
               transactions={filteredList}
               deleteTransactions={deleteTransactions}
             />
           </div>
         </div>
-        <div className="right-navigation-panel flex flex-[0.3] h-[95%] rounded-[2rem] pt-4 pl-4 ">
+        <div className="right-navigation-panel flex flex-[0.25] h-[95%] rounded-[2rem] pt-4 pl-4 m-auto ">
           <RightNavigationPanel
             roomId={room.roomId}
             loadTransactions={loadTransactions}
