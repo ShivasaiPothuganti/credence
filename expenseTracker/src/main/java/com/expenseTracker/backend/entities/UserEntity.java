@@ -28,7 +28,6 @@ public class UserEntity implements UserDetails {
     @Column(name="username",unique = true,nullable = false)
     private String userName;
 
-    @JsonIgnore
     @Column(name="password",nullable = false)
     private String password;
 

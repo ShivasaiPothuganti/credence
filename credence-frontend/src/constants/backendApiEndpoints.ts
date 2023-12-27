@@ -9,7 +9,8 @@ const addRoom = '/rooms/';
 const getCategories = '/category/';
 const updateCategories = "/category/";
 const deleteCategories = "/category/";
-const getGroups = "/"
+const getGroups = "/groups/";
+const createSplit = "/groups/"
 
 export const backendApiUrls = {
     authorization,
@@ -22,5 +23,7 @@ export const backendApiUrls = {
     addRoom,
     deleteCategories,
     updateCategories,
-    getCategories
+    getCategories,
+    getGroups,
+    createSplit
 }
