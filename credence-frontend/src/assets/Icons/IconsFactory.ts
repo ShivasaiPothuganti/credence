@@ -10,6 +10,9 @@ import SplitBillIcon from './SplitBillIcons.svg';
 import DeleteIcon from '@/assets/Icons/DeleteIcon.svg';
 import SearchIcon from './SearchIcon.svg';
 import filterIcon from './filter.svg';
+import CrossIcon from './cross.svg';
+import TickIcon from './tick.svg';
+
 
 export const IconFactory= {
     DashboardIcon,
@@ -23,5 +26,7 @@ export const IconFactory= {
     SplitBillIcon,
     DeleteIcon,
     SearchIcon,
-    filterIcon
+    filterIcon,
+    CrossIcon,
+    TickIcon
 }

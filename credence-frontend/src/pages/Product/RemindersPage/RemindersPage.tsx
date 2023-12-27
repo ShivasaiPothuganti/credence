@@ -4,16 +4,19 @@ import { FormGeneratorData } from "@/TypeDefinitions/FormGeneratorData";
 import Form from "@/components/ui/form";
 import { logger } from "@/helpers/loggers/logger";
 import { billsService } from "@/services/api/BillsService";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BillsList from "./BillsList/BillsList";
 import { toast } from "@/components/ui/use-toast";
 import { Switch } from "@/components/ui/switch";
 import SearchBar from "@/components/ui/searchbar";
+import FilterBills from "@/components/FilterBills/FilterBills";
+import { Button } from "@/components/ui/button";
 
 
 function RemindersPage() {
   const [bills, setBills] = useState<TBill[]>([]);
   const [filteredBills,setFilteredBills] = useState<TBill[]>(null);
+  const [billDueStatus,setBillDueStatus] = useState(false);
 
 
   const addBillFormGenerator:FormGeneratorData[] = [
@@ -99,10 +102,21 @@ function RemindersPage() {
 	}
   }
 
-  function filterBillsByStatus(value:boolean){
-		setFilteredBills(()=>{
-			return bills.filter((bill)=>bill.status===value)
-		})
+  function filterBillsByStatus(dueBillToggleValue:boolean){
+	setBillDueStatus(dueBillToggleValue);
+		if(dueBillToggleValue===true){
+			if(filteredBills!=null){
+				const activeBills = filteredBills.filter((bill)=>bill.status);
+				setFilteredBills(activeBills);
+			}
+			else{
+				const activeBills = bills.filter((bill)=>bill.status);
+				setFilteredBills(activeBills);
+			}
+		}
+		else{
+			setFilteredBills(null);
+		}
   }
 
   async function deleteBill(billId:number){
@@ -125,22 +139,39 @@ function RemindersPage() {
 
   }
 
+  function searchBill(searchQuery:string){
+	searchQuery = searchQuery.trim();
+	if(searchQuery===""||searchQuery===null){
+		setFilteredBills([]);
+	}
+
+	const resultBills = bills.filter((bill)=>{
+		return bill.title.includes(searchQuery);
+	});
+	setFilteredBills(resultBills);
+  }
+
   return (
     <section className="h-full w-full flex justify-center p-10 items-center">
       <div className="remainder_container h-full w-full flex ">
-		<div className="display_bill flex-[0.7] flex flex-col h-full gap-10 ">
-			<div className="filter_options flex justify-between ">
-				<SearchBar getSearchQuery={()=>{}} />
-				<div className="flex gap-2">
-					<Switch 
-						onCheckedChange={filterBillsByStatus}
-					/>
-					<h1>Bills Due</h1>
+		<div className="display_bill flex-[0.85] flex flex-col h-full gap-10 ">
+			<div className="filter flex justify-between ">
+				<SearchBar getSearchQuery={searchBill} />
+				<div className="filter_options_container flex gap-10">
+					<Button onClick={()=>{ setBillDueStatus(false); setFilteredBills(null) }} >Show all bills</Button>
+					<FilterBills bills={bills} setFilteredBills={setFilteredBills} />
+					<div className="flex gap-5">
+						<Switch 
+							checked={billDueStatus}
+							onCheckedChange={filterBillsByStatus}
+						/>
+						<h1 className="text-lg font-semibold" >Bills Due</h1>
+					</div>
 				</div>
 			</div>
-			<BillsList bills={bills} deleteBillHandler={deleteBill} toggleBillStatusHandler={toggleBillStatus} />
+			<BillsList bills={ filteredBills? filteredBills:bills } deleteBillHandler={deleteBill} toggleBillStatusHandler={toggleBillStatus} />
 		</div>
-		<div className="add_bill flex-[0.3] pt-5 pl-10 pr-5 ">
+		<div className="add_bill flex-[0.25] pt-20 pl-10 pr-5 ">
 			<Form generatorData={addBillFormGenerator} onSubmit={addBill} />
 		</div>
 	  </div>
