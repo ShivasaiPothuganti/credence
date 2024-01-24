@@ -47,6 +47,11 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity,L
     )
     List<RoomTransactionModel> findRoomTransactionsByUserName(@Param("userName") String userName, @Param("roomId") Long roomId);
 
+    @Query(
+            value = "SELECT * FROM TRANSACTIONS WHERE userid= :userId and room_id IS NULL and group_id is NULL;",
+            nativeQuery = true
+    )
+    List<TransactionEntity> getPersonalTransactions(@Param("userId") Long userId);
     
     @Query(
     	value = "SELECT t.id as transactionId, * FROM transactions t JOIN users u on t.userid = u.id WHERE t.room_id = :roomId and t.category = :category",

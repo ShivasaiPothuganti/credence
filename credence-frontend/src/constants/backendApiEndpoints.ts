@@ -9,11 +9,11 @@ const addRoom = '/rooms/';
 const getCategories = '/category/';
 const updateCategories = "/category/";
 const deleteCategories = "/category/";
-const getGroups = "/"
 const getBills = '/bills/';
 const deleteBill = '/bills/';
 const toggleBill = '/bills/';
-const addBill = '/bills/'
+const addBill = '/bills/';
+const getPersonalTransactions = "/transactions/personaltransactions";
 
 export const backendApiUrls = {
     authorization,
@@ -30,5 +30,6 @@ export const backendApiUrls = {
     getBills,
     deleteBill,
     toggleBill,
-    addBill
+    addBill,
+    getPersonalTransactions
 }

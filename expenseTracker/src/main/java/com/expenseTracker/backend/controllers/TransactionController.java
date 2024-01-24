@@ -126,6 +126,20 @@ public class TransactionController {
 		}
 	}
 
+	@GetMapping("/personaltransactions")
+	public ResponseEntity<?> getPersonalTransactionsByUserId(Authentication authenticationObject){
+		UserEntity authenticatedUser = (UserEntity) authenticationObject.getPrincipal();
+		Long userId = authenticatedUser.getUserId();
+		try{
+			List<TransactionEntity> personalTransactions = transactionService.getPersonalTransactionsOfUser(userId);
+			return new ResponseEntity<>(personalTransactions,HttpStatus.OK);
+		}
+		catch (Exception e){
+			ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage());
+			return new ResponseEntity<>(error,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	@GetMapping("/groups/{groupId}")
 	public ResponseEntity<?> getTransactionsByGroupId(@PathVariable long groupId){
 		try{

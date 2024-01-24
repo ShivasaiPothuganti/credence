@@ -133,7 +133,7 @@ function TransactionsPage() {
 
   useEffect(()=>{
 	setLoadingTransactions(true);
-    transactionService.getAllTransactions().then((response:AxiosResponse)=>{
+    transactionService.getPeronalTransactions().then((response:AxiosResponse)=>{
       if(response&&response.data){
         setTransactionsList(response.data)
       }

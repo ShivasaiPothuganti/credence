@@ -4,7 +4,7 @@ import { FormGeneratorData } from "@/TypeDefinitions/FormGeneratorData";
 import Form from "@/components/ui/form";
 import { logger } from "@/helpers/loggers/logger";
 import { billsService } from "@/services/api/BillsService";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import BillsList from "./BillsList/BillsList";
 import { toast } from "@/components/ui/use-toast";
 import { Switch } from "@/components/ui/switch";

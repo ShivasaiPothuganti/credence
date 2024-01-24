@@ -66,6 +66,10 @@ public class TransactionService {
     	return savedTransaction;
     }
 
+    public List<TransactionEntity> getPersonalTransactionsOfUser(Long userId){
+        return transactionRepository.getPersonalTransactions(userId);
+    }
+
     @Transactional
     public Optional<TransactionEntity> getTransactionById(long transactionId){
         return transactionRepository.findById(transactionId);
