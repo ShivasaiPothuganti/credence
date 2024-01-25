@@ -24,6 +24,11 @@ public class BillsService {
        return savedBill;
     }
 
+    public List<BillsEntity> getRecentActiveBills(long numberOfBills,long userId){
+        List<BillsEntity> recentBills = billsRepository.getRecentActiveBills(numberOfBills,userId);
+        return recentBills;
+    }
+
     public List<BillsEntity> getBills(long userId){
         List<BillsEntity> bills = billsRepository.findByUserId(userId);
         return bills;

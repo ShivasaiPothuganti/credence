@@ -2,6 +2,7 @@ package com.expenseTracker.backend.controllers;
 
 import com.expenseTracker.backend.entities.BillsEntity;
 import com.expenseTracker.backend.entities.UserEntity;
+import com.expenseTracker.backend.models.ErrorResponse;
 import com.expenseTracker.backend.services.BillsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +44,18 @@ public class BillsController {
         }
         catch (Exception e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/recentBills/{numberOfBills}")
+    public ResponseEntity<?> getRecentActiveBills(@PathVariable("numberOfBills") long numberOfBills,Authentication authenticationObject ){
+        UserEntity authenticatedUser = (UserEntity)authenticationObject.getPrincipal();
+        try{
+            List<BillsEntity> bills = billsService.getRecentActiveBills(numberOfBills,authenticatedUser.getUserId());
+            return new ResponseEntity<>(bills,HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>("cannot fetch the bills",HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

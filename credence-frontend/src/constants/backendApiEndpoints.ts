@@ -14,6 +14,7 @@ const deleteBill = '/bills/';
 const toggleBill = '/bills/';
 const addBill = '/bills/';
 const getPersonalTransactions = "/transactions/personaltransactions";
+const getRecentBills = "/bills/recentBills/";
 
 export const backendApiUrls = {
     authorization,
@@ -31,5 +32,6 @@ export const backendApiUrls = {
     deleteBill,
     toggleBill,
     addBill,
-    getPersonalTransactions
+    getPersonalTransactions,
+    getRecentBills
 }

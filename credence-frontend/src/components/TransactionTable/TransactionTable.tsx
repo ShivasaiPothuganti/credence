@@ -16,7 +16,6 @@ import {
     TableRow,
   } from "@/components/ui/table";
 import { transformISOtoDateTime } from '@/utils/formatDate';
-import { logger } from '@/helpers/loggers/logger';
 
 type TransactionTable = {
     transactions:TTransaction[]
@@ -107,13 +106,10 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   });
 
-
-  logger.debug("Inside data table",data)
-
   return (
-    <div  className="rounded-md border">
-      <Table  >
-        <TableHeader>
+    <div  className="rounded-md border h-40 overflow-y-scroll relative ">
+      <Table >
+        <TableHeader className='sticky z-[2] top-0 w-full  bg-primaryWhite' >
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {

@@ -20,6 +20,10 @@ class BillsService{
         return backend.patch(backendApiUrls.toggleBill+id,null);
     }
 
+    getRecentBills(numberOfBills:number):Promise<AxiosResponse>{
+        return backend.get(backendApiUrls.getRecentBills+numberOfBills);
+    }
+
     getBillsByStatus(bills:TBill[],status:boolean):TBill[]{
         if(status===true){
             return this.getActiveBills(bills);

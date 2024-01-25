@@ -21,6 +21,13 @@ public interface BillsRepository extends JpaRepository<BillsEntity,Long> {
             nativeQuery = true,
             value = "UPDATE bills SET status = NOT status WHERE id = :billId"
     )
-    int toggleBillStatus(@Param("billId") long billId );
+    int toggleBillStatus(@Param("billId") long billId);
+
+
+    @Query(
+            nativeQuery = true,
+            value="select * from bills  where userid = :userId AND status=true order by expiry_date ASC limit :numberOfBills; "
+    )
+    List<BillsEntity> getRecentActiveBills(@Param("numberOfBills") long numberOfBills,@Param("userId") long userId );
 
 }
