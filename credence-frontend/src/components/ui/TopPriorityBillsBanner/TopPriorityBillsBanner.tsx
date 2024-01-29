@@ -1,23 +1,21 @@
-import React from 'react'
-import TopPriorityBillCard from '../TopPriorityBillCard/TopPriorityBillCard'
-import { TBill } from '@/TypeDefinitions/Bill'
-
+import TopPriorityBillCard from "../TopPriorityBillCard/TopPriorityBillCard";
+import { TBill } from "@/TypeDefinitions/Bill";
+import "./TopPriorityBillsBanner.css";
 
 type TopPriorityBillCardProps = {
-    topPriorityBills:TBill[]
-}
+  topPriorityBills: TBill[];
+};
 
-
-function TopPriorityBillsBanner({topPriorityBills}:TopPriorityBillCardProps) {
+function TopPriorityBillsBanner({
+  topPriorityBills,
+}: TopPriorityBillCardProps) {
   return (
-    <div className='w-full h-[10rem] overflow-x-scroll flex gap-96 rounded-md'>
-        {
-            topPriorityBills.map((bill)=>{
-                return <TopPriorityBillCard bill={bill} />
-            })
-        }
+    <div className="w-full p-10 h-[10rem] overflow-y-hidden flex gap-20 rounded-md">
+      {topPriorityBills.map((bill) => {
+        return <TopPriorityBillCard bill={bill} />;
+      })}
     </div>
-  )
+  );
 }
 
-export default TopPriorityBillsBanner
+export default TopPriorityBillsBanner;

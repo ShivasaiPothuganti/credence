@@ -10,7 +10,6 @@ import { logger } from "@/helpers/loggers/logger";
 
 const pipe = (...functions:any[])=>{
     logger.debug(functions);
-    
 }
 
 export {pipe};

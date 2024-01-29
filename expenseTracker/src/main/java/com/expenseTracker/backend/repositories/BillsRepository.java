@@ -26,7 +26,7 @@ public interface BillsRepository extends JpaRepository<BillsEntity,Long> {
 
     @Query(
             nativeQuery = true,
-            value="select * from bills  where userid = :userId AND status=true order by expiry_date ASC limit :numberOfBills; "
+            value="select * from bills  where userid = :userId AND status=true order by expiry_date ASC limit :numberOfBills"
     )
     List<BillsEntity> getRecentActiveBills(@Param("numberOfBills") long numberOfBills,@Param("userId") long userId );
 
