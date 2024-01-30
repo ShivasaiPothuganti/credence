@@ -1,7 +1,7 @@
 export type Group = {
     groupId:string
     groupTitle:string
-    ownerId:number
+    ownerId:string
     createdOn:string
     totalPrice:number
 }

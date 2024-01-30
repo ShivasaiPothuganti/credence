@@ -25,7 +25,6 @@ export default function GroupPage({group}:GroupInput) {
     backend.get(backendApiUrls.getGroupTransactions+group.groupId).then((response:AxiosResponse)=>{
       setTransactionsList(response.data)
       setFilteredList(response.data)
-      console.log(transactionsList)
     })
   }
 
