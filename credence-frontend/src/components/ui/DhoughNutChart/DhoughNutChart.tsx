@@ -1,57 +1,30 @@
 import { TTransaction } from '@/TypeDefinitions/Transaction';
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Chart as ChartJS, ArcElement,Tooltip,Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { logger } from '@/helpers/loggers/logger';
 import { purpleShades } from './BackgroundColors';
-import { transformISOtoDateTime } from '@/utils/formatDate';
+import { convertCurrencyToInr } from '@/utils/currencyConverter';
+import { SelectField } from '../select';
 
 ChartJS.register(ArcElement,Legend,Tooltip);
 
 type DhoughNutChartProps = {
     transactions:TTransaction[],
-    renderChartBasedOn:'Category'|'TransactionType';
 }
 
 
-function generateCategoryCountsMap(transactions:TTransaction[]){
-    const categoryCount = new Map<string,number>();
 
+function generateDataCountMap(transactions:TTransaction[],fieldName:string){
+    const dataMap = new Map<string,number>();
     transactions.forEach((transaction)=>{
-
-        if(!transaction.category){
-            transaction.category = 'Other'
-        }
-
-        if(categoryCount.has(transaction.category)){
-            categoryCount.set(transaction.category,categoryCount.get(transaction.category)+transaction.price);
+        if(dataMap.has(transaction[fieldName])){
+            dataMap.set(transaction[fieldName], dataMap.get(transaction[fieldName])+transaction.price);
         }
         else{
-            categoryCount.set(transaction.category,transaction.price);
+            dataMap.set(transaction[fieldName],transaction.price);
         }
     });
-
-    return categoryCount;
-}
-
-function generateTransactionTypeCounts(transactions:TTransaction[]){
-    const typeCount = new Map<string,number>();
-    typeCount.set('Rooms',0);
-    typeCount.set('Groups',0);
-    typeCount.set('Personal',0);
-
-    transactions.forEach((transaction)=>{
-        if(transaction.roomId){
-            typeCount.set('Rooms',typeCount.get('Rooms')+transaction.price);
-        }
-        else if(transaction.groupId){
-            typeCount.set('Groups',typeCount.get('Groups')+transaction.price);
-        }
-        else{
-            typeCount.set('Personal',typeCount.get('Personal')+transaction.price);
-        }
-    });
-    return typeCount;
+    return dataMap;
 }
 
 function formatTransactionsIntoChartData(transactions:TTransaction[],formatBasedOn:string){
@@ -67,30 +40,27 @@ function formatTransactionsIntoChartData(transactions:TTransaction[],formatBased
             }
         ]
     }
+    const dataMap = generateDataCountMap(transactions,formatBasedOn);
 
-   if(formatBasedOn==='Category'){
-        const categoryCountMap = generateCategoryCountsMap(transactions);
-        transactionsData.labels = Array.from(categoryCountMap.keys());
-        transactionsData.datasets[0].data = Array.from(categoryCountMap.values());
-        transactionsData.datasets[0].backgroundColor = purpleShades;
-        return transactionsData;
-   }
-   else if(formatBasedOn==='TransactionType'){
-        const groupTypeCountMap = generateTransactionTypeCounts(transactions);
-        transactionsData.labels = Array.from(groupTypeCountMap.keys());
-        transactionsData.datasets[0].data = Array.from(groupTypeCountMap.values());
-        transactionsData.datasets[0].backgroundColor = purpleShades;
-        return transactionsData;
-   }
+    transactionsData.labels = Array.from(dataMap.keys());
+    transactionsData.datasets[0].data = Array.from(dataMap.values());
+    transactionsData.datasets[0].backgroundColor = purpleShades;
+    return transactionsData;
+   
 }
 
 
-function DhoughNutChart({transactions,renderChartBasedOn}:DhoughNutChartProps) {
+function DhoughNutChart({transactions}:DhoughNutChartProps) {
 
     const [formattedTransactions,setFormattedTransactions] = useState<TTransaction[]>(transactions);
+    const [filteredTransactions,setFilteredTransactions] = useState<TTransaction[]>(transactions);
+    const [total,setTotal] = useState(0);
+    const [renderParameter,setRenderRenderParameter] = useState<string>('category');
+
 
     useEffect(()=>{
-        setFormattedTransactions(transactions.map((transaction)=>{
+        let total = 0;
+        const formattedTransactions = transactions.map((transaction)=>{
             if(!transaction.category){
                 transaction.category = 'Other'
             }
@@ -103,14 +73,30 @@ function DhoughNutChart({transactions,renderChartBasedOn}:DhoughNutChartProps) {
             else{
                 transaction.type = 'Personal';
             }
+            total+=transaction.price;
             return transaction;
-        }));
+        });
+        setFormattedTransactions(formattedTransactions);
+        setTotal(total);
+
     },[transactions]);
 
   return (
-    <div className='h-96' >
-        <h1>  </h1>
-        <Doughnut  data={formatTransactionsIntoChartData(formattedTransactions,renderChartBasedOn)}/>
+    <div className='h-full w-full' >
+        <div className="header w-full flex flex-col gap-5">
+            <div className="amount_holder flex justify-between">
+                <h1 className='font-bold text-[1.5rem] font-primary' > Total Amount </h1>
+                <h1 className='font-bold text-[1.5rem] font-primary' > {convertCurrencyToInr(total)} </h1>
+            </div>
+           <SelectField 
+                selectPlaceholder,
+                selectLabel,
+                selectItems,
+                onChange={()=>{}} 
+            />
+            <p className='font-semibold text-gray-500' > Transactions Breakdown </p>
+        </div>
+        <Doughnut data={formatTransactionsIntoChartData(formattedTransactions,renderChartBasedOn)}/>
     </div>
   )
 }

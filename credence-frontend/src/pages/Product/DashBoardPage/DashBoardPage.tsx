@@ -46,14 +46,14 @@ function DashBoardPage() {
 				})
 			})
 		}
-
-
 	},[])
 
   return (
-    <section className='h-full w-full flex items-center justify-center' >
+    <section className='h-full w-full flex items-center justify-center  ' >
         <div className="stas_section h-full flex-[0.7] ">
-			<DhoughNutChart transactions={transactions} renderChartBasedOn='TransactionType' />
+			<div className="doughNutChart h-[32rem] w-[50%] border border-primaryBlack rounded-xl p-5 ">
+				<DhoughNutChart transactions={transactions} />
+			</div>
 		</div>
 		<div className="user_profile_section h-full flex-[0.3] ">
 

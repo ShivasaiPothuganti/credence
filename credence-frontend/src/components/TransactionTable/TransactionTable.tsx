@@ -16,6 +16,7 @@ import {
     TableRow,
   } from "@/components/ui/table";
 import { transformISOtoDateTime } from '@/utils/formatDate';
+import {convertCurrencyToInr} from '@/utils/currencyConverter';
 
 type TransactionTable = {
     transactions:TTransaction[]
@@ -55,10 +56,7 @@ function TransactionTable({transactions}:TransactionTable) {
         cell:({row})=>{
             const amount = parseFloat(row.getValue("price"));
             console.log(amount);
-            const formattedAmount = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "INR",
-            }).format(amount)
+            const formattedAmount = convertCurrencyToInr(amount);
             return <span> {formattedAmount} </span>
         }
       },
