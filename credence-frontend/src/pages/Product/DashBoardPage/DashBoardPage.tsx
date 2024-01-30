@@ -1,6 +1,6 @@
 import { TBill } from "@/TypeDefinitions/Bill"
 import { TTransaction } from "@/TypeDefinitions/Transaction"
-import TopPriorityBillsBanner from "@/components/ui/TopPriorityBillsBanner/TopPriorityBillsBanner"
+import DhoughNutChart from "@/components/ui/DhoughNutChart/DhoughNutChart";
 import { toast } from "@/components/ui/use-toast"
 import { billsService } from "@/services/api/BillsService"
 import { transactionService } from "@/services/api/TransactionsService"
@@ -52,7 +52,12 @@ function DashBoardPage() {
 
   return (
     <section className='h-full w-full flex items-center justify-center' >
-        <TopPriorityBillsBanner topPriorityBills={topPriorityBills} />
+        <div className="stas_section h-full flex-[0.7] ">
+			<DhoughNutChart transactions={transactions} renderChartBasedOn='TransactionType' />
+		</div>
+		<div className="user_profile_section h-full flex-[0.3] ">
+
+		</div>
     </section>
   )
 }

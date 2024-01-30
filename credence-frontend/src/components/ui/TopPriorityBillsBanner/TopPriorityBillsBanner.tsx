@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import TopPriorityBillCard from "../TopPriorityBillCard/TopPriorityBillCard";
 import { TBill } from "@/TypeDefinitions/Bill";
 import "./TopPriorityBillsBanner.css";
