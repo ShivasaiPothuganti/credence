@@ -11,6 +11,8 @@ const updateCategories = "/category/";
 const deleteCategories = "/category/";
 const getGroups = "/groups/";
 const createSplit = "/groups/"
+const getGroupTransactions = "/transactions/groups/"
+const addGroupTransaction = "/transactions/groups/"
 
 export const backendApiUrls = {
     authorization,
@@ -25,5 +27,7 @@ export const backendApiUrls = {
     updateCategories,
     getCategories,
     getGroups,
-    createSplit
+    createSplit,
+    getGroupTransactions,
+    addGroupTransaction
 }

@@ -1,5 +1,5 @@
 export type Group = {
-    groupId:number
+    groupId:string
     groupTitle:string
     ownerId:number
     createdOn:string

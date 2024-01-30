@@ -19,7 +19,7 @@ export default function SearchBar({getSearchQuery}:InputProps) {
         onClick={()=>{
           if(inputRef.current){
             getSearchQuery(inputRef.current.value);
-            inputRef.current.value = ""
+            // inputRef.current.value = ""
           }         
         }}
       className="px-3 py-2">

@@ -58,8 +58,7 @@ public class TransactionController {
 	public ResponseEntity<?> addTransactionInRoom(
 			@RequestBody TransactionEntity newTransaction,
 			@PathVariable Long roomId,
-			Authentication authenticationObject)
-	{
+			Authentication authenticationObject) {
 		UserEntity authenticatedUser = (UserEntity)authenticationObject.getPrincipal();
 		try{
 			newTransaction.setUserId(authenticatedUser.getUserId());
@@ -67,22 +66,19 @@ public class TransactionController {
 			newTransaction.setGroupId(null);
 			TransactionEntity transactionEntity = transactionService.addTransactionByRoomId(newTransaction, roomId);
 			return new ResponseEntity<>(transactionEntity,HttpStatus.OK);
-		}
-		catch (Exception exc){
+		} catch (Exception exc){
 			return new ResponseEntity<>("failed to add transaction ",HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
 	@GetMapping("/rooms/{roomId}")
-	public ResponseEntity<?> getTranasactionsByRoomId(@PathVariable Long roomId,Authentication authenticationObject)
-	{
+	public ResponseEntity<?> getTranasactionsByRoomId(@PathVariable Long roomId,Authentication authenticationObject) {
 		UserEntity authenticatedUser = (UserEntity) authenticationObject.getPrincipal();
 		Long userId = authenticatedUser.getUserId();
 		try{
-			 List<RoomTransactionModel> transactions = transactionService.getTransactionsByRoomId(roomId,userId);
-			 return new ResponseEntity<>(transactions,HttpStatus.OK);
-		}
-		catch (Exception exc){
+			List<RoomTransactionModel> transactions = transactionService.getTransactionsByRoomId(roomId,userId);
+			return new ResponseEntity<>(transactions,HttpStatus.OK);
+		} catch (Exception exc){
 			return new ResponseEntity<>(exc.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -92,24 +88,25 @@ public class TransactionController {
 		try{
 			List<RoomTransactionModel> roomTransactionsOfUser= transactionService.getRoomTransactionsByUserName(roomId,userName);
 			return new ResponseEntity<>(roomTransactionsOfUser,HttpStatus.OK);
-		}
-		catch (Exception exc){
+		} catch (Exception exc){
 			return new ResponseEntity<>(exc.getMessage(),HttpStatus.BAD_REQUEST);
 		}
 	}
 
-	@PostMapping("/groups")
-	public ResponseEntity<?> addTransactionInGroup( @RequestBody TransactionEntity newTransaction,Authentication authenticationObject){
+	@PostMapping("/groups/{groupId}")
+	public ResponseEntity<?> addTransactionInGroup( @RequestBody TransactionEntity newTransaction,@PathVariable long groupId, Authentication authenticationObject){
 		UserEntity authenticatedUser = (UserEntity) authenticationObject.getPrincipal();
 		newTransaction.setUserId(authenticatedUser.getUserId());
 		try{
+			newTransaction.setGroupId(groupId);
+			newTransaction.setRoomId(null);
 			TransactionEntity savedTransaction = transactionService.addTransactionInGroup(newTransaction);
 			return new ResponseEntity<>(savedTransaction,HttpStatus.OK);
-		}
-		catch (Exception exc){
+		} catch (Exception exc){
 			return new ResponseEntity<>(exc.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
 	@GetMapping("/users")
 	public ResponseEntity<?> getTransactionsByUserId(Authentication authenticationObject){
 
@@ -119,20 +116,21 @@ public class TransactionController {
 		try{
 			List<TransactionEntity> transactions = transactionService.getTransactionsByUserId(userId);
 			return new ResponseEntity<>(transactions,HttpStatus.OK);
-		}
-		catch (Exception exc){
+		} catch (Exception exc){
 			ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND, exc.getMessage());
 			return new ResponseEntity<>(error,HttpStatus.NOT_FOUND);
 		}
 	}
 
 	@GetMapping("/groups/{groupId}")
-	public ResponseEntity<?> getTransactionsByGroupId(@PathVariable long groupId){
+	public ResponseEntity<?> getTransactionsByGroupId(@PathVariable long groupId, Authentication authentication){
+		System.out.println("In the get Transactions by Group ID function");
+		System.out.println(authentication.getPrincipal().toString());
 		try{
 			List<GroupTransactionModel> transactions = transactionService.getTransactionsByGroupId(groupId);
+			System.out.println(transactions.get(0).getHasToPay());
 			return new ResponseEntity<>(transactions,HttpStatus.OK);
-		}
-		catch (Exception e){
+		} catch (Exception e){
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
