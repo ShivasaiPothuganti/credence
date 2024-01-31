@@ -5,6 +5,8 @@ import { Doughnut } from 'react-chartjs-2';
 import { purpleShades } from './BackgroundColors';
 import { convertCurrencyToInr } from '@/utils/currencyConverter';
 import { SelectField } from '../select';
+import FilterTransactionsPopOver from '@/components/FilterTransactions/FilterTransactionsPopOver';
+import { logger } from '@/helpers/loggers/logger';
 
 ChartJS.register(ArcElement,Legend,Tooltip);
 
@@ -28,6 +30,7 @@ function generateDataCountMap(transactions:TTransaction[],fieldName:string){
 }
 
 function formatTransactionsIntoChartData(transactions:TTransaction[],formatBasedOn:string){
+
     const transactionsData = {
         labels:[],
         datasets:[
@@ -39,6 +42,9 @@ function formatTransactionsIntoChartData(transactions:TTransaction[],formatBased
                 borderWidth:3
             }
         ]
+    }
+    if(!transactions){
+       return transactionsData; 
     }
     const dataMap = generateDataCountMap(transactions,formatBasedOn);
 
@@ -53,7 +59,7 @@ function formatTransactionsIntoChartData(transactions:TTransaction[],formatBased
 function DhoughNutChart({transactions}:DhoughNutChartProps) {
 
     const [formattedTransactions,setFormattedTransactions] = useState<TTransaction[]>(transactions);
-    const [filteredTransactions,setFilteredTransactions] = useState<TTransaction[]>(transactions);
+    const [filteredTransactions,setFilteredTransactions] = useState<TTransaction[]>(null);
     const [total,setTotal] = useState(0);
     const [renderParameter,setRenderRenderParameter] = useState<string>('category');
 
@@ -78,7 +84,6 @@ function DhoughNutChart({transactions}:DhoughNutChartProps) {
         });
         setFormattedTransactions(formattedTransactions);
         setTotal(total);
-
     },[transactions]);
 
   return (
@@ -88,15 +93,32 @@ function DhoughNutChart({transactions}:DhoughNutChartProps) {
                 <h1 className='font-bold text-[1.5rem] font-primary' > Total Amount </h1>
                 <h1 className='font-bold text-[1.5rem] font-primary' > {convertCurrencyToInr(total)} </h1>
             </div>
-           <SelectField 
-                selectPlaceholder,
-                selectLabel,
-                selectItems,
-                onChange={()=>{}} 
-            />
-            <p className='font-semibold text-gray-500' > Transactions Breakdown </p>
+         
+            <div className="dhoughnut_header flex w-full justify-between">
+                <p className='font-semibold text-gray-500' > Transactions Breakdown </p>
+                <FilterTransactionsPopOver 
+                    dateRange
+                    categoryOrType
+                    priceRange={false}
+                    category={false}
+                    initialTransactions={formattedTransactions} 
+                    setFilteredTransactions={setFilteredTransactions}
+                    onSubmit={(renderParameter)=>{
+                        setRenderRenderParameter(renderParameter);
+                    }}
+                />
+            </div>
         </div>
-        <Doughnut data={formatTransactionsIntoChartData(formattedTransactions,renderChartBasedOn)}/>
+        
+        {
+            !filteredTransactions ?
+            <Doughnut data={formatTransactionsIntoChartData(formattedTransactions,renderParameter)}/>
+            :
+            <Doughnut data={formatTransactionsIntoChartData(filteredTransactions,renderParameter)}/>
+        }
+
+        
+        
     </div>
   )
 }

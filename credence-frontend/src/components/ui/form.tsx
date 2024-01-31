@@ -4,6 +4,8 @@ import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
 import {SelectField} from './select';
 import { Checkbox } from './checkbox';
 import { DatePickerWithRange } from './DateRangePicker';
+import {  useState } from 'react';
+import { logger } from '@/helpers/loggers/logger';
 
 
 type FormGeneratorProp = {
@@ -28,6 +30,8 @@ type BasicFormElementProps = {
 function Form({generatorData,onSubmit}:FormGeneratorProp) {
   const formElementsRef:Record<string,HTMLInputElement | null> = {};
   let formData:Record<string,unknown> = {};
+  
+
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function getComponentByType(basicProps:BasicFormElementProps,additionalProps:any,elementReference:any){
@@ -42,14 +46,18 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 			return <span className="inline-block">
 				
 				<Checkbox name={name}  />
-				<p>{'hiello'}</p>
 			</span>
 		case 'submit':
 			return <Button {...additionalProps} > {value} </Button>
 		case 'button':
 			return <Button {...additionalProps} > {value} </Button> 
 		case 'select':
-			return <SelectField reference = {elementReference} onChange={(value:string)=>{formData[name]=value}} {...additionalProps} /> 
+			return <SelectField
+						onChange={(_value:string)=>{
+									formData[name]=_value;
+									console.log(formData);
+								}} 
+					{...additionalProps} /> 
 		default:
 			return <Input ref={elementReference} type={type} value={value} name={name} placeholder={placeholder} {...additionalProps} />
 	}
@@ -62,7 +70,8 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 			if(formElementsRef[key]?.type!='submit'){
 				formData[key] = formElementsRef[key]?.value;
 			}
-		})
+		});
+		logger.warn(formData);
 		onSubmit(formData);
 		formData = {}
 		Object.keys(formElementsRef).forEach((key:string)=>{
@@ -95,6 +104,7 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 				)
 			})
 		}
+		<button onClick={()=>{formData['CATEGORY']='ASDLFKADFASF'}} >add element</button>
       </form>
     </>
   )

@@ -167,7 +167,7 @@ function TransactionsPage() {
 					<Button onClick={()=>{
 						setFilteredTransactions(null);
 					}} > All Transactions </Button>
-					<FilterTransactionsPopOver initialTransactions={transactionList} setFilteredTransactions={setFilteredTransactions} />
+					<FilterTransactionsPopOver categoryOrType={false} initialTransactions={transactionList} setFilteredTransactions={setFilteredTransactions} />
 				</div>
 			</div>
 			<div className="transactions-container h-[90%] w-full flex-[0.7]">
