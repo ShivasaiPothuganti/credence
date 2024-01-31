@@ -14,6 +14,8 @@ const createSplit = "/groups/"
 const getGroupTransactions = "/transactions/groups/"
 const addGroupTransaction = "/transactions/groups/"
 const addUserToGroup = "/groups/user"
+const removeUserFromGroup = "/groups/"
+const getGroupIndTransactions = "/transactions/groups/"
 
 export const backendApiUrls = {
     authorization,
@@ -31,5 +33,7 @@ export const backendApiUrls = {
     createSplit,
     getGroupTransactions,
     addGroupTransaction,
-    addUserToGroup
+    addUserToGroup,
+    removeUserFromGroup,
+    getGroupIndTransactions
 }

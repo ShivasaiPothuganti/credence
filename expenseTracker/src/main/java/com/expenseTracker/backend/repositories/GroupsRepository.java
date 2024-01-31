@@ -24,6 +24,7 @@ public interface GroupsRepository extends JpaRepository<GroupEntity,Long> {
     )
     List<GroupTransactionModel> getTransactionsByGroupId(@Param("groupId") Long groupId);
 
-    List<GroupEntity> findByOwnerId(Long ownerId);
+    List<GroupEntity> findByOwnerIdOrderByGroupIdDesc(Long ownerId);
+
 
 }

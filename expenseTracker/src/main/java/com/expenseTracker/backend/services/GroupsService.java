@@ -43,10 +43,9 @@ public class GroupsService {
     }
 
     public List<GroupEntity> getAdminGroups(long userId) {
-        List<GroupEntity> adminGroups = groupsRepository.findByOwnerId(userId);
+        List<GroupEntity> adminGroups = groupsRepository.findByOwnerIdOrderByGroupIdDesc(userId);
         return adminGroups;
     }
-
 
 
 }

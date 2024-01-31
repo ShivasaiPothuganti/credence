@@ -2,10 +2,7 @@ package com.expenseTracker.backend.controllers;
 
 import com.expenseTracker.backend.entities.TransactionEntity;
 import com.expenseTracker.backend.entities.UserEntity;
-import com.expenseTracker.backend.models.ErrorResponse;
-import com.expenseTracker.backend.models.GroupTransactionModel;
-import com.expenseTracker.backend.models.RoomTransactionModel;
-import com.expenseTracker.backend.models.SuccessResponseModel;
+import com.expenseTracker.backend.models.*;
 import com.expenseTracker.backend.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -135,6 +132,10 @@ public class TransactionController {
 		}
 	}
 
-
+	@GetMapping("/groups/{groupId}/ind")
+	public ResponseEntity<?> getGroupIndTransactions(@PathVariable long groupId, Authentication authentication){
+		List<GroupIndTransactionModel> groupIndTransactions = transactionService.getGroupIndTransactions(groupId);
+		return new ResponseEntity<>(groupIndTransactions, HttpStatus.OK);
+	}
 
 }

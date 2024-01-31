@@ -1,4 +1,5 @@
 import { Group } from "@/TypeDefinitions/Group";
+import { capitalizeFirstLetter } from "@/utils/formatText";
 
 type GroupInput = {
   group: Group;
@@ -19,7 +20,7 @@ function GroupCard({ group, navigateToGroup }: GroupInput) {
         </div>
       </div>
       <div className="room-details flex-[0.6] pt-3">
-        <h1 className="font-semibold text-2xl mb-3">{group.groupTitle}</h1>
+        <h1 className="font-semibold text-2xl mb-3">{capitalizeFirstLetter(group.groupTitle)}</h1>
         <h3 className="text-muted-foreground">Price: ₹ {group.totalPrice}</h3>
         <h3 className="text-muted-foreground text-xs mt-3">
           Created on: {group.createdOn.split("T")[0]}

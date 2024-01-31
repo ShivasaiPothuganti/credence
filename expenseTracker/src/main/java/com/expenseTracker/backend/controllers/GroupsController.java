@@ -63,4 +63,15 @@ public class GroupsController {
         return new ResponseEntity<>(userGroups, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{groupId}")
+    public  ResponseEntity<?> removeUserFromGroup(@PathVariable("groupId") long groupId, Authentication authentication){
+        UserEntity user = (UserEntity) authentication.getPrincipal();
+        try {
+            userGroupsService.removeUserFromGroup(groupId, user.getUserId());
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("Bye bye", HttpStatus.OK);
+    }
+
 }

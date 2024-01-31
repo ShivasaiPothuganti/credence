@@ -2,8 +2,12 @@ import { FormGeneratorData } from "@/TypeDefinitions/FormGeneratorData"
 import Form from "@/components/ui/form"
 import { backendApiUrls } from "@/constants/backendApiEndpoints"
 import { backend } from "@/services/api/Network/HttpHelper"
+import { AxiosResponse } from "axios"
 
-function RightNavigationPanel() {
+type InputProps={
+    addNewGroup: Function
+}
+function RightNavigationPanel({addNewGroup}:InputProps) {
 
     const addGroupForm:FormGeneratorData[]=[
         {
@@ -24,8 +28,8 @@ function RightNavigationPanel() {
     ]
 
     function onSubmit(data:any){
-        backend.post(backendApiUrls.createSplit,data).then(()=>{
-            
+        backend.post(backendApiUrls.createSplit,data).then((response:AxiosResponse)=>{
+            addNewGroup(response.data);
         })
     }
     

@@ -16,6 +16,6 @@ public interface UserGroupsRepository extends JpaRepository<UserGroupsEntity,Lon
 
     Optional<UserGroupsEntity> findByUserIdAndGroupId(Long userId,Long groupId);
 
-    List<UserGroupsEntity> findByUserId(long userId);
+    List<UserGroupsEntity> findByUserIdOrderByIdDesc(long userId);
 
 }

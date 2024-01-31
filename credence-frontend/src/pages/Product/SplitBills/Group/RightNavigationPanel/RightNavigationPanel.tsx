@@ -11,8 +11,6 @@ function RightNavigationPanel({group, loadTransactions}:InputProps) {
 
   const userId = storageService.getItem("userId");
 
-  console.log(userId+'  '+group.ownerId)
-
   return (
     <div className="w-[95%]">
       {(userId==group.ownerId)?

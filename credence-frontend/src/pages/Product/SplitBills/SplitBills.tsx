@@ -12,16 +12,32 @@ function SplitBills() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [groups, setGroups] = useState<Group[]>([]);
-  const [groupId, setGroupId] = useState();
+  const [groupId, setGroupId] = useState(searchParams.get("groupId"));
   const [selectedGroup, setselectedGroup] = useState({} as Group)
 
   useEffect(()=>{
+    loadGroups();
+  },[])
+
+  useEffect(()=>{
+    loadGroups();
+  },[groupId]);
+
+  function loadGroups(){
     backend.get(backendApiUrls.getGroups).then((response:AxiosResponse)=>{
-      console.log(response.data);
       setGroups(response.data);
     }
     )
-  },[])
+  }
+
+  function addNewGroup(newGroup:Group){
+    const newGroups = [newGroup, ...groups];
+    setGroups(newGroups);
+  }
+
+  useEffect(()=>{
+    setGroupId(searchParams.get("groupId"));
+  },[searchParams])
 
   function navigateToGroup(groupId){
     setGroupId(groupId);
@@ -41,7 +57,7 @@ function SplitBills() {
         <GroupsList groupsList={groups} navigateToGroup={navigateToGroup}/>
       </div>
       <div className="right-navigation-panel flex flex-[0.2] h-[95%] rounded-[2rem] ">
-        <RightNavigationPanel />
+        <RightNavigationPanel addNewGroup={addNewGroup} />
       </div>
     </section>
     )}
