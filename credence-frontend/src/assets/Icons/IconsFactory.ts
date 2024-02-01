@@ -12,6 +12,7 @@ import SearchIcon from './SearchIcon.svg';
 import filterIcon from './filter.svg';
 import CrossIcon from './cross.svg';
 import TickIcon from './tick.svg';
+import RefreshIcon from './RefreshIcon.svg';
 
 
 export const IconFactory= {
@@ -28,5 +29,6 @@ export const IconFactory= {
     SearchIcon,
     filterIcon,
     CrossIcon,
-    TickIcon
+    TickIcon,
+    RefreshIcon
 }
