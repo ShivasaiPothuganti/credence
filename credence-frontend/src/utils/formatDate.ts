@@ -35,3 +35,10 @@ export function compareTwoDates(date1:string|Date,date2:string|Date):number{
 export function getDateOnly(date:string):string{
     return date.split('T')[0];
 }
+
+export function convertDateToMonth(dateString:string){
+    const date = new Date(dateString);
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const formattedDate = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+    return formattedDate;
+}

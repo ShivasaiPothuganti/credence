@@ -17,6 +17,7 @@ type DhoughNutChartProps = {
 function generateDataCountMap(transactions:TTransaction[],fieldName:string){
     const dataMap = new Map<string,number>();
     transactions.forEach((transaction)=>{
+        
         if(dataMap.has(transaction[fieldName])){
             dataMap.set(transaction[fieldName], dataMap.get(transaction[fieldName])+transaction.price);
         }
@@ -88,15 +89,9 @@ function DhoughNutChart({transactions}:DhoughNutChartProps) {
                 <h1 className='font-bold text-[1.5rem] font-primary' > Total Amount </h1>
                 <h1 className='font-bold text-[1.5rem] font-primary' > {convertCurrencyToInr(total)} </h1>
             </div>
-           <SelectField 
-                selectPlaceholder,
-                selectLabel,
-                selectItems,
-                onChange={()=>{}} 
-            />
             <p className='font-semibold text-gray-500' > Transactions Breakdown </p>
         </div>
-        <Doughnut data={formatTransactionsIntoChartData(formattedTransactions,renderChartBasedOn)}/>
+        <Doughnut data={formatTransactionsIntoChartData(formattedTransactions,renderParameter)}/>
     </div>
   )
 }
