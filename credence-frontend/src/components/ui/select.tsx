@@ -3,7 +3,6 @@ import * as SelectPrimitive from "@radix-ui/react-select"
 import { Check, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { useState } from "react";
 
 
 const Select = SelectPrimitive.Root;
@@ -121,8 +120,8 @@ type SelectFieldProps = {
 	onChange:Function,
 }
 
-export function SelectField({selectPlaceholder,selectLabel,selectItems,onChange}:SelectFieldProps){
-  const [selectedValue,setSelectedValue] = useState<string>("");
+export function SelectField({selectPlaceholder,selectLabel,selectItems,onChange,selectedValue,setSelectedValue}:SelectFieldProps){
+  
   return(
   <Select value={selectedValue}  onValueChange={
         (_value)=>{

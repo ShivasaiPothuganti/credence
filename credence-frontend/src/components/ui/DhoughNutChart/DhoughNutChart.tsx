@@ -4,9 +4,8 @@ import { Chart as ChartJS, ArcElement,Tooltip,Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { purpleShades } from './BackgroundColors';
 import { convertCurrencyToInr } from '@/utils/currencyConverter';
-import { SelectField } from '../select';
 import FilterTransactionsPopOver from '@/components/FilterTransactions/FilterTransactionsPopOver';
-import { logger } from '@/helpers/loggers/logger';
+
 
 ChartJS.register(ArcElement,Legend,Tooltip);
 
@@ -27,6 +26,13 @@ function generateDataCountMap(transactions:TTransaction[],fieldName:string){
         }
     });
     return dataMap;
+}
+
+function calculateTotalPrice(transactions:TTransaction[]):number{
+    const totalPrice = transactions.reduce((priceSum,transaction)=>{
+        return priceSum + transaction.price;
+    },0);
+    return totalPrice;
 }
 
 function formatTransactionsIntoChartData(transactions:TTransaction[],formatBasedOn:string){
@@ -86,6 +92,15 @@ function DhoughNutChart({transactions}:DhoughNutChartProps) {
         setTotal(total);
     },[transactions]);
 
+    useEffect(()=>{
+        if(filteredTransactions){
+            setTotal(calculateTotalPrice(filteredTransactions));
+        }
+        else{
+            setTotal(calculateTotalPrice(formattedTransactions));
+        }
+    },[formattedTransactions,filteredTransactions]);
+
   return (
     <div className='h-full w-full' >
         <div className="header w-full flex flex-col gap-5">
@@ -103,7 +118,7 @@ function DhoughNutChart({transactions}:DhoughNutChartProps) {
                     category={false}
                     initialTransactions={formattedTransactions} 
                     setFilteredTransactions={setFilteredTransactions}
-                    onSubmit={(renderParameter)=>{
+                    onSubmit={(renderParameter:string)=>{
                         setRenderRenderParameter(renderParameter);
                     }}
                 />
