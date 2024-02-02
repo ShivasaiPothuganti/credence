@@ -1,6 +1,7 @@
 import { TBill } from "@/TypeDefinitions/Bill"
 import { TTransaction } from "@/TypeDefinitions/Transaction"
 import DhoughNutChart from "@/components/ui/DhoughNutChart/DhoughNutChart";
+import LineChart from "@/components/ui/LineChart/LineChart";
 import { toast } from "@/components/ui/use-toast"
 import { billsService } from "@/services/api/BillsService"
 import { transactionService } from "@/services/api/TransactionsService"
@@ -53,6 +54,9 @@ function DashBoardPage() {
         <div className="stas_section h-full flex-[0.7] ">
 			<div className="doughNutChart h-[32rem] w-[50%] p-5 ">
 				<DhoughNutChart transactions={transactions} />
+			</div>
+			<div>
+				<LineChart transactions={transactions}/>
 			</div>
 		</div>
 		<div className="user_profile_section h-full flex-[0.3] ">

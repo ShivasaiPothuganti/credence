@@ -19,6 +19,7 @@ type DhoughNutChartProps = {
 function generateDataCountMap(transactions:TTransaction[],fieldName:string){
     const dataMap = new Map<string,number>();
     transactions.forEach((transaction)=>{
+        
         if(dataMap.has(transaction[fieldName])){
             dataMap.set(transaction[fieldName], dataMap.get(transaction[fieldName])+transaction.price);
         }
