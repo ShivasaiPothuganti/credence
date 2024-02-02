@@ -5,50 +5,86 @@ import { categoryService } from '@/services/api/CategoryService';
 import { toast } from '../ui/use-toast';
 import { AxiosResponse } from 'axios';
 import { TTransaction } from '@/TypeDefinitions/Transaction';
-import { logger } from '@/helpers/loggers/logger';
 import { compareTwoDates } from '@/utils/formatDate';
 
 
 type FilterTransactionsPopOver = {
     // eslint-disable-next-line @typescript-eslint/ban-types
     setFilteredTransactions:Function,
-    initialTransactions:TTransaction[]
+    initialTransactions:TTransaction[],
+    dateRange?:boolean,
+    categoryOrType?:boolean,
+    priceRange?:boolean,
+    category?:boolean,
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    onSubmit?:Function
 }
 
-function FilterTransactionsPopOver({setFilteredTransactions,initialTransactions}:FilterTransactionsPopOver) {
-    const [filterTransactionFormGenerator,setFilterTransactionFormGenerator] = useState<FormGeneratorData[]>([
-        {
-            type:'number',
-            name:'startingPrice',
-            placeholder:'starting price'
-        },
-        {
-            type:'number',
-            name:'endingPrice',
-            placeholder:'ending price'
-        },
-        {
-            type:'dateRangePicker',
-            name:'dateRange',
-            placeholder:'ending date'
-        },
-        {
-            type:'select',
-            name:'category',
-            placeholder:'category',
-            elementProps:{
-                selectPlaceholder:'Category',
-                selectLabel:'Category',
-                selectItems:[]
+function FilterTransactionsPopOver({setFilteredTransactions,initialTransactions,dateRange=true,categoryOrType=true,priceRange=true,category=true,onSubmit}:FilterTransactionsPopOver) {
+    const [filterTransactionFormGenerator,setFilterTransactionFormGenerator] = useState<FormGeneratorData[]>([]);
+
+      useEffect(()=>{
+            const filterTransactionForm:FormGeneratorData[] = [
+                  
+            ]
+
+            if(priceRange){
+                filterTransactionForm.push({
+                    type:'number',
+                    name:'startingPrice',
+                    placeholder:'starting price'
+                },
+                {
+                    type:'number',
+                    name:'endingPrice',
+                    placeholder:'ending price'
+                },)
             }
-        },
-        {
-            type:'submit',
-            name:'Filter',
-            value:'Filter'
-        },
-        
-      ]);
+            if(dateRange){
+                filterTransactionForm.push({
+                    type:'dateRangePicker',
+                    name:'dateRange',
+                    placeholder:'ending date',                    
+                });
+            }
+            if(category){
+                filterTransactionForm.push(
+                    {
+                        type:'select',
+                        name:'category',
+                        placeholder:'category',
+                        elementProps:{
+                            selectPlaceholder:'Category',
+                            selectLabel:'Category',
+                            selectItems:[]
+                        }
+                    }
+                )
+            }
+
+            if(categoryOrType){
+                filterTransactionForm.push(
+                    {
+                        type:'select',
+                        name:'categoryOrType',
+                        placeholder:'categoryOrType',
+                        elementProps:{
+                            selectPlaceholder:'Category',
+                            selectLabel:'Category',
+                            selectItems:['category','type']
+                        }
+                    }
+                )
+            }
+
+            filterTransactionForm.push({
+                type:'submit',
+                name:'Filter',
+                value:'Filter'
+            } )
+
+            setFilterTransactionFormGenerator(filterTransactionForm);
+      },[]);
 
       function filterTransactionsByPrice(transactions:TTransaction[],startingPrice:number,endingPrice:number):TTransaction[]{
             if(startingPrice&&endingPrice){
@@ -70,7 +106,6 @@ function FilterTransactionsPopOver({setFilteredTransactions,initialTransactions}
 
         if(fromDate&&toDate){
             return transactions.filter((transaction:TTransaction)=>{
-
                 return compareTwoDates(fromDate,transaction.dateOfTransaction) <=0 && compareTwoDates(toDate,transaction.dateOfTransaction)>=0;
             })
         }
@@ -97,8 +132,7 @@ function FilterTransactionsPopOver({setFilteredTransactions,initialTransactions}
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       function handleFilter(filterOptions:any){
-        logger.debug(filterOptions);
-        const {category,dateRange,startingPrice,endingPrice} = filterOptions;
+        const {category,dateRange,startingPrice,endingPrice,categoryOrType} = filterOptions;
         let filteredTransactions = initialTransactions;
         if(category){
             filteredTransactions = filterTransactionsByCategory(filteredTransactions,category);
@@ -110,6 +144,13 @@ function FilterTransactionsPopOver({setFilteredTransactions,initialTransactions}
             filteredTransactions = filterTransactionsByPrice(filteredTransactions,startingPrice,endingPrice);
         }
         setFilteredTransactions(filteredTransactions);
+        if(onSubmit){
+            if(!categoryOrType){
+                onSubmit('category');
+                return;
+            }
+            onSubmit(categoryOrType);
+        }
       }
 
 

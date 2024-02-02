@@ -4,6 +4,10 @@ import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
 import {SelectField} from './select';
 import { Checkbox } from './checkbox';
 import { DatePickerWithRange } from './DateRangePicker';
+import {  useRef, useState } from 'react';
+import { logger } from '@/helpers/loggers/logger';
+import { addDays } from 'date-fns';
+import { DateRange } from 'react-day-picker';
 
 
 type FormGeneratorProp = {
@@ -27,7 +31,13 @@ type BasicFormElementProps = {
 
 function Form({generatorData,onSubmit}:FormGeneratorProp) {
   const formElementsRef:Record<string,HTMLInputElement | null> = {};
-  let formData:Record<string,unknown> = {};
+  const formData = useRef({});
+  const [selectedValue,setSelectedValue] = useState<string>("");
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: addDays(new Date(), -30),
+    to: new Date(),
+  })
+
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function getComponentByType(basicProps:BasicFormElementProps,additionalProps:any,elementReference:any){
@@ -36,20 +46,25 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 
 		case 'dateRangePicker':
 			
-			return <DatePickerWithRange onSelect={(date)=>{formData[name]=date}} />
+			return <DatePickerWithRange date={date} setDate={setDate} onSelect={(date)=>{formData.current[name]=date}} />
 
 		case 'checkbox':
 			return <span className="inline-block">
 				
 				<Checkbox name={name}  />
-				<p>{'hiello'}</p>
 			</span>
 		case 'submit':
 			return <Button {...additionalProps} > {value} </Button>
 		case 'button':
 			return <Button {...additionalProps} > {value} </Button> 
 		case 'select':
-			return <SelectField reference = {elementReference} onChange={(value:string)=>{formData[name]=value}} {...additionalProps} /> 
+			return <SelectField
+			selectedValue={selectedValue}
+			setSelectedValue={setSelectedValue}
+						onChange={(_value:string)=>{
+									formData.current[name]=_value;
+								}} 
+					{...additionalProps} /> 
 		default:
 			return <Input ref={elementReference} type={type} value={value} name={name} placeholder={placeholder} {...additionalProps} />
 	}
@@ -60,11 +75,12 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 		event.preventDefault();
 		Object.keys(formElementsRef).forEach((key:string)=>{
 			if(formElementsRef[key]?.type!='submit'){
-				formData[key] = formElementsRef[key]?.value;
+				formData.current[key] = formElementsRef[key]?.value;
 			}
-		})
-		onSubmit(formData);
-		formData = {}
+		});
+		logger.warn(formData);
+		onSubmit(formData.current);
+		formData.current = {}
 		Object.keys(formElementsRef).forEach((key:string)=>{
 			if(formElementsRef[key]?.type!='submit'){
 				const element = formElementsRef[key];
@@ -73,6 +89,8 @@ function Form({generatorData,onSubmit}:FormGeneratorProp) {
 				}
 			}
 		});
+		setSelectedValue("");
+		setDate(undefined);
 		event.target.reset();
 	}
 
