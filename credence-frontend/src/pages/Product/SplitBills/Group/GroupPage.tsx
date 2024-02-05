@@ -32,10 +32,26 @@ export default function GroupPage({ group }: GroupInput) {
   );
   const userId = storageService.getItem("userId");
   const [toggle, setToggle] = useState(false);
+  const [remainingAmount, setRemainingAmount] = useState(0);
 
   useEffect(() => {
     loadTransactions();
   }, []);
+
+  useEffect(()=>{
+    refreshRemainingAmount();
+  },[indTransactions, transactionsList])
+
+  function refreshRemainingAmount(){
+    if(toggle){
+      const amountHasToPay = indTransactions.reduce((remainingAmount, transaction) => remainingAmount + transaction.price, 0)
+      setRemainingAmount(group.totalPrice - amountHasToPay)
+    }
+    else{
+      const amountHasToPay = transactionsList.reduce((remainingAmount, transaction) => remainingAmount + transaction.paid,0);
+      setRemainingAmount(group.totalPrice - amountHasToPay)
+    }
+  }
 
   function loadTransactions() {
     backend
@@ -44,6 +60,7 @@ export default function GroupPage({ group }: GroupInput) {
         setTransactionsList(response.data);
         setFilteredList(response.data);
       });
+      refreshRemainingAmount();
   }
 
   function loadIndividualTransactions() {
@@ -53,6 +70,7 @@ export default function GroupPage({ group }: GroupInput) {
         console.log(response.data);
         setIndTransactions(response.data);
         setFilteredIndTransactions(response.data);
+        refreshRemainingAmount();
       });
   }
 
@@ -75,6 +93,7 @@ export default function GroupPage({ group }: GroupInput) {
             return transaction.transactionId != id
           })
           setFilteredIndTransactions(newIndFilteredList);
+          refreshRemainingAmount();
         }
         toast({
           title: "Transaction Deleted",
@@ -161,10 +180,12 @@ export default function GroupPage({ group }: GroupInput) {
           </div>
           <div className="flex justify-between pl-7 pr-7 font-secondary font-semibold text-lg">
             <div>
-              Total Amount:
+              Total Amount: 
+              ₹ {group.totalPrice}
             </div>
             <div>
-            ₹ {group.totalPrice}
+              Remaining Amount:
+              ₹ {remainingAmount}
             </div>
           </div>
           <div className="rooms-list h-[79%] scroll-smooth overflow-x-hidden overflow-y-scroll">
