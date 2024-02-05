@@ -67,11 +67,14 @@ export default function GroupPage({ group }: GroupInput) {
       .deleteTransaction(id)
       .then((response) => {
         if (response && response.status === 200) {
-          setIndTransactions((previousState) => {
-            return previousState.filter(
-              (transaction) => transaction.transactionId !== id
-            );
-          });
+          const newIndTransactions = indTransactions.filter((transaction)=>{
+            return transaction.transactionId != id
+          })
+          setIndTransactions(newIndTransactions);
+          const newIndFilteredList = filteredIndTransactions.filter((transaction)=>{
+            return transaction.transactionId != id
+          })
+          setFilteredIndTransactions(newIndFilteredList);
         }
         toast({
           title: "Transaction Deleted",
