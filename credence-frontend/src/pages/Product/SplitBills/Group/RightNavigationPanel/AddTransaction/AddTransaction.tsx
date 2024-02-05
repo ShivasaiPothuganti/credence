@@ -1,6 +1,7 @@
 import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
 import { Group } from '@/TypeDefinitions/Group';
 import Form from '@/components/ui/form';
+import { toast } from '@/components/ui/use-toast';
 import { backendApiUrls } from '@/constants/backendApiEndpoints';
 import { backend } from '@/services/api/Network/HttpHelper';
 import React, { useState } from 'react'
@@ -50,6 +51,10 @@ export default function AddTransaction({group, loadTransactions}:InputProps) {
   function addRoomTransaction(data){
     backend.post(backendApiUrls.addGroupTransaction+group.groupId,data).then(()=>{
         loadTransactions();
+        toast({
+            title: "Transaction added",
+            variant: "default"
+        })
     })
   }
 

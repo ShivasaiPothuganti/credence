@@ -34,8 +34,8 @@ export default function GroupTransactionCard({ transaction }: InputProps) {
           </div>
           <CardDescription>
             {" "}
-            <p className="mt-2"> Paid: {transaction.paid} </p>{" "}
-            <p className="mt-2">Has To Pay: {transaction.hasToPay} </p>{" "}
+            <p className="mt-2"> Paid: ₹ {transaction.paid} </p>{" "}
+            <p className="mt-2">Has To Pay: ₹ {transaction.hasToPay} </p>{" "}
           </CardDescription>
         </CardHeader>
       </div>

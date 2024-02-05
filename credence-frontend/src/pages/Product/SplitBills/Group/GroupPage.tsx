@@ -122,6 +122,10 @@ export default function GroupPage({ group }: GroupInput) {
     backend
       .delete(backendApiUrls.removeUserFromGroup + group.groupId)
       .then((response) => {
+        toast({
+          title: "Left the Group",
+          variant: "default"
+        })
         navigate("/product/splitbills");
       });
   }
@@ -149,8 +153,16 @@ export default function GroupPage({ group }: GroupInput) {
                 handleToggle();
               }}
             >
-              {toggle ? "Show Stats" : "Show All Transactions"}
+              {toggle ? "Show Stats" : "Show Transactions"}
             </Button>
+          </div>
+          <div className="flex justify-between pl-7 pr-7 font-secondary font-semibold text-lg">
+            <div>
+              Total Amount:
+            </div>
+            <div>
+            ₹ {group.totalPrice}
+            </div>
           </div>
           <div className="rooms-list h-[79%] scroll-smooth overflow-x-hidden overflow-y-scroll">
             {toggle ? (

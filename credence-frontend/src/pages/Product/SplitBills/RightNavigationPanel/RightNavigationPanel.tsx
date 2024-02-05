@@ -1,5 +1,6 @@
 import { FormGeneratorData } from "@/TypeDefinitions/FormGeneratorData"
 import Form from "@/components/ui/form"
+import { toast } from "@/components/ui/use-toast"
 import { backendApiUrls } from "@/constants/backendApiEndpoints"
 import { backend } from "@/services/api/Network/HttpHelper"
 import { AxiosResponse } from "axios"
@@ -30,6 +31,10 @@ function RightNavigationPanel({addNewGroup}:InputProps) {
     function onSubmit(data:any){
         backend.post(backendApiUrls.createSplit,data).then((response:AxiosResponse)=>{
             addNewGroup(response.data);
+            toast({
+                title: "Bill created",
+                variant: "default"
+            })
         })
     }
     

@@ -1,5 +1,6 @@
 import { FormGeneratorData } from '@/TypeDefinitions/FormGeneratorData';
 import Form from '@/components/ui/form';
+import { toast } from '@/components/ui/use-toast';
 import { backendApiUrls } from '@/constants/backendApiEndpoints';
 import { backend } from '@/services/api/Network/HttpHelper';
 import { AxiosResponse } from 'axios';
@@ -41,6 +42,10 @@ export default function AddMember({groupId, loadTransactions}:InputProps) {
     data.groupId=groupId;
     backend.post(backendApiUrls.addUserToGroup,data).then((response:AxiosResponse)=>{
         loadTransactions();
+        toast({
+          title: `Added user`,
+          variant: "default"
+        })
     })
   }
   return (
