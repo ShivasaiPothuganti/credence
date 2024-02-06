@@ -1,28 +1,40 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useRef } from "react";
 
-
 type InputProps = {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    getSearchQuery:Function
-}
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  getSearchQuery: Function;
+};
 
-export default function SearchBar({getSearchQuery}:InputProps) {
-
+export default function SearchBar({ getSearchQuery }: InputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+
+  function handleKeyPress(event){
+    console.log(event);    
+    if(event.key === 'Enter'){
+      getSearchQuery(inputRef.current.value);
+    }
+  }
 
   return (
     <div className="flex items-center space-x-2">
-      <Input ref={inputRef} type="text" className="px-3 py-2 w-80" placeholder="Search..." />
-      <Button 
-        onClick={()=>{
-          if(inputRef.current){
+      <Input
+        ref={inputRef}
+        type="text"
+        className="px-3 py-2 w-80"
+        placeholder="Search..."
+      />
+      <Button
+        onClick={() => {
+          if (inputRef.current) {
             getSearchQuery(inputRef.current.value);
-            inputRef.current.value = ""
-          }         
+            // inputRef.current.value = ""
+          }
         }}
-      className="px-3 py-2">
+        onKeyDown={handleKeyPress}
+        className="px-3 py-2"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -39,5 +51,5 @@ export default function SearchBar({getSearchQuery}:InputProps) {
         </svg>
       </Button>
     </div>
-  )
+  );
 }

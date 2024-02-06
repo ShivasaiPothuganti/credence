@@ -1,5 +1,6 @@
 package com.expenseTracker.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,7 +22,8 @@ public class GroupEntity {
     @Column(name="owner_id")
     private Long ownerId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id",referencedColumnName = "id",insertable = false,updatable = false)
     private UserEntity user;
 

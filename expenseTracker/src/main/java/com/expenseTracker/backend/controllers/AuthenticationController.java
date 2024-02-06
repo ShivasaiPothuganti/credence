@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,6 +42,8 @@ public class AuthenticationController {
        String token = jwtService.generateToken(user);
         JwtTokenResponse jwt = new JwtTokenResponse();
         jwt.setToken(token);
+        jwt.setUserId(userEntity.getUserId());
+        jwt.setUsername(userEntity.getUsername());
        return new ResponseEntity<>(jwt,HttpStatus.OK);
     }
 
@@ -50,7 +53,11 @@ public class AuthenticationController {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userService.registerUser(user);
             String token = jwtService.generateToken(user);
-            return new ResponseEntity<String>(token,HttpStatus.OK);
+            JwtTokenResponse jwt = new JwtTokenResponse();
+            jwt.setToken(token);
+            jwt.setUserId(user.getUserId());
+            jwt.setUsername(jwt.getUsername());
+            return new ResponseEntity<JwtTokenResponse>(jwt,HttpStatus.OK);
         }
         catch (UserNameExistsException exc){
             return new ResponseEntity<String>("User with this gmail already exists",HttpStatus.ALREADY_REPORTED);

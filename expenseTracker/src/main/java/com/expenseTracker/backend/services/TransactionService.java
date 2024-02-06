@@ -4,6 +4,7 @@ import com.expenseTracker.backend.customExceptions.CategoryNotFoundException;
 import com.expenseTracker.backend.entities.TransactionEntity;
 import com.expenseTracker.backend.entities.UserRoomsEntity;
 
+import com.expenseTracker.backend.models.GroupIndTransactionModel;
 import com.expenseTracker.backend.models.GroupTransactionModel;
 import com.expenseTracker.backend.models.RoomTransactionModel;
 
@@ -151,6 +152,11 @@ public class TransactionService {
 
     public List<GroupTransactionModel> getTransactionsByGroupId(Long groupId){
         List<GroupTransactionModel> transactions = groupsRepository.getTransactionsByGroupId(groupId);
+        return transactions;
+    }
+
+    public List<GroupIndTransactionModel> getGroupIndTransactions(Long groupId){
+        List<GroupIndTransactionModel> transactions = transactionRepository.findByGroupId(groupId);
         return transactions;
     }
 
