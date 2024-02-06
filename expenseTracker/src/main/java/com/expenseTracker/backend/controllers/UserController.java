@@ -5,6 +5,7 @@ import com.expenseTracker.backend.entities.BudgetEntity;
 import com.expenseTracker.backend.entities.RoomEntity;
 import com.expenseTracker.backend.entities.TransactionEntity;
 import com.expenseTracker.backend.entities.UserEntity;
+import com.expenseTracker.backend.models.UserDetails;
 import com.expenseTracker.backend.repositories.UserRepository;
 import com.expenseTracker.backend.services.BudgetService;
 import com.expenseTracker.backend.services.TransactionService;
@@ -37,6 +38,19 @@ public class UserController {
         this.budgetService = budgetService;
 		this.userRoomsService = userRoomsService;
     }
+
+	@GetMapping("/userDetails")
+	public ResponseEntity<?> getUserDetails(Authentication authentication){
+		UserEntity userEntity = (UserEntity)authentication.getPrincipal();
+		try{
+			 UserDetails userDetails =  userService.getUserDetails(userEntity.getUserEmail());
+			return new ResponseEntity<>(userDetails,HttpStatus.OK);
+		}
+		catch (Exception e){
+			ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,e.getMessage());
+			return new ResponseEntity<>(error,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
     @GetMapping("budgets/{userId}")
 	public ResponseEntity<?> getBudgetsByUserId(@PathVariable Long userId) {

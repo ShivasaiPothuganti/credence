@@ -32,11 +32,7 @@ function AuthenticationPage({setAuth}:AuthenticationPageProps) {
 		}
 	})
 	const loginFormGeneratorData:FormGeneratorData[] = [
-		{
-			type:'text',
-			name:'userName',
-			placeholder:'Username'
-		},
+
 		{
 			type:'gmail',
 			name:'userEmail',
@@ -66,10 +62,20 @@ function AuthenticationPage({setAuth}:AuthenticationPageProps) {
 			name:'userEmail',
 			placeholder:'Gmail'
 		},
+		
 		{
 			type:'password',
 			name:'password',
 			placeholder:'password'
+		},
+		{
+			type:'select',
+			name:'gender',
+			elementProps:{
+				selectPlaceholder:'Gender',
+				selectLabel:'Gender',
+				selectItems:['Male','Female','Others']
+			}
 		},
 		{
 			type:'submit',

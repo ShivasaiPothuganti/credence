@@ -13,6 +13,7 @@ import { Line } from "react-chartjs-2";
 import { TTransaction } from "@/TypeDefinitions/Transaction";
 import { convertDateToMonth } from "@/utils/formatDate";
 import FilterTransactionsPopOver from "@/components/FilterTransactions/FilterTransactionsPopOver";
+import RefreshButton from "../RefreshButton";
 // import faker from 'faker';
 
 ChartJS.register(
@@ -109,7 +110,7 @@ export default function LineChart({ transactions }: InputProps) {
 
   return (
     <div className="h-full w-full">
-      <div className="flex flex-row-reverse">
+      <div className="flex gap-5 w-full justify-end">
         <FilterTransactionsPopOver
           initialTransactions={transactions}
           setFilteredTransactions={setFilteredTransactions}
@@ -118,6 +119,10 @@ export default function LineChart({ transactions }: InputProps) {
           categoryOrType={false}
           category={false}
         />
+         <RefreshButton onClick={()=>{
+                        setFilteredTransactions(transactions);
+                     
+                    }} />
       </div>
       <Line
         options={options}

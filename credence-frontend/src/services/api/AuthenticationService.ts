@@ -15,8 +15,8 @@ class AuthenticationService{
     }
 
     register(userCredentials:UserCredentials):Promise<AxiosResponse>{
-        const {userName,password,userEmail} = userCredentials;
-        const requestBody = {userName,password,userEmail};
+        const {userName,password,userEmail,gender} = userCredentials;
+        const requestBody = {userName,password,userEmail,gender};
         logger.debug(requestBody);
         return backend.post('/authenticate/register',requestBody);
     }

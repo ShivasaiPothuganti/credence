@@ -21,7 +21,8 @@ const getGroupTransactions = "/transactions/groups/"
 const addGroupTransaction = "/transactions/groups/"
 const addUserToGroup = "/groups/user"
 const removeUserFromGroup = "/groups/"
-const getGroupIndTransactions = "/transactions/groups/"
+const getGroupIndTransactions = "/transactions/groups/";
+const getUserDetails = '/users/userDetails';
 
 export const backendApiUrls = {
     authorization,
@@ -47,5 +48,6 @@ export const backendApiUrls = {
     addGroupTransaction,
     addUserToGroup,
     removeUserFromGroup,
-    getGroupIndTransactions
+    getGroupIndTransactions,
+    getUserDetails
 }
