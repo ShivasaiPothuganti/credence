@@ -79,7 +79,7 @@ function TransactionTable({transactions}:TransactionTable) {
     ]
 
   return (
-    <div className='w-full pl-10 pr-10' >
+    <div className='w-full' >
        < DataTable columns={columns} data={formattedTransactions} />
     </div>
   )

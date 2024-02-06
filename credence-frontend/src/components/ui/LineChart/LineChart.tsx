@@ -14,6 +14,7 @@ import { TTransaction } from "@/TypeDefinitions/Transaction";
 import { convertDateToMonth } from "@/utils/formatDate";
 import FilterTransactionsPopOver from "@/components/FilterTransactions/FilterTransactionsPopOver";
 import RefreshButton from "../RefreshButton";
+import { convertCurrencyToInr } from "@/utils/currencyConverter";
 // import faker from 'faker';
 
 ChartJS.register(
@@ -104,13 +105,21 @@ export default function LineChart({ transactions }: InputProps) {
   const [filteredTransactions, setFilteredTransactions] =
     useState<TTransaction[]>(transactions);
 
+    const [total,setTotal] = useState(0);
+
   useEffect(() => {
     setFilteredTransactions(transactions);
   }, [transactions]);
 
   return (
     <div className="h-full w-full">
-      <div className="flex gap-5 w-full justify-end">
+      <div className="total_amount">
+          <div className="amount_holder flex justify-between">
+                <h1 className='font-bold text-[1.5rem] font-primary' > Total Amount </h1>
+                <h1 className='font-bold text-[1.5rem] font-primary' > {convertCurrencyToInr(total)} </h1>
+            </div>
+      </div>
+      <div className="flex gap-5 w-full justify-end mt-5 ">
         <FilterTransactionsPopOver
           initialTransactions={transactions}
           setFilteredTransactions={setFilteredTransactions}
@@ -124,10 +133,13 @@ export default function LineChart({ transactions }: InputProps) {
                      
                     }} />
       </div>
-      <Line
-        options={options}
-        data={formatTransactions(filteredTransactions, "dateOfTransaction")}
-      />
+      <div className="linechart_holder w-full flex justify-center ">
+        <Line
+        style={{height:'100%'}}
+          options={options}
+          data={formatTransactions(filteredTransactions, "dateOfTransaction")}
+        />
+      </div>
     </div>
   );
 }

@@ -133,14 +133,16 @@ function DhoughNutChart({transactions}:DhoughNutChartProps) {
             </div>
         </div>
         
+        <div className="doughtnutchat_holder mt-5 flex w-full justify-center items-center">
         {
             !filteredTransactions ?
-            <Doughnut data={formatTransactionsIntoChartData(formattedTransactions,renderParameter)}/>
+            <Doughnut style={{width:'15rem',height:'15rem',display:'flex',justifyContent:'center',alignItems:'center'}} data={formatTransactionsIntoChartData(formattedTransactions,renderParameter)}/>
             :
-            <Doughnut data={formatTransactionsIntoChartData(filteredTransactions,renderParameter)}/>
+            <Doughnut style={{width:'1rem'}} data={formatTransactionsIntoChartData(filteredTransactions,renderParameter)}/>
         }
 
         
+        </div>
         
     </div>
   )

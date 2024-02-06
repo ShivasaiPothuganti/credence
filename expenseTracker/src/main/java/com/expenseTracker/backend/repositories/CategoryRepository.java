@@ -24,6 +24,7 @@ public interface CategoryRepository extends JpaRepository<CategoriesEntity,Long>
     void addCategory( @Param("userId") Long userId);
 
     @Modifying
+    @Transactional
     @Query(
             value = "UPDATE categories SET categories = :newCategories where userid=:userId ",
             nativeQuery = true

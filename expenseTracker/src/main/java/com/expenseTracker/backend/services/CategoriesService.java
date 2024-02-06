@@ -29,21 +29,15 @@ public class CategoriesService {
 
 
 	@Transactional
-	public CategoriesEntity deleteCategories(CategoriesEntity categories){
+	public void deleteCategories(CategoriesEntity categories){
 		this.updateCategories(categories);
-		return this.findCategoriesByUserId(categories.getUserId());
 	}
 
 	// update a category list
 	@Transactional
 	public void updateCategories(CategoriesEntity categories) {
-		try{
-			String[] categoriesArray = categories.getCategories().toArray(new String[categories.getCategories().size()]);
-			categoryRepository.updateCategories(categories.getUserId(),categoriesArray);
-		}
-		catch (Exception e){
-			System.out.println(e.getMessage());
-		}
+		String[] categoriesArray = categories.getCategories().toArray(new String[categories.getCategories().size()]);
+		categoryRepository.updateCategories(categories.getUserId(),categoriesArray);
 	}
 
 	public CategoriesEntity findCategoriesByUserId(Long userId) {

@@ -56,10 +56,12 @@ public class CategoryController {
 	}
 
 	@DeleteMapping("/")
-	public ResponseEntity<?> deleteCategory(@RequestBody CategoriesEntity categories){
+	public ResponseEntity<?> deleteCategory( Authentication authentication, @RequestBody CategoriesEntity categories){
+		UserEntity user = (UserEntity)authentication.getPrincipal();
 		try{
-			CategoriesEntity updatedCategories =  categoriesService.deleteCategories(categories);
-			return new ResponseEntity<>(updatedCategories.getCategories(),HttpStatus.OK);
+			categories.setUserId(user.getUserId());
+			categoriesService.deleteCategories(categories);
+			return new ResponseEntity<>("deleted",HttpStatus.OK);
 		}
 		catch (Exception exe){
 			ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,exe.getMessage());

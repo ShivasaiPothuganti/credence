@@ -11,7 +11,7 @@ function TopPriorityBillsBanner({
   topPriorityBills,
 }: TopPriorityBillCardProps) {
   return (
-    <div className="w-full p-10 h-[10rem] overflow-y-hidden flex gap-20 rounded-md">
+    <div className="w-[95%] h-[10rem] overflow-x-scroll gap-3 flex rounded-md">
       {topPriorityBills.map((bill) => {
         return <TopPriorityBillCard bill={bill} />;
       })}
