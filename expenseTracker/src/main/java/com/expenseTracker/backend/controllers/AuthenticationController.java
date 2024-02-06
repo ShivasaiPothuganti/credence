@@ -33,13 +33,14 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody UserEntity user){
-       authenticationManager.authenticate(
+      Authentication authentication =  authenticationManager.authenticate(
                new UsernamePasswordAuthenticationToken(
                        user.getUserEmail(),
                        user.getPassword()
                )
        );
        String token = jwtService.generateToken(user);
+       UserEntity userEntity = (UserEntity)authentication.getPrincipal();
         JwtTokenResponse jwt = new JwtTokenResponse();
         jwt.setToken(token);
         jwt.setUserId(userEntity.getUserId());
