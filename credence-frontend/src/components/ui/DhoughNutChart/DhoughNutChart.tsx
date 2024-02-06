@@ -5,6 +5,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { purpleShades } from './BackgroundColors';
 import { convertCurrencyToInr } from '@/utils/currencyConverter';
 import FilterTransactionsPopOver from '@/components/FilterTransactions/FilterTransactionsPopOver';
+import RefreshButton from '../RefreshButton';
 
 
 ChartJS.register(ArcElement,Legend,Tooltip);
@@ -112,17 +113,23 @@ function DhoughNutChart({transactions}:DhoughNutChartProps) {
          
             <div className="dhoughnut_header flex w-full justify-between">
                 <p className='font-semibold text-gray-500' > Transactions Breakdown </p>
-                <FilterTransactionsPopOver 
-                    dateRange
-                    categoryOrType
-                    priceRange={false}
-                    category={false}
-                    initialTransactions={formattedTransactions} 
-                    setFilteredTransactions={setFilteredTransactions}
-                    onSubmit={(renderParameter:string)=>{
-                        setRenderRenderParameter(renderParameter);
-                    }}
-                />
+                <div className="filterOptions flex gap-3">
+                    <FilterTransactionsPopOver 
+                        dateRange
+                        categoryOrType
+                        priceRange={false}
+                        category={false}
+                        initialTransactions={formattedTransactions} 
+                        setFilteredTransactions={setFilteredTransactions}
+                        onSubmit={(renderParameter:string)=>{
+                            setRenderRenderParameter(renderParameter);
+                        }}
+                    />
+                    <RefreshButton onClick={()=>{
+                        setFilteredTransactions(null);
+                        setRenderRenderParameter('category');
+                    }} />
+                </div>
             </div>
         </div>
         
