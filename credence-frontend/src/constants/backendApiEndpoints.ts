@@ -8,7 +8,14 @@ const getRoomsOfUser = '/users/rooms'
 const addRoom = '/rooms/';
 const getCategories = '/category/';
 const updateCategories = "/category/";
-const deleteCategories = "/category/"
+const deleteCategories = "/category/";
+const getGroups = "/groups/";
+const createSplit = "/groups/"
+const getGroupTransactions = "/transactions/groups/"
+const addGroupTransaction = "/transactions/groups/"
+const addUserToGroup = "/groups/user"
+const removeUserFromGroup = "/groups/"
+const getGroupIndTransactions = "/transactions/groups/"
 
 export const backendApiUrls = {
     authorization,
@@ -21,5 +28,12 @@ export const backendApiUrls = {
     addRoom,
     deleteCategories,
     updateCategories,
-    getCategories
+    getCategories,
+    getGroups,
+    createSplit,
+    getGroupTransactions,
+    addGroupTransaction,
+    addUserToGroup,
+    removeUserFromGroup,
+    getGroupIndTransactions
 }

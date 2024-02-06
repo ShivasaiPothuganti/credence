@@ -94,7 +94,10 @@ function AuthenticationPage({setAuth}:AuthenticationPageProps) {
 		try{
 			const response =  await authenticationService.authenticate(mode,userAuthenticationCredentials);
 			if(response&&response.data){
+				console.log(response.data)
 				authenticationService.setToken(response.data.token);
+				authenticationService.setUserId(response.data.userId);
+				authenticationService.setUsername(response.data.username);
 				setAuth(true);
 				navigate('/product/transactions');
 			}

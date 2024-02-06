@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 public interface GroupTransactionModel {
 
+//    @Value("#{target.transactionId}")
+//    Long getTransactionId();
+
     @Value("#{target.username}")
     String getUserName();
 

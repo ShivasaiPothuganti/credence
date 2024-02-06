@@ -1,5 +1,6 @@
 package com.expenseTracker.backend.repositories;
 
+import com.expenseTracker.backend.entities.GroupEntity;
 import com.expenseTracker.backend.entities.UserGroupsEntity;
 import com.expenseTracker.backend.models.GroupTransactionModel;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,7 @@ import java.util.Optional;
 public interface UserGroupsRepository extends JpaRepository<UserGroupsEntity,Long> {
 
     Optional<UserGroupsEntity> findByUserIdAndGroupId(Long userId,Long groupId);
+
+    List<UserGroupsEntity> findByUserIdOrderByIdDesc(long userId);
 
 }

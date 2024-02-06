@@ -34,7 +34,15 @@ class AuthenticationService{
 
     setToken(token:string):void{
         storageService.setItem('authenticationToken',token)
-    }   
+    }
+    
+    setUserId(userId:string):void{
+        storageService.setItem('userId',userId)
+    }
+
+    setUsername(username:string):void{
+        storageService.setItem('username',username);
+    }
 
     getToken():string|null{
         return storageService.getItem('authenticationToken');
