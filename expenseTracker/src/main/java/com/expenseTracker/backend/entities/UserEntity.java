@@ -26,6 +26,9 @@ public class UserEntity implements UserDetails {
     @Column(name="user_email",unique = true)
     private String userEmail;
 
+    @Column(name="gender",nullable = false)
+    private String gender;
+
     @Column(name="username",unique = true,nullable = false)
     private String userName;
 
@@ -42,6 +45,15 @@ public class UserEntity implements UserDetails {
 
     public String getUserName() {
         return userName;
+    }
+
+
+    public void setGender(String gender){
+        this.gender = gender;
+    }
+
+    public String getGender(){
+        return this.gender;
     }
 
     public void setUserName(String userName) {

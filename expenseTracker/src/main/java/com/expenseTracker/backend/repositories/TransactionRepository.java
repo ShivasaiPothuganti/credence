@@ -2,6 +2,7 @@ package com.expenseTracker.backend.repositories;
 
 import com.expenseTracker.backend.entities.TransactionEntity;
 
+import com.expenseTracker.backend.models.GroupIndTransactionModel;
 import com.expenseTracker.backend.models.RoomTransactionModel;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,6 +32,22 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity,L
             nativeQuery = true
     )
     List<RoomTransactionModel> findByRoomId(Long roomId);
+
+    @Query(
+
+            value = "SELECT \n" +
+                    "\tt.id as transactionId,\n" +
+                    "\tt.date_of_transaction,\n" +
+                    "\tt.category,\n" +
+                    "\tt.created_on,\n" +
+                    "\tt.description,\n" +
+                    "\tt.price,\n" +
+                    "\tt.title,\n" +
+                    "\tu.username\n" +
+                    "FROM transactions t,users u WHERE t.group_id=:groupId AND t.userid=u.id ORDER BY t.id DESC;",
+            nativeQuery = true
+    )
+    List<GroupIndTransactionModel> findByGroupId(@Param("groupId") Long groupId);
 
     @Query(
             value="SELECT \n" +

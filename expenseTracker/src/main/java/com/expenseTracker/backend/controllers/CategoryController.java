@@ -1,6 +1,7 @@
 package com.expenseTracker.backend.controllers;
 
 import com.expenseTracker.backend.entities.UserEntity;
+import com.expenseTracker.backend.models.SuccessResponse;
 import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -33,8 +34,7 @@ public class CategoryController {
 		try {
 			categories.setUserId(((UserEntity) authentication.getPrincipal()).getUserId());
 			categoriesService.updateCategories(categories);
-			CategoriesEntity saveCategories = categoriesService.findCategoriesByUserId(user.getUserId());
-			return new ResponseEntity<>(saveCategories, HttpStatus.OK);
+			return new ResponseEntity<>("updated", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "Unable to update categories"),

@@ -5,7 +5,7 @@ import { AxiosResponse } from "axios";
 class CategoryService{
 
     addCategory(categories:string[]):Promise<AxiosResponse<unknown,unknown>>{
-       return backend.put(backendApiUrls.updateCategories,categories);
+       return backend.put(backendApiUrls.updateCategories,{categories:categories});
     }
 
     getCategories():Promise<AxiosResponse<unknown,unknown>>{
@@ -13,7 +13,7 @@ class CategoryService{
     }
 
     deleteCategory(categories:string[]):Promise<AxiosResponse<unknown,unknown>>{
-        return backend.delete(backendApiUrls.deleteCategories,categories);
+        return backend.delete(backendApiUrls.deleteCategories,{categories:categories});
     }
 
 }

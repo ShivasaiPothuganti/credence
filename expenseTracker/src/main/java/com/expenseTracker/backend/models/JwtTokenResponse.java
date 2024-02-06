@@ -3,14 +3,8 @@ package com.expenseTracker.backend.models;
 public class JwtTokenResponse {
 
     private String token;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    private String username;
+    private Long userId;
 
     public Long getUserId() {
         return userId;
@@ -20,9 +14,14 @@ public class JwtTokenResponse {
         this.userId = userId;
     }
 
-    private String username;
-    private Long userId;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getToken(){
         return this.token;

@@ -3,6 +3,7 @@ package com.expenseTracker.backend.services;
 import com.expenseTracker.backend.entities.GroupEntity;
 import com.expenseTracker.backend.entities.UserGroupsEntity;
 import com.expenseTracker.backend.repositories.UserGroupsRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class UserGroupsService {
     }
 
     public List<GroupEntity> getUserGroups(Long userId) {
-        List<UserGroupsEntity> userGroups = userGroupsRepository.findByUserId(userId);
+        List<UserGroupsEntity> userGroups = userGroupsRepository.findByUserIdOrderByIdDesc(userId);
         List<GroupEntity> groups = new ArrayList<>();
         List<GroupEntity> adminGroups = groupsService.getAdminGroups(userId);
         for(GroupEntity adminGroup : adminGroups) {
@@ -54,5 +55,14 @@ public class UserGroupsService {
             groups.add(userGroupsEntity.getGroup());
         }
         return  groups;
+    }
+
+    public void removeUserFromGroup(long groupId, long userId) throws Exception {
+        Optional<UserGroupsEntity> userGroups = userGroupsRepository.findByUserIdAndGroupId(userId, groupId);
+        if(userGroups.isPresent()){
+            userGroupsRepository.delete(userGroups.get());
+        } else{
+                throw new Exception("User with id "+userId+" does not belong to groupId "+groupId);
+        }
     }
 }

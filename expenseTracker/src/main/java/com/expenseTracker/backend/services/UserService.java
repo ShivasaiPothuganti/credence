@@ -3,6 +3,7 @@ package com.expenseTracker.backend.services;
 import com.expenseTracker.backend.customExceptions.UserNameExistsException;
 import com.expenseTracker.backend.customExceptions.UserNotFoundException;
 import com.expenseTracker.backend.entities.UserEntity;
+import com.expenseTracker.backend.models.UserDetails;
 import com.expenseTracker.backend.repositories.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -33,6 +34,25 @@ public class UserService {
         UserEntity saved_user = userRepository.save(user);
         categoriesService.addCategory(user.getUserId());
         return saved_user;
+    }
+
+    public UserDetails getUserDetails(String userEmail) throws Exception {
+        Optional<UserEntity> result = userRepository.findByUserEmail(userEmail);
+        UserDetails userDetails = null;
+        if(result.isPresent()){
+
+                UserEntity userEntity = result.get();
+                userDetails = new UserDetails();
+                userDetails.setUserName(userEntity.getUserName());
+                userDetails.setGender(userEntity.getGender());
+                userDetails.setUserId(userEntity.getUserId());
+                userDetails.setUserEmail(userEntity.getUserEmail());
+                return userDetails;
+        }
+        else{
+            throw new Exception("userNot found");
+        }
+
     }
 
     // login the user

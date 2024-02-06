@@ -15,8 +15,8 @@ class AuthenticationService{
     }
 
     register(userCredentials:UserCredentials):Promise<AxiosResponse>{
-        const {userName,password,userEmail} = userCredentials;
-        const requestBody = {userName,password,userEmail};
+        const {userName,password,userEmail,gender} = userCredentials;
+        const requestBody = {userName,password,userEmail,gender};
         logger.debug(requestBody);
         return backend.post('/authenticate/register',requestBody);
     }
@@ -34,7 +34,15 @@ class AuthenticationService{
 
     setToken(token:string):void{
         storageService.setItem('authenticationToken',token)
-    }   
+    }
+    
+    setUserId(userId:string):void{
+        storageService.setItem('userId',userId)
+    }
+
+    setUsername(username:string):void{
+        storageService.setItem('username',username);
+    }
 
     getToken():string|null{
         return storageService.getItem('authenticationToken');
