@@ -51,7 +51,7 @@ export const options = {
     },
     y: {
       grid: {
-         display: false
+        //  display: false
       },
     },
   },
@@ -63,7 +63,7 @@ function getMonthlyTransactions(
 ) {
   const transactionsMap = new Map<string, number>();
   transactions.map((transaction) => {
-    const keyValue = convertDateToMonth(transaction[fieldName]);
+    const keyValue = convertDateToMonth(transaction[fieldName]);    
     if (transactionsMap.has(keyValue)) {
       transactionsMap.set(
         keyValue,
@@ -94,7 +94,6 @@ function formatTransactions(transactions: TTransaction[], fieldName: string) {
     ],
   };
   const transactionsMap = getMonthlyTransactions(transactions, fieldName);
-
   formattedTransactions.labels = Array.from(transactionsMap.keys());
   formattedTransactions.datasets[0].data = Array.from(transactionsMap.values());
 
@@ -134,7 +133,7 @@ export default function LineChart({ transactions }: InputProps) {
       </div>
       <div className="linechart_holder h-[70%] w-full flex justify-center ">
         <Line
-          style={{height:'22rem',width:'33rem'}}
+          style={{height:'20rem',width:'33rem'}}
           options={options}
           data={formatTransactions(filteredTransactions, "dateOfTransaction")}
         />

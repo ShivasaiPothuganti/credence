@@ -105,7 +105,7 @@ function AuthenticationPage({setAuth}:AuthenticationPageProps) {
 				authenticationService.setUserId(response.data.userId);
 				authenticationService.setUsername(response.data.username);
 				setAuth(true);
-				navigate('/product/transactions');
+				navigate('/product/dashboard');
 			}
 		}
 		catch(error){

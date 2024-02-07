@@ -33,6 +33,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> userLogin(@RequestBody UserEntity user){
+        System.out.println("In login controller");
       Authentication authentication =  authenticationManager.authenticate(
                new UsernamePasswordAuthenticationToken(
                        user.getUserEmail(),

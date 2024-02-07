@@ -100,9 +100,9 @@ function UserProfile({userDetails}:UserDetailsProps) {
             </div>
             
         </div>
-        <div className='w-[90%] h-[10rem] bg-primaryWhite rounded-2xl flex justify-center items-center bottom-3 left-5 absolute' >
-                <div className='absolute h-8 w-full bg-purple-400 top-0 rounded-bl-3xl rounded-br-3xl ' > <h1 className='text-center text-white' >UserId</h1> </div>
-                <h1 className='text-[2.5rem] text-primaryBlack ' > {userId} </h1>
+        <div className='w-[90%] h-[10rem] bg-primaryBlack rounded-2xl flex justify-center items-center bottom-3 left-5 absolute' >
+                <div className='absolute h-8 w-full bg-purple-600 top-0 rounded-bl-3xl rounded-br-3xl ' > <h1 className='text-center text-white' >UserId</h1> </div>
+                <h1 className='text-[4rem] text-purple-400' > {userId} </h1>
         </div>
     </div>
   )
