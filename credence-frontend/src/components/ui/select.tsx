@@ -5,7 +5,7 @@ import { Check, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 
-const Select = SelectPrimitive.Root
+const Select = SelectPrimitive.Root;
 
 const SelectGroup = SelectPrimitive.Group
 
@@ -112,13 +112,23 @@ type SelectFieldProps = {
 	selectPlaceholder:string,
 	selectLabel:string,
 	selectItems:string[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  selectedValue?:any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setSelectedValue?:any
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	onChange:Function,
 }
 
-export function SelectField({selectPlaceholder,selectLabel,selectItems,onChange}:SelectFieldProps){
+export function SelectField({selectPlaceholder,selectLabel,selectItems,onChange,selectedValue,setSelectedValue}:SelectFieldProps){
+  
   return(
-  <Select  onValueChange={(value)=>{onChange(value)}} >
+  <Select value={selectedValue}  onValueChange={
+        (_value)=>{
+          setSelectedValue(_value);
+          onChange(_value); 
+        }
+    } >
       <SelectTrigger  className="w-[180px]">
         <SelectValue  placeholder={selectPlaceholder} />
       </SelectTrigger>

@@ -1,6 +1,7 @@
 package com.expenseTracker.backend.controllers;
 
 import com.expenseTracker.backend.entities.UserEntity;
+import com.expenseTracker.backend.models.SuccessResponse;
 import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -33,8 +34,7 @@ public class CategoryController {
 		try {
 			categories.setUserId(((UserEntity) authentication.getPrincipal()).getUserId());
 			categoriesService.updateCategories(categories);
-			CategoriesEntity saveCategories = categoriesService.findCategoriesByUserId(user.getUserId());
-			return new ResponseEntity<>(saveCategories, HttpStatus.OK);
+			return new ResponseEntity<>("updated", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST, "Unable to update categories"),
@@ -56,10 +56,12 @@ public class CategoryController {
 	}
 
 	@DeleteMapping("/")
-	public ResponseEntity<?> deleteCategory(@RequestBody CategoriesEntity categories){
+	public ResponseEntity<?> deleteCategory( Authentication authentication, @RequestBody CategoriesEntity categories){
+		UserEntity user = (UserEntity)authentication.getPrincipal();
 		try{
-			CategoriesEntity updatedCategories =  categoriesService.deleteCategories(categories);
-			return new ResponseEntity<>(updatedCategories.getCategories(),HttpStatus.OK);
+			categories.setUserId(user.getUserId());
+			categoriesService.deleteCategories(categories);
+			return new ResponseEntity<>("deleted",HttpStatus.OK);
 		}
 		catch (Exception exe){
 			ErrorResponse error = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,exe.getMessage());

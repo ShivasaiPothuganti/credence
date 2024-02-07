@@ -65,4 +65,4 @@ function SplitBills() {
   )
 }
 
-export default SplitBills
+export default SplitBills;

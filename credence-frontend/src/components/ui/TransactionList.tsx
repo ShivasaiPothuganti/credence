@@ -15,10 +15,9 @@ function TransactionList({transactions,deleteTransactions}:TTransactionList) {
   return (
     <section className='h-full flex flex-col gap-2 w-full p-4 overflow-y-auto overflow-x-hidden' >
         {
-            
-            transactions.map((transaction:TTransaction)=>{
-                return <Transaction deleteTransaction={deleteTransactions} transaction={transaction} />
-            })
+          transactions.map((transaction:TTransaction)=>{
+              return <Transaction deleteTransaction={deleteTransactions} transaction={transaction} />
+          })
         }
     </section>
   )

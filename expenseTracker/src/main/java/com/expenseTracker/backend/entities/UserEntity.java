@@ -1,6 +1,7 @@
 package com.expenseTracker.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,9 @@ public class UserEntity implements UserDetails {
     @Column(name="user_email",unique = true)
     private String userEmail;
 
+    @Column(name="gender",nullable = false)
+    private String gender;
+
     @Column(name="username",unique = true,nullable = false)
     private String userName;
 
@@ -43,6 +47,15 @@ public class UserEntity implements UserDetails {
         return userName;
     }
 
+
+    public void setGender(String gender){
+        this.gender = gender;
+    }
+
+    public String getGender(){
+        return this.gender;
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -52,9 +65,11 @@ public class UserEntity implements UserDetails {
         return List.of(new SimpleGrantedAuthority("USER"));
     }
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public String getPassword() {
         return password;
     }
+
 
     @Override
     public String getUsername() {

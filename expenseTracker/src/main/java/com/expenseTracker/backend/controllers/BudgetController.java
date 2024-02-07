@@ -44,6 +44,8 @@ public class BudgetController {
 			return new ResponseEntity<>(new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+
 	
 	@PutMapping("/")
 	public ResponseEntity<?> updateTotalBudget(@RequestBody BudgetEntity budget, Authentication authentication) {

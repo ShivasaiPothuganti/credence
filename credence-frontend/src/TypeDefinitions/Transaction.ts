@@ -9,5 +9,6 @@ export type TTransaction = {
     category:string,
     roomId:string|null,
     groupId:string|null,
-    username?:string
+    username?:string,
+    type?:'Personal'|'Room'|'Group'
 }

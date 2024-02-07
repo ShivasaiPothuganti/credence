@@ -17,6 +17,10 @@ class TransactionService{
         return backend.delete(backendApiUrls.deleteTransactions+`${transactionId}`);
     }
 
+    getPeronalTransactions(){
+        return backend.get(backendApiUrls.getPersonalTransactions);
+    }
+
 }
 
 

@@ -2,10 +2,14 @@ import { backendApiUrls } from "@/constants/backendApiEndpoints";
 import { backend } from "./Network/HttpHelper";
 import { AxiosResponse } from "axios";
 
+
 class CategoryService{
 
     addCategory(categories:string[]):Promise<AxiosResponse<unknown,unknown>>{
-       return backend.put(backendApiUrls.updateCategories,categories);
+        const requestBody = {
+            categories:categories
+        }
+       return backend.put(backendApiUrls.updateCategories,requestBody);
     }
 
     getCategories():Promise<AxiosResponse<unknown,unknown>>{
@@ -13,7 +17,10 @@ class CategoryService{
     }
 
     deleteCategory(categories:string[]):Promise<AxiosResponse<unknown,unknown>>{
-        return backend.delete(backendApiUrls.deleteCategories,categories);
+        const requestBody = {
+            categories:categories
+        }
+        return backend.delete(backendApiUrls.deleteCategories,requestBody);
     }
 
 }
