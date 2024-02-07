@@ -51,7 +51,7 @@ export const options = {
     },
     y: {
       grid: {
-        // display: false
+         display: false
       },
     },
   },
@@ -129,13 +129,12 @@ export default function LineChart({ transactions }: InputProps) {
           category={false}
         />
          <RefreshButton onClick={()=>{
-                        setFilteredTransactions(transactions);
-                     
-                    }} />
+            setFilteredTransactions(transactions);           
+          }} />
       </div>
-      <div className="linechart_holder w-full flex justify-center ">
+      <div className="linechart_holder h-[70%] w-full flex justify-center ">
         <Line
-        style={{height:'100%'}}
+          style={{height:'22rem',width:'33rem'}}
           options={options}
           data={formatTransactions(filteredTransactions, "dateOfTransaction")}
         />

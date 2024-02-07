@@ -34,7 +34,7 @@ function UserProfile({userDetails}:UserDetailsProps) {
     useEffect(()=>{
         categoryService.getCategories().then((response)=>{
             setCategories(response.data as string[]);
-        }).catch((err)=>{
+        }).catch(()=>{
             toast({
                 title:'unable to fetch the categories',
                 variant:'destructive'
@@ -98,10 +98,11 @@ function UserProfile({userDetails}:UserDetailsProps) {
             <div className="categories_group mt-5 h-[13rem] overflow-x-scroll ">
                 <CategoriesGroup deleteCategoryHandler={handleDeleteCategory} edit={editable} categories={categories} />
             </div>
-            <div className='w-full h-[10rem] bg-primaryWhite rounded-2xl flex justify-center items-center bottom-0 relative' >
+            
+        </div>
+        <div className='w-[90%] h-[10rem] bg-primaryWhite rounded-2xl flex justify-center items-center bottom-3 left-5 absolute' >
                 <div className='absolute h-8 w-full bg-purple-400 top-0 rounded-bl-3xl rounded-br-3xl ' > <h1 className='text-center text-white' >UserId</h1> </div>
                 <h1 className='text-[2.5rem] text-primaryBlack ' > {userId} </h1>
-            </div>
         </div>
     </div>
   )

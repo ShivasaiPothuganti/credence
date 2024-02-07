@@ -10,7 +10,6 @@ import { AxiosResponse } from "axios"
 import { useEffect, useState } from "react";
 import UserProfile from "./UserProfile/UserProfile";
 import TopPriorityBillsBanner from "@/components/ui/TopPriorityBillsBanner/TopPriorityBillsBanner";
-import { Doughnut } from "react-chartjs-2";
 import DhoughNutChart from "@/components/ui/DhoughNutChart/DhoughNutChart";
 import LineChart from "@/components/ui/LineChart/LineChart";
 import TransactionTable from "@/components/TransactionTable/TransactionTable";
@@ -65,7 +64,7 @@ function DashBoardPage() {
 	useEffect(()=>{
 		userDetailsService.getUserDetails().then((response)=>{
 			setUserDetails(response.data);
-		}).catch((_err)=>{
+		}).catch(()=>{
 			toast({
 				title:'failed to fetch the userDetails',
 				variant:'destructive'
@@ -84,14 +83,14 @@ function DashBoardPage() {
 				<TopPriorityBillsBanner topPriorityBills={topPriorityBills} />
 			</div>
 			<div className="graphs h-[30rem] flex w-full justify-between ">
-				<div className="graph_left w-[45%] ">
+				<div className="graph_left w-[45%] h-full ">
 					<DhoughNutChart transactions={transactions} />
 				</div>
-				<div className="graph_right w-[45%] ">
+				<div className="graph_right w-[45%] h-full ">
 					<LineChart transactions={transactions} />
 				</div>
 			</div>
-			<div className="transaction_tables mt-16 ">
+			<div className="transaction_tables mt-4 ">
 				<TransactionTable transactions={transactions} />
 			</div>
 		</div>

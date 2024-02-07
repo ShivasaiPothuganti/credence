@@ -1,7 +1,7 @@
 import { backendApiUrls } from "@/constants/backendApiEndpoints";
 import { backend } from "./Network/HttpHelper";
 import { AxiosResponse } from "axios";
-import { logger } from "@/helpers/loggers/logger";
+
 
 class CategoryService{
 
